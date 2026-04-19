@@ -92,10 +92,18 @@ def extract(
     mode: str = "docker",
     console: Console | None = None,
     backend_image: str = "prototypebench/backend:latest",
+    repo_dir: Path | None = None,
 ) -> ExtractResult:
+    """Extract FAIL_TO_PASS / PASS_TO_PASS for a single task spec.
+
+    `repo_dir` defaults to `work_root/repo`. Pass an explicit path to share a
+    single checkout across multiple extract calls (sequential only) — saves
+    the per-PR clone cost.
+    """
     console = console or Console()
     work_root.mkdir(parents=True, exist_ok=True)
-    repo_dir = work_root / "repo"
+    if repo_dir is None:
+        repo_dir = work_root / "repo"
     out_dir = work_root / "out"
     out_dir.mkdir(exist_ok=True)
 

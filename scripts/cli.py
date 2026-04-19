@@ -261,6 +261,51 @@ def extract_cmd(
     console.print(f"summary → {work_dir / 'out' / 'summary.json'}")
 
 
+@app.command(name="batch-extract")
+def batch_extract_cmd(
+    candidates: Path = typer.Option(
+        DEFAULT_RAW_DIR / "candidates.jsonl", "--candidates", help="Filtered candidate pool."
+    ),
+    top: int = typer.Option(0, "--top", help="Process only the top-N candidates (0 = all)."),
+    report: Path = typer.Option(
+        DEFAULT_RAW_DIR / "extract_report.jsonl", "--report", help="Per-PR JSONL report."
+    ),
+    work_root: Path = typer.Option(
+        Path("/tmp/pbench"), "--work-root", help="Scratch dir; shares one repo checkout."
+    ),
+    repo_url: str = typer.Option(
+        "https://github.com/fastapi/full-stack-fastapi-template.git",
+        "--repo-url",
+    ),
+    mode: str = typer.Option(
+        "docker", "--mode", help="Execution mode: 'docker' or 'local'."
+    ),
+) -> None:
+    """Phase 2 — batch-run the extractor over the candidate pool.
+
+    Produces a per-PR JSONL report and prints a status-breakdown table:
+      exact     — F2P derived from base/head test diff
+      fallback  — F2P recovered from test_patch parse (base collection-error)
+      test_only — no F2P signal but P2P present (test-refactor PR)
+      no_signal — no F2P, no P2P (likely needs manual triage)
+      error     — pipeline failed; see `error` field in the report
+    """
+    from harness import batch
+
+    results = batch.batch_extract(
+        candidates_path=candidates,
+        work_root=work_root,
+        report_path=report,
+        repo_url=repo_url,
+        top_n=top or None,
+        mode=mode,
+        console=console,
+    )
+    console.print("")
+    batch.render_summary(results, console)
+    console.print(f"\nreport → {report}")
+
+
 @app.command(name="score")
 def score_cmd(
     pr: int = typer.Option(..., "--pr", help="Merged PR number (must have been extracted first)."),
