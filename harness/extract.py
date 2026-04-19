@@ -104,6 +104,11 @@ def extract(
         mode=mode,
     )
 
+    def _write_summary() -> None:
+        (out_dir / "summary.json").write_text(
+            json.dumps(asdict(result), indent=2, sort_keys=True)
+        )
+
     # 1. clone (or reuse)
     if not repo_dir.exists():
         console.log(f"cloning {spec.repo_url} → {repo_dir}")
@@ -115,11 +120,26 @@ def extract(
     # 2-3. base + test_patch
     console.log(f"checkout base {spec.base_commit[:10]}")
     git_ops.checkout(repo_dir, spec.base_commit)
+
+    # Sanity: our harness assumes uv-workspace layout (introduced in PR #2090,
+    # merged 2026-01-20). Earlier commits were poetry-based and need a
+    # different runner — bail early with an actionable message instead of
+    # letting `uv sync` fail deep inside the container.
+    if not (repo_dir / "uv.lock").exists():
+        result.error = (
+            "base_commit predates the uv-workspace migration (need merge of "
+            "fastapi/full-stack-fastapi-template#2090 or later, 2026-01-20). "
+            "This PR is not supported by the current harness."
+        )
+        _write_summary()
+        return result
+
     if spec.test_patch:
         try:
             git_ops.apply_diff(repo_dir, spec.test_patch)
         except git_ops.GitError as e:
             result.error = f"test_patch apply failed on base: {e}"
+            _write_summary()
             return result
 
     # 4. postgres + runner
@@ -134,6 +154,7 @@ def extract(
         pg = postgres.start(pg_name, network=network_name)
     except postgres.PostgresError as e:
         result.error = f"postgres start failed: {e}"
+        _write_summary()
         return result
 
     runner = backend_runner.make(
@@ -221,9 +242,7 @@ def extract(
             postgres.remove_network(network_name)
 
     # 9. write summary
-    (out_dir / "summary.json").write_text(
-        json.dumps(asdict(result), indent=2, sort_keys=True)
-    )
+    _write_summary()
     console.log(
         f"FAIL_TO_PASS={len(result.fail_to_pass)} PASS_TO_PASS={len(result.pass_to_pass)}"
     )

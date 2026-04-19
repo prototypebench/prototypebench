@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import typer
@@ -225,13 +226,28 @@ def extract_cmd(
     (work_dir / "test_patch.diff").write_text(test_patch)
     console.log(f"test_patch: {len(test_patch)} bytes")
 
+    # Auto-scope pytest to the PR's changed backend test files when the user
+    # hasn't pinned a scope explicitly. Speeds up extraction substantially and
+    # matches what the curator cares about: the tests the PR actually targets.
+    scoped = [a for a in pytest_args.split() if a]
+    if not scoped and test_patch:
+        hits = re.findall(
+            r"^\+\+\+ b/(backend/(?:tests|app/tests)/[^\s]+)",
+            test_patch,
+            re.MULTILINE,
+        )
+        rel = sorted({p.replace("backend/", "", 1) for p in hits})
+        if rel:
+            scoped = rel
+            console.log(f"auto-scoped pytest: {' '.join(rel)}")
+
     spec = ex.ExtractSpec(
         instance_id=instance_id,
         repo_url=repo_url,
         base_commit=base_commit,
         head_commit=head_commit,
         test_patch=test_patch or None,
-        pytest_args=[a for a in pytest_args.split() if a] or None,
+        pytest_args=scoped or None,
     )
     result = ex.extract(spec, work_root=work_dir, mode=mode, console=console)
 

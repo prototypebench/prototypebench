@@ -138,6 +138,14 @@ Docker 이미지 빌드는 무겁다. 반복 작업 시 로컬 모드 옵션:
 - **Flaky test 재시도** — 첫 실행만. 재시도 정책은 Phase 3 튜닝 이후.
 - **결과 캐싱** — 같은 (base, patch) 조합 재실행 생략. 구현 쉽지만 yagni 상 보류.
 
+## Observed failure modes (validated 2026-04-20 on PRs 1543, 1396, 2104, 1270, 2146)
+
+| Mode | Root cause | Current behavior | Fix |
+|---|---|---|---|
+| **Pre-uv-era base_commit** | base predates PR #2090 (2026-01-20) which introduced the uv workspace layout. The harness assumes `uv.lock` at repo root. | Extractor checks for `uv.lock` after base checkout and aborts with an actionable error. `filter_prs.py` drops PRs with `mergedAt < 2026-01-20` from the candidate pool. | Poetry-era runner is v2+ scope. |
+| **Collection-error on base** (e.g. PR #2104) | `test_patch` imports symbols the base commit doesn't have yet (e.g. `argon2` in a fresh-feature PR). pytest fails at collection, emitting file-level errors instead of test-nodeid errors. | F2P = 0, P2P = 0 (intersection is empty because base reports no nodeids). | **v2**: fall back to parsing `+def test_*` from `test_patch` and intersecting with head's passing set. |
+| **Flaky on first-cold-cache Docker run** | Not yet observed | — | Monitor; add retries in Phase 3 if it shows up. |
+
 ## Failure modes to explicitly log
 
 - git apply 실패 (base/head 충돌) → `patch_apply_failed`

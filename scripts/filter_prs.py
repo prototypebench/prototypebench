@@ -52,6 +52,12 @@ IGNORE_PATH_PATTERNS = (
 
 SIGNAL_LABELS = {"bug", "feature", "enhancement", "fix"}
 
+# Harness currently assumes uv-workspace layout, introduced in PR #2090
+# (merged 2026-01-20). PRs merged before this date targeted a poetry-based
+# project structure our harness can't drive — filter them out of the candidate
+# pool so curators don't waste time on them.
+UV_ERA_MIN_MERGED_AT = "2026-01-20"
+
 
 def _author_login(pr: dict[str, Any]) -> str:
     a = pr.get("author") or {}
@@ -93,6 +99,10 @@ def score(pr: dict[str, Any]) -> tuple[int, list[str], str | None]:
     title = (pr.get("title") or "").lower()
     if any(title.startswith(p) for p in DROP_TITLE_PREFIXES):
         return 0, reasons, f"non-task title prefix: {title[:40]}"
+
+    merged_at = pr.get("mergedAt") or ""
+    if merged_at and merged_at[:10] < UV_ERA_MIN_MERGED_AT:
+        return 0, reasons, f"pre-uv-era merge ({merged_at[:10]}) — harness unsupported"
 
     paths = _file_paths(pr)
     if not paths:
