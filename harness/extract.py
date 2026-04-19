@@ -29,7 +29,7 @@ from pathlib import Path
 
 from rich.console import Console
 
-from . import backend_runner, git_ops, junit, postgres
+from . import backend_runner, git_ops, junit, postgres, test_patch_parser
 
 
 @dataclass
@@ -63,6 +63,8 @@ class ExtractResult:
     pass_to_pass: list[str] = field(default_factory=list)
     base: PhaseResult | None = None
     head: PhaseResult | None = None
+    fallback_used: str | None = None  # e.g. "collection_error_test_patch_parse"
+    notes: list[str] = field(default_factory=list)
     error: str | None = None
 
 
@@ -235,6 +237,42 @@ def extract(
 
         result.fail_to_pass = sorted(base_fail & head_pass)
         result.pass_to_pass = sorted((base_pass & head_pass) - set(result.fail_to_pass))
+
+        # Fallback for base collection errors (e.g. test_patch imports a symbol
+        # the base impl doesn't have yet — pytest emits file-level errors with
+        # no per-test nodeids, so the diff above yields F2P=0 even when the
+        # PR is a legitimate feature task. Recover by parsing test_patch.
+        base_collection_error = (
+            base_run.returncode >= 2
+            and bool(base_outcomes)
+            and not base_pass
+            and not any("::" in nid for nid in base_outcomes)
+        )
+        if base_collection_error and not result.fail_to_pass and spec.test_patch:
+            added = test_patch_parser.parse_added_tests(spec.test_patch)
+            candidates: set[str] = set()
+            for a in added:
+                candidates.update(test_patch_parser.candidate_nodeids(a))
+            recovered = sorted(candidates & head_pass)
+            if recovered:
+                result.fail_to_pass = recovered
+                # P2P can't be computed from base when base never collected
+                # the patched files — leave it as the head-passing remainder
+                # for curator review, with a note.
+                result.pass_to_pass = sorted(head_pass - set(recovered))
+                result.fallback_used = "collection_error_test_patch_parse"
+                result.notes.append(
+                    f"base collection-errored ({len(base_outcomes)} file-level errors); "
+                    f"FAIL_TO_PASS recovered from test_patch parse "
+                    f"({len(added)} parsed → {len(recovered)} matched in head)."
+                )
+                result.notes.append(
+                    "PASS_TO_PASS is head-passing minus FAIL_TO_PASS — "
+                    "verify regression coverage manually before promoting."
+                )
+                console.log(
+                    f"[yellow]fallback used:[/yellow] recovered F2P={len(recovered)} from test_patch"
+                )
     finally:
         console.log(f"stop postgres {pg_name}")
         postgres.stop(pg_name)
