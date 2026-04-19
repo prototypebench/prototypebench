@@ -1,0 +1,24 @@
+# PrototypeBench overlay — strips host port publishing from every service in
+# the source repo's compose stack. Ports are only useful when a developer
+# wants to poke services from the host; our harness runs everything inside
+# the docker network, where containers reach each other by name.
+#
+# Without this overlay, multiple concurrent extract runs (or a single run on
+# a host that already serves something on 1025/1080/5173/etc.) collide on
+# host port allocation.
+
+services:
+  proxy:
+    ports: !reset []
+  db:
+    ports: !reset []
+  adminer:
+    ports: !reset []
+  mailcatcher:
+    ports: !reset []
+  backend:
+    ports: !reset []
+  frontend:
+    ports: !reset []
+  playwright:
+    ports: !reset []

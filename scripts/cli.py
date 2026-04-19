@@ -261,6 +261,86 @@ def extract_cmd(
     console.print(f"summary → {work_dir / 'out' / 'summary.json'}")
 
 
+@app.command(name="extract-frontend")
+def extract_frontend_cmd(
+    pr: int = typer.Option(..., "--pr", help="Merged PR number from the source repo."),
+    repo_url: str = typer.Option(
+        "https://github.com/fastapi/full-stack-fastapi-template.git",
+        "--repo-url",
+    ),
+    prs: Path = typer.Option(
+        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL."
+    ),
+    work_root: Path = typer.Option(
+        Path("/tmp/pbench"), "--work-root", help="Scratch dir; reuses _shared_repo if present."
+    ),
+    playwright_args: str = typer.Option(
+        "", "--playwright-args",
+        help="Extra args, e.g. 'tests/sign-up.spec.ts' to scope to one file.",
+    ),
+) -> None:
+    """Phase 2 — extract FAIL_TO_PASS / PASS_TO_PASS for a PR via Playwright.
+
+    Uses the source repo's compose stack (db + backend + prestart + mailcatcher
+    + frontend + playwright). First run will build the playwright image
+    (5-15 min); subsequent runs reuse the cached image.
+    """
+    from harness import frontend_extract as fe
+    from harness import git_ops as g
+
+    row = _find_pr(prs, pr)
+    head_commit = ((row.get("mergeCommit") or {}).get("oid")) or ""
+    if not head_commit:
+        raise typer.BadParameter(f"PR #{pr} has no mergeCommit.oid")
+
+    instance_id = f"fastapi__full-stack-fastapi-template-{pr}"
+    work_dir = work_root / instance_id
+    work_dir.mkdir(parents=True, exist_ok=True)
+
+    shared = work_root / "_shared_repo"
+    if shared.exists():
+        repo_dir = shared
+    else:
+        repo_dir = work_dir / "repo"
+        if not repo_dir.exists():
+            console.log(f"cloning {repo_url} → {repo_dir}")
+            g.clone(repo_url, repo_dir)
+
+    base_commit = g.rev_parse(repo_dir, f"{head_commit}^")
+    console.log(f"base={base_commit[:10]} head={head_commit[:10]}")
+
+    # Auto-scope test_patch to frontend test files only.
+    test_patch = g.diff(
+        repo_dir, base_commit, head_commit,
+        paths=["frontend/tests/**", "frontend/**/*.spec.ts", "frontend/**/*.spec.tsx",
+               "frontend/**/*.test.ts", "frontend/**/*.test.tsx"],
+    )
+    (work_dir / "frontend_test_patch.diff").write_text(test_patch)
+    console.log(f"frontend test_patch: {len(test_patch)} bytes")
+
+    spec = fe.FrontendExtractSpec(
+        instance_id=instance_id,
+        repo_url=repo_url,
+        base_commit=base_commit,
+        head_commit=head_commit,
+        test_patch=test_patch or None,
+        playwright_args=[a for a in playwright_args.split() if a] or None,
+    )
+    result = fe.extract_frontend(spec, work_root=work_dir, console=console, repo_dir=repo_dir)
+
+    console.print("")
+    if result.error:
+        console.print(f"[red]error:[/red] {result.error}")
+    console.print(f"[bold]FAIL_TO_PASS[/bold]: {len(result.fail_to_pass)}")
+    for t in result.fail_to_pass[:10]:
+        console.print(f"  + {t}")
+    if len(result.fail_to_pass) > 10:
+        console.print(f"  ... and {len(result.fail_to_pass) - 10} more")
+    console.print(f"[bold]PASS_TO_PASS[/bold]: {len(result.pass_to_pass)}")
+    for n in result.notes:
+        console.print(f"[yellow]note:[/yellow] {n}")
+
+
 @app.command(name="batch-extract")
 def batch_extract_cmd(
     candidates: Path = typer.Option(
