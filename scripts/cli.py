@@ -242,5 +242,78 @@ def extract_cmd(
     console.print(f"summary → {work_dir / 'out' / 'summary.json'}")
 
 
+@app.command(name="score")
+def score_cmd(
+    pr: int = typer.Option(..., "--pr", help="Merged PR number (must have been extracted first)."),
+    patch_file: Path = typer.Option(..., "--patch-file", help="Path to the agent's unified-diff patch."),
+    prs: Path = typer.Option(
+        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL."
+    ),
+    work_root: Path = typer.Option(
+        Path("/tmp/pbench"), "--work-root", help="Must match the extract run's --work-root."
+    ),
+    pytest_args: str = typer.Option(
+        "", "--pytest-args", help="Extra pytest args (same scope used during extract)."
+    ),
+) -> None:
+    """Phase 2 — score an agent patch against a PR's FAIL_TO_PASS/PASS_TO_PASS.
+
+    Prereq: `pbench extract --pr <N>` has already run for this PR so that
+    work_root/<instance_id>/out/summary.json and test_patch.diff exist.
+    """
+    from harness import score as sc
+
+    _find_pr(prs, pr)  # just validates the PR exists in the crawl
+    instance_id = f"fastapi__full-stack-fastapi-template-{pr}"
+    work_dir = work_root / instance_id
+
+    summary_path = work_dir / "out" / "summary.json"
+    if not summary_path.exists():
+        raise typer.BadParameter(
+            f"No extract summary at {summary_path}. Run `pbench extract --pr {pr}` first."
+        )
+    summary = json.loads(summary_path.read_text())
+
+    test_patch_path = work_dir / "test_patch.diff"
+    test_patch = test_patch_path.read_text() if test_patch_path.exists() else ""
+
+    if not patch_file.exists():
+        raise typer.BadParameter(f"patch file not found: {patch_file}")
+    agent_patch = patch_file.read_text()
+
+    spec = sc.ScoreSpec(
+        instance_id=instance_id,
+        repo_url="https://github.com/fastapi/full-stack-fastapi-template.git",
+        base_commit=summary["base_commit"],
+        test_patch=test_patch,
+        fail_to_pass=list(summary.get("fail_to_pass") or []),
+        pass_to_pass=list(summary.get("pass_to_pass") or []),
+        agent_patch=agent_patch,
+        pytest_args=[a for a in pytest_args.split() if a] or None,
+    )
+    result = sc.score_patch(spec, work_root=work_dir, console=console)
+
+    console.print("")
+    color = "green" if result.score == 1 else "red"
+    console.print(f"[bold {color}]score = {result.score}[/bold {color}]")
+    console.print(
+        f"FAIL_TO_PASS: {len(result.fail_to_pass_passed)}/{len(spec.fail_to_pass)} passing"
+    )
+    if result.fail_to_pass_missing:
+        console.print(f"  [red]missing[/red]:")
+        for t in result.fail_to_pass_missing[:8]:
+            console.print(f"    - {t}")
+    console.print(
+        f"PASS_TO_PASS: {len(result.pass_to_pass_passed)}/{len(spec.pass_to_pass)} passing"
+    )
+    if result.pass_to_pass_regressed:
+        console.print(f"  [red]regressed[/red]:")
+        for t in result.pass_to_pass_regressed[:8]:
+            console.print(f"    - {t}")
+    if result.error:
+        console.print(f"[red]error:[/red] {result.error}")
+    raise typer.Exit(code=0 if result.score == 1 else 1)
+
+
 if __name__ == "__main__":
     app()
