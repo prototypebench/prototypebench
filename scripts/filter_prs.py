@@ -90,33 +90,57 @@ def _label_names(pr: dict[str, Any]) -> set[str]:
     return {l.get("name", "").lower() for l in labels if isinstance(l, dict)}
 
 
-def score(pr: dict[str, Any]) -> tuple[int, list[str], str | None]:
-    """Return (score, reasons, drop_reason). If drop_reason set, PR is rejected."""
+def _is_backend_test(p: str) -> bool:
+    return p.startswith("backend/") and ("/tests/" in p or "/test_" in p) and p.endswith(".py")
+
+
+def _is_frontend_test(p: str) -> bool:
+    if not p.startswith("frontend/"):
+        return False
+    return p.endswith(".spec.ts") or p.endswith(".spec.tsx") or p.endswith(".test.ts") or p.endswith(".test.tsx")
+
+
+def score(pr: dict[str, Any]) -> tuple[int, list[str], str | None, dict[str, int]]:
+    """Return (score, reasons, drop_reason, signals).
+
+    signals = {"backend_tests": N, "frontend_tests": N} — used downstream by
+    `top --kind` and `batch-extract --kind` to route PRs to the right runner.
+    """
     reasons: list[str] = []
+    signals = {"backend_tests": 0, "frontend_tests": 0}
     if _author_is_bot(pr):
-        return 0, reasons, f"bot author: {_author_login(pr)}"
+        return 0, reasons, f"bot author: {_author_login(pr)}", signals
 
     title = (pr.get("title") or "").lower()
     if any(title.startswith(p) for p in DROP_TITLE_PREFIXES):
-        return 0, reasons, f"non-task title prefix: {title[:40]}"
+        return 0, reasons, f"non-task title prefix: {title[:40]}", signals
 
     merged_at = pr.get("mergedAt") or ""
     if merged_at and merged_at[:10] < UV_ERA_MIN_MERGED_AT:
-        return 0, reasons, f"pre-uv-era merge ({merged_at[:10]}) — harness unsupported"
+        return 0, reasons, f"pre-uv-era merge ({merged_at[:10]}) — harness unsupported", signals
 
     paths = _file_paths(pr)
     if not paths:
-        return 0, reasons, "no files"
+        return 0, reasons, "no files", signals
 
     meaningful_paths = [p for p in paths if not _is_ignorable_path(p)]
     if not meaningful_paths:
-        return 0, reasons, "only docs/ci/lock files"
+        return 0, reasons, "only docs/ci/lock files", signals
 
     s = 0
-    test_paths = [p for p in meaningful_paths if _is_test_path(p)]
-    if test_paths:
+    backend_tests = [p for p in meaningful_paths if _is_backend_test(p)]
+    frontend_tests = [p for p in meaningful_paths if _is_frontend_test(p)]
+    signals["backend_tests"] = len(backend_tests)
+    signals["frontend_tests"] = len(frontend_tests)
+
+    if backend_tests:
         s += 3
-        reasons.append(f"has {len(test_paths)} test file(s)")
+        reasons.append(f"backend tests: {len(backend_tests)}")
+    if frontend_tests:
+        s += 3
+        reasons.append(f"frontend tests: {len(frontend_tests)}")
+    if not backend_tests and not frontend_tests:
+        return 0, reasons, "no test file changes (neither backend nor frontend)", signals
 
     labels = _label_names(pr)
     hit_labels = labels & SIGNAL_LABELS
@@ -139,7 +163,7 @@ def score(pr: dict[str, Any]) -> tuple[int, list[str], str | None]:
         s -= 2
         reasons.append("short body, no issue link")
 
-    return s, reasons, None
+    return s, reasons, None, signals
 
 
 def load_jsonl(path: Path) -> list[dict]:
@@ -165,11 +189,17 @@ def filter_prs(input_path: Path, candidates_path: Path, rejected_path: Path) -> 
     accepted: list[dict] = []
     rejected: list[dict] = []
     for pr in prs:
-        s, reasons, drop = score(pr)
+        s, reasons, drop, signals = score(pr)
         if drop:
             rejected.append({"number": pr.get("number"), "title": pr.get("title"), "reason": drop})
             continue
-        accepted.append({"number": pr["number"], "score": s, "reasons": reasons, "pr": pr})
+        accepted.append({
+            "number": pr["number"],
+            "score": s,
+            "reasons": reasons,
+            "signals": signals,
+            "pr": pr,
+        })
 
     accepted.sort(key=lambda r: (-r["score"], -r["number"]))
     write_jsonl(candidates_path, accepted)

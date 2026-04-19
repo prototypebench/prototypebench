@@ -69,19 +69,41 @@ def top_cmd(
         DEFAULT_RAW_DIR / "candidates.jsonl", "--candidates", help="Candidate pool JSONL."
     ),
     n: int = typer.Option(20, "--n", help="Number of candidates to show."),
+    kind: str = typer.Option(
+        "any", "--kind",
+        help="Filter by test signal: 'backend' | 'frontend' | 'fullstack' | 'any'.",
+    ),
 ) -> None:
-    """Quick look: print top-N candidates by score."""
-    rows = load_jsonl(candidates)[:n]
-    table = Table(title=f"Top {len(rows)} candidates")
+    """Quick look: print top-N candidates by score, optionally filtered by kind."""
+    rows = load_jsonl(candidates)
+
+    def _matches(r: dict) -> bool:
+        s = r.get("signals") or {}
+        be, fe = s.get("backend_tests", 0), s.get("frontend_tests", 0)
+        if kind == "backend":
+            return be > 0
+        if kind == "frontend":
+            return fe > 0
+        if kind == "fullstack":
+            return be > 0 and fe > 0
+        return True
+
+    rows = [r for r in rows if _matches(r)][:n]
+    table = Table(title=f"Top {len(rows)} candidates (kind={kind})")
     table.add_column("#", justify="right")
     table.add_column("score", justify="right")
+    table.add_column("BE", justify="right")
+    table.add_column("FE", justify="right")
     table.add_column("title", overflow="fold")
     table.add_column("reasons", overflow="fold")
     for r in rows:
         pr = r["pr"]
+        s = r.get("signals") or {}
         table.add_row(
             str(pr["number"]),
             str(r["score"]),
+            str(s.get("backend_tests", 0)),
+            str(s.get("frontend_tests", 0)),
             (pr.get("title") or "")[:80],
             ", ".join(r["reasons"]),
         )
@@ -405,7 +427,11 @@ def batch_extract_cmd(
         "--repo-url",
     ),
     mode: str = typer.Option(
-        "docker", "--mode", help="Execution mode: 'docker' or 'local'."
+        "docker", "--mode", help="Execution mode: 'docker' or 'local' (backend kind only)."
+    ),
+    kind: str = typer.Option(
+        "backend", "--kind",
+        help="'backend' (pytest) or 'frontend' (Playwright). Default: backend.",
     ),
 ) -> None:
     """Phase 2 — batch-run the extractor over the candidate pool.
@@ -426,6 +452,7 @@ def batch_extract_cmd(
         repo_url=repo_url,
         top_n=top or None,
         mode=mode,
+        kind=kind,
         console=console,
     )
     console.print("")

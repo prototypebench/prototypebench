@@ -22,6 +22,7 @@ from rich.progress import BarColumn, Progress, TextColumn, TimeRemainingColumn
 from rich.table import Table
 
 from . import extract as ex
+from . import frontend_extract as fe
 from . import git_ops
 
 
@@ -38,11 +39,21 @@ class BatchRow:
     duration_s: float
 
 
-def _classify(result: ex.ExtractResult) -> str:
+def _classify_backend(result: ex.ExtractResult) -> str:
     if result.error:
         return "error"
     if result.fallback_used:
         return "fallback"
+    if result.fail_to_pass:
+        return "exact"
+    if result.pass_to_pass:
+        return "test_only"
+    return "no_signal"
+
+
+def _classify_frontend(result: fe.FrontendExtractResult) -> str:
+    if result.error:
+        return "error"
     if result.fail_to_pass:
         return "exact"
     if result.pass_to_pass:
@@ -59,6 +70,23 @@ def _scope_pytest(test_patch: str) -> list[str]:
     return sorted({p.replace("backend/", "", 1) for p in hits})
 
 
+def _scope_playwright(test_patch: str) -> list[str]:
+    """Restrict Playwright to changed spec files (relative to frontend/)."""
+    hits = re.findall(
+        r"^\+\+\+ b/(frontend/(?:tests/[^\s]+|.+?\.(?:spec|test)\.[tj]sx?))",
+        test_patch,
+        re.MULTILINE,
+    )
+    return sorted({p.replace("frontend/", "", 1) for p in hits})
+
+
+def _signal_for_kind(r: dict, kind: str) -> int:
+    s = r.get("signals") or {}
+    if kind == "backend":
+        return s.get("backend_tests", 0)
+    return s.get("frontend_tests", 0)
+
+
 def batch_extract(
     *,
     candidates_path: Path,
@@ -67,6 +95,7 @@ def batch_extract(
     repo_url: str,
     top_n: int | None,
     mode: str,
+    kind: str = "backend",
     console: Console | None = None,
 ) -> list[BatchRow]:
     console = console or Console()
@@ -77,6 +106,11 @@ def batch_extract(
             line = line.strip()
             if line:
                 rows.append(json.loads(line))
+
+    # Drop PRs without any test signal of the requested kind — running the
+    # extractor on a PR that doesn't touch the relevant tests is guaranteed
+    # to produce F2P=0 noise.
+    rows = [r for r in rows if _signal_for_kind(r, kind) > 0]
     if top_n:
         rows = rows[:top_n]
 
@@ -118,12 +152,18 @@ def batch_extract(
                 git_ops.clean(shared_repo)
                 git_ops.checkout(shared_repo, head_commit)
                 base_commit = git_ops.rev_parse(shared_repo, f"{head_commit}^")
-                test_patch = git_ops.diff(
-                    shared_repo,
-                    base_commit,
-                    head_commit,
-                    paths=["*test*", "*.spec.ts", "*.spec.tsx", "*.test.ts", "*.test.tsx"],
-                )
+                if kind == "backend":
+                    test_patch = git_ops.diff(
+                        shared_repo, base_commit, head_commit,
+                        paths=["backend/tests/**", "backend/app/tests/**"],
+                    )
+                else:
+                    test_patch = git_ops.diff(
+                        shared_repo, base_commit, head_commit,
+                        paths=["frontend/tests/**", "frontend/**/*.spec.ts",
+                               "frontend/**/*.spec.tsx",
+                               "frontend/**/*.test.ts", "frontend/**/*.test.tsx"],
+                    )
             except git_ops.GitError as e:
                 results.append(BatchRow(
                     pr=number, instance_id=instance_id,
@@ -135,26 +175,58 @@ def batch_extract(
 
             work_dir = work_root / instance_id
             work_dir.mkdir(exist_ok=True)
-            (work_dir / "test_patch.diff").write_text(test_patch)
+            patch_filename = "test_patch.diff" if kind == "backend" else "frontend_test_patch.diff"
+            (work_dir / patch_filename).write_text(test_patch)
 
-            scoped = _scope_pytest(test_patch) if test_patch else None
-
-            spec = ex.ExtractSpec(
-                instance_id=instance_id,
-                repo_url=repo_url,
-                base_commit=base_commit,
-                head_commit=head_commit,
-                test_patch=test_patch or None,
-                pytest_args=scoped or None,
-            )
             try:
-                result = ex.extract(
-                    spec,
-                    work_root=work_dir,
-                    mode=mode,
-                    console=quiet_console,
-                    repo_dir=shared_repo,
-                )
+                if kind == "backend":
+                    scoped = _scope_pytest(test_patch) if test_patch else None
+                    spec_be = ex.ExtractSpec(
+                        instance_id=instance_id,
+                        repo_url=repo_url,
+                        base_commit=base_commit,
+                        head_commit=head_commit,
+                        test_patch=test_patch or None,
+                        pytest_args=scoped or None,
+                    )
+                    result_be = ex.extract(
+                        spec_be, work_root=work_dir, mode=mode,
+                        console=quiet_console, repo_dir=shared_repo,
+                    )
+                    results.append(BatchRow(
+                        pr=number, instance_id=instance_id,
+                        title=pr.get("title", ""),
+                        f2p=len(result_be.fail_to_pass),
+                        p2p=len(result_be.pass_to_pass),
+                        fallback=result_be.fallback_used,
+                        status=_classify_backend(result_be),
+                        error=result_be.error,
+                        duration_s=time.monotonic() - t0,
+                    ))
+                else:
+                    scoped = _scope_playwright(test_patch) if test_patch else None
+                    spec_fe = fe.FrontendExtractSpec(
+                        instance_id=instance_id,
+                        repo_url=repo_url,
+                        base_commit=base_commit,
+                        head_commit=head_commit,
+                        test_patch=test_patch or None,
+                        playwright_args=scoped or None,
+                    )
+                    result_fe = fe.extract_frontend(
+                        spec_fe, work_root=work_dir,
+                        console=quiet_console, repo_dir=shared_repo,
+                    )
+                    results.append(BatchRow(
+                        pr=number, instance_id=instance_id,
+                        title=pr.get("title", ""),
+                        f2p=len(result_fe.fail_to_pass),
+                        p2p=len(result_fe.pass_to_pass),
+                        fallback=None,
+                        status=_classify_frontend(result_fe),
+                        error=result_fe.error,
+                        duration_s=time.monotonic() - t0,
+                    ))
             except Exception as e:  # noqa: BLE001 — never let one PR kill the batch
                 results.append(BatchRow(
                     pr=number, instance_id=instance_id,
@@ -163,18 +235,6 @@ def batch_extract(
                     duration_s=time.monotonic() - t0,
                 ))
                 continue
-
-            results.append(BatchRow(
-                pr=number,
-                instance_id=instance_id,
-                title=pr.get("title", ""),
-                f2p=len(result.fail_to_pass),
-                p2p=len(result.pass_to_pass),
-                fallback=result.fallback_used,
-                status=_classify(result),
-                error=result.error,
-                duration_s=time.monotonic() - t0,
-            ))
 
     report_path.parent.mkdir(parents=True, exist_ok=True)
     with report_path.open("w") as f:
