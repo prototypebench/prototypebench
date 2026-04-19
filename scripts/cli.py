@@ -134,6 +134,53 @@ def draft_cmd(
     console.print("Fill in <<TODO:...>> markers, then run `pbench validate`.")
 
 
+@app.command(name="build-from-extract")
+def build_from_extract_cmd(
+    report: Path = typer.Option(
+        DEFAULT_RAW_DIR / "extract_report.jsonl", "--report", help="Batch-extract JSONL."
+    ),
+    prs: Path = typer.Option(
+        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL."
+    ),
+    work_root: Path = typer.Option(
+        Path("/tmp/pbench"), "--work-root", help="Same scratch dir used by batch-extract."
+    ),
+    output: Path = typer.Option(
+        Path("tasks/instances.jsonl"), "--output", "-o", help="Output instances JSONL."
+    ),
+    statuses: str = typer.Option(
+        "exact,fallback", "--statuses",
+        help="Comma-separated extract statuses to convert.",
+    ),
+    cutoff: str = typer.Option(
+        "2026-01-01", "--cutoff", help="ISO date for contamination_tier split."
+    ),
+) -> None:
+    """Phase 1 step 4 — convert usable batch-extract results into tasks/instances.jsonl.
+
+    Per-PR build pulls fields from three sources:
+      - PR metadata    (raw/prs.jsonl)            → title, author, labels, body
+      - Extract summary (work_root/.../summary.json) → F2P, P2P, base/head commits
+      - Shared repo    (work_root/_shared_repo)    → patch, test_patch_*, lock SHAs
+    """
+    from scripts.build_from_extract import build_from_extract as bfe
+
+    repo_dir = work_root / "_shared_repo"
+    if not repo_dir.exists():
+        raise typer.BadParameter(
+            f"shared repo not found at {repo_dir} — run `pbench batch-extract` first."
+        )
+    status_set = {s.strip() for s in statuses.split(",") if s.strip()}
+    n_built, n_skipped = bfe(
+        report_path=report, prs_path=prs, repo_dir=repo_dir,
+        work_root=work_root, output=output,
+        statuses=status_set, cutoff=cutoff,
+    )
+    console.print(f"[green]built[/green] {n_built} instance(s) → {output}")
+    console.print(f"[yellow]skipped[/yellow] {n_skipped} (status not in {sorted(status_set)} or missing artifacts)")
+    console.print(f"\nNext: [bold]pbench validate -p {output}[/bold]")
+
+
 @app.command(name="validate")
 def validate_cmd(
     path: Path = typer.Option(
