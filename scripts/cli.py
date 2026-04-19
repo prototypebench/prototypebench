@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import typer
@@ -12,6 +13,9 @@ from .build_instance import build_from_candidates
 from .crawl_prs import crawl
 from .filter_prs import filter_prs, load_jsonl
 from .validate import validate_file
+
+# Harness (Phase 2) — imported lazily inside commands to keep `pbench --help`
+# fast even when docker-dependent paths aren't ready.
 
 app = typer.Typer(
     name="pbench",
@@ -149,6 +153,93 @@ def validate_cmd(
         console.print(f"... and {len(errors) - 50} more")
     console.print(f"[red]{len(errors)} error(s) across {n} instance(s)[/red]")
     raise typer.Exit(code=1)
+
+
+def _find_pr(prs_path: Path, pr_number: int) -> dict:
+    for line in prs_path.open():
+        line = line.strip()
+        if not line:
+            continue
+        row = json.loads(line)
+        if row.get("number") == pr_number:
+            return row
+    raise typer.BadParameter(f"PR #{pr_number} not found in {prs_path}")
+
+
+@app.command(name="extract")
+def extract_cmd(
+    pr: int = typer.Option(..., "--pr", help="Merged PR number from the source repo."),
+    repo_url: str = typer.Option(
+        "https://github.com/fastapi/full-stack-fastapi-template.git",
+        "--repo-url",
+    ),
+    prs: Path = typer.Option(
+        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL."
+    ),
+    work_root: Path = typer.Option(
+        Path("/tmp/pbench"), "--work-root", help="Scratch dir for checkouts/outputs."
+    ),
+    pytest_args: str = typer.Option(
+        "", "--pytest-args", help="Extra pytest args, space-separated (e.g. 'tests/api/routes')."
+    ),
+) -> None:
+    """Phase 2 — extract FAIL_TO_PASS / PASS_TO_PASS for a single PR (backend, local mode)."""
+    import json as _json
+
+    from harness import extract as ex
+    from harness import git_ops
+
+    row = _find_pr(prs, pr)
+    head_commit = ((row.get("mergeCommit") or {}).get("oid")) or ""
+    if not head_commit:
+        raise typer.BadParameter(f"PR #{pr} has no mergeCommit.oid")
+
+    instance_id = f"fastapi__full-stack-fastapi-template-{pr}"
+    work_dir = work_root / instance_id
+    work_dir.mkdir(parents=True, exist_ok=True)
+    repo_dir = work_dir / "repo"
+
+    if not repo_dir.exists():
+        console.log(f"cloning {repo_url} → {repo_dir}")
+        git_ops.clone(repo_url, repo_dir)
+    else:
+        console.log(f"reusing checkout: {repo_dir}")
+
+    # base = first parent of the merge commit. For squash merges (this repo's
+    # default) the merge commit has exactly one parent on master — `<head>^`
+    # gives the pre-PR state. For true merge commits, ^ still yields the main-
+    # line parent.
+    base_commit = git_ops.rev_parse(repo_dir, f"{head_commit}^")
+    console.log(f"base={base_commit[:10]} head={head_commit[:10]}")
+
+    # Derive the test-only patch from the PR range.
+    test_patch = git_ops.diff(
+        repo_dir,
+        base_commit,
+        head_commit,
+        paths=["*test*", "*.spec.ts", "*.spec.tsx", "*.test.ts", "*.test.tsx"],
+    )
+    (work_dir / "test_patch.diff").write_text(test_patch)
+    console.log(f"test_patch: {len(test_patch)} bytes")
+
+    spec = ex.ExtractSpec(
+        instance_id=instance_id,
+        repo_url=repo_url,
+        base_commit=base_commit,
+        head_commit=head_commit,
+        test_patch=test_patch or None,
+        pytest_args=[a for a in pytest_args.split() if a] or None,
+    )
+    result = ex.extract(spec, work_root=work_dir, console=console)
+
+    console.print("")
+    console.print(f"[bold]FAIL_TO_PASS[/bold]: {len(result.fail_to_pass)}")
+    for t in result.fail_to_pass[:10]:
+        console.print(f"  + {t}")
+    if len(result.fail_to_pass) > 10:
+        console.print(f"  ... and {len(result.fail_to_pass) - 10} more")
+    console.print(f"[bold]PASS_TO_PASS[/bold]: {len(result.pass_to_pass)}")
+    console.print(f"summary → {work_dir / 'out' / 'summary.json'}")
 
 
 if __name__ == "__main__":
