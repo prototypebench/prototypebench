@@ -1,0 +1,25 @@
+FROM python:3.10-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1 \
+    PATH="/root/.cargo/bin:$PATH"
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends git ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:0.9.26 /uv /uvx /bin/
+
+WORKDIR /work
+
+# Runtime contract:
+#   bind-mount the source repo at /work
+#   bind-mount a persistent uv cache at /root/.cache/uv  (speeds up `uv sync`)
+#   bind-mount an output dir at /out
+#   invoke via: sh -c "uv sync --frozen && <prestart> && uv run pytest ..."
+#
+# We intentionally don't pre-install any workspace here — lock SHAs vary per
+# task base_commit. uv's resolver reuses the shared cache across tasks.
+
+CMD ["bash"]

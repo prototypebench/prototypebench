@@ -182,8 +182,11 @@ def extract_cmd(
     pytest_args: str = typer.Option(
         "", "--pytest-args", help="Extra pytest args, space-separated (e.g. 'tests/api/routes')."
     ),
+    mode: str = typer.Option(
+        "docker", "--mode", help="Execution mode: 'docker' (reproducible) or 'local' (host uv)."
+    ),
 ) -> None:
-    """Phase 2 — extract FAIL_TO_PASS / PASS_TO_PASS for a single PR (backend, local mode)."""
+    """Phase 2 — extract FAIL_TO_PASS / PASS_TO_PASS for a single PR (backend)."""
     import json as _json
 
     from harness import extract as ex
@@ -230,7 +233,7 @@ def extract_cmd(
         test_patch=test_patch or None,
         pytest_args=[a for a in pytest_args.split() if a] or None,
     )
-    result = ex.extract(spec, work_root=work_dir, console=console)
+    result = ex.extract(spec, work_root=work_dir, mode=mode, console=console)
 
     console.print("")
     console.print(f"[bold]FAIL_TO_PASS[/bold]: {len(result.fail_to_pass)}")
@@ -254,6 +257,9 @@ def score_cmd(
     ),
     pytest_args: str = typer.Option(
         "", "--pytest-args", help="Extra pytest args (same scope used during extract)."
+    ),
+    mode: str = typer.Option(
+        "docker", "--mode", help="Execution mode: 'docker' or 'local'."
     ),
 ) -> None:
     """Phase 2 — score an agent patch against a PR's FAIL_TO_PASS/PASS_TO_PASS.
@@ -291,7 +297,7 @@ def score_cmd(
         agent_patch=agent_patch,
         pytest_args=[a for a in pytest_args.split() if a] or None,
     )
-    result = sc.score_patch(spec, work_root=work_dir, console=console)
+    result = sc.score_patch(spec, work_root=work_dir, mode=mode, console=console)
 
     console.print("")
     color = "green" if result.score == 1 else "red"

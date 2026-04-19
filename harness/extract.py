@@ -1,18 +1,23 @@
 """Single-PR FAIL_TO_PASS / PASS_TO_PASS extraction.
 
-Backend-only, local mode. Postgres runs in a task-scoped docker container;
-pytest runs on the host via `uv run`.
+Backend-only. Supports two execution modes:
+
+- `mode='local'` — runs on the host via `uv run`. Fast for iteration; depends
+  on host python/uv.
+- `mode='docker'` — runs in `prototypebench/backend:<tag>` with repo bind-
+  mounted. Reproducible across hosts. Postgres joins a task-scoped docker
+  network; the backend container reaches it by container name.
 
 Flow:
   1. clone/reuse repo checkout
-  2. git checkout <base_commit>
-  3. git apply <test_patch>                 (tests-only diff)
-  4. start disposable postgres
-  5. uv run pytest --junitxml=base.xml     (expected to contain FAILs)
-  6. git reset + checkout <head_commit>
-  7. uv run pytest --junitxml=head.xml     (expected all pass)
-  8. diff → FAIL_TO_PASS / PASS_TO_PASS
-  9. stop postgres, write summary.json
+  2. git checkout <base_commit> + git apply <test_patch>
+  3. start postgres (attached to network in docker mode)
+  4. prestart (backend_pre_start + alembic upgrade + initial_data)
+  5. pytest --junitxml → base
+  6. reset/checkout <head_commit>
+  7. prestart + pytest → head
+  8. diff outcomes → FAIL_TO_PASS / PASS_TO_PASS
+  9. write summary.json, tear down
 """
 
 from __future__ import annotations
@@ -24,7 +29,7 @@ from pathlib import Path
 
 from rich.console import Console
 
-from . import git_ops, junit, postgres, runner
+from . import backend_runner, git_ops, junit, postgres
 
 
 @dataclass
@@ -33,7 +38,7 @@ class ExtractSpec:
     repo_url: str
     base_commit: str
     head_commit: str
-    test_patch: str | None = None  # optional; head already contains tests
+    test_patch: str | None = None
     pytest_args: list[str] | None = None
 
 
@@ -53,6 +58,7 @@ class ExtractResult:
     instance_id: str
     base_commit: str
     head_commit: str
+    mode: str
     fail_to_pass: list[str] = field(default_factory=list)
     pass_to_pass: list[str] = field(default_factory=list)
     base: PhaseResult | None = None
@@ -60,7 +66,9 @@ class ExtractResult:
     error: str | None = None
 
 
-def _phase_summary(outcomes: dict[str, junit.Outcome], rc: int, crashed: bool, dur: float) -> PhaseResult:
+def _phase_summary(
+    outcomes: dict[str, junit.Outcome], rc: int, crashed: bool, dur: float
+) -> PhaseResult:
     counts = {"passed": 0, "failed": 0, "error": 0, "skipped": 0}
     for o in outcomes.values():
         counts[o] = counts.get(o, 0) + 1
@@ -79,8 +87,9 @@ def extract(
     spec: ExtractSpec,
     *,
     work_root: Path,
+    mode: str = "docker",
     console: Console | None = None,
-    reuse_checkout: bool = True,
+    backend_image: str = "prototypebench/backend:latest",
 ) -> ExtractResult:
     console = console or Console()
     work_root.mkdir(parents=True, exist_ok=True)
@@ -92,14 +101,13 @@ def extract(
         instance_id=spec.instance_id,
         base_commit=spec.base_commit,
         head_commit=spec.head_commit,
+        mode=mode,
     )
 
     # 1. clone (or reuse)
-    if repo_dir.exists() and not reuse_checkout:
-        git_ops.ensure_clean_tmp(repo_dir)
     if not repo_dir.exists():
         console.log(f"cloning {spec.repo_url} → {repo_dir}")
-        git_ops.clone(spec.repo_url, repo_dir, depth=None)
+        git_ops.clone(spec.repo_url, repo_dir)
     else:
         console.log(f"reusing checkout: {repo_dir}")
         git_ops.clean(repo_dir)
@@ -114,23 +122,36 @@ def extract(
             result.error = f"test_patch apply failed on base: {e}"
             return result
 
-    # 4. postgres
+    # 4. postgres + runner
     pg_name = f"pbench-db-{spec.instance_id}"[:60]
-    postgres.stop(pg_name)  # idempotent cleanup
-    console.log(f"start postgres {pg_name}")
+    network_name: str | None = None
+    postgres.stop(pg_name)
+    if mode == "docker":
+        network_name = f"pbench-net-{spec.instance_id}"[:60]
+        postgres.create_network(network_name)
+    console.log(f"start postgres {pg_name} (mode={mode})")
     try:
-        pg = postgres.start(pg_name)
+        pg = postgres.start(pg_name, network=network_name)
     except postgres.PostgresError as e:
         result.error = f"postgres start failed: {e}"
         return result
 
+    runner = backend_runner.make(
+        mode,
+        image=backend_image,
+        network=network_name or "",
+        out_mount=out_dir,
+        container_prefix=f"pbench-b-{spec.instance_id}"[:50],
+    )
+    pg_env = pg.env_container() if mode == "docker" else pg.env_host()
+
     try:
         backend_dir = repo_dir / "backend"
 
-        # 4a. prestart — alembic migration + initial data (mirrors backend/scripts/prestart.sh)
-        console.log("running prestart (alembic + initial data) on base")
+        # 4a. prestart (base)
+        console.log("running prestart on base")
         rc, so, se = runner.run_prestart(
-            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg.env()
+            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg_env
         )
         (out_dir / "base.prestart.log").write_text(so + "\n---stderr---\n" + se)
         if rc != 0:
@@ -144,12 +165,11 @@ def extract(
             workspace_root=repo_dir,
             backend_dir=backend_dir,
             junit_path=out_dir / "base.junit.xml",
-            env_overrides=pg.env(),
+            env_overrides=pg_env,
             pytest_args=spec.pytest_args,
         )
         base_outcomes = (
-            junit.parse(base_run.junit_path)
-            if base_run.junit_path.exists() else {}
+            junit.parse(base_run.junit_path) if base_run.junit_path.exists() else {}
         )
         result.base = _phase_summary(
             base_outcomes, base_run.returncode, base_run.crashed, time.monotonic() - t0
@@ -161,12 +181,9 @@ def extract(
         console.log(f"checkout head {spec.head_commit[:10]}")
         git_ops.reset_hard(repo_dir, spec.base_commit)
         git_ops.checkout(repo_dir, spec.head_commit)
-        # Head may include migration changes; rerun prestart. Ignore errors
-        # here only if alembic is "already up to date" — but migrations should
-        # be idempotent, so a real failure is a real error.
         console.log("running prestart on head")
         rc, so, se = runner.run_prestart(
-            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg.env()
+            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg_env
         )
         (out_dir / "head.prestart.log").write_text(so + "\n---stderr---\n" + se)
         if rc != 0:
@@ -178,12 +195,11 @@ def extract(
             workspace_root=repo_dir,
             backend_dir=backend_dir,
             junit_path=out_dir / "head.junit.xml",
-            env_overrides=pg.env(),
+            env_overrides=pg_env,
             pytest_args=spec.pytest_args,
         )
         head_outcomes = (
-            junit.parse(head_run.junit_path)
-            if head_run.junit_path.exists() else {}
+            junit.parse(head_run.junit_path) if head_run.junit_path.exists() else {}
         )
         result.head = _phase_summary(
             head_outcomes, head_run.returncode, head_run.crashed, time.monotonic() - t0
@@ -196,17 +212,18 @@ def extract(
         base_fail = junit.failing(base_outcomes)
         head_pass = junit.passing(head_outcomes)
 
-        fail_to_pass = sorted(base_fail & head_pass)
-        pass_to_pass = sorted((base_pass & head_pass) - set(fail_to_pass))
-        result.fail_to_pass = fail_to_pass
-        result.pass_to_pass = pass_to_pass
+        result.fail_to_pass = sorted(base_fail & head_pass)
+        result.pass_to_pass = sorted((base_pass & head_pass) - set(result.fail_to_pass))
     finally:
         console.log(f"stop postgres {pg_name}")
         postgres.stop(pg_name)
+        if network_name:
+            postgres.remove_network(network_name)
 
     # 9. write summary
-    summary = asdict(result)
-    (out_dir / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True))
+    (out_dir / "summary.json").write_text(
+        json.dumps(asdict(result), indent=2, sort_keys=True)
+    )
     console.log(
         f"FAIL_TO_PASS={len(result.fail_to_pass)} PASS_TO_PASS={len(result.pass_to_pass)}"
     )

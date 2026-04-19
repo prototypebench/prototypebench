@@ -18,7 +18,7 @@ from pathlib import Path
 
 from rich.console import Console
 
-from . import git_ops, junit, postgres, runner
+from . import backend_runner, git_ops, junit, postgres
 
 
 @dataclass
@@ -29,14 +29,15 @@ class ScoreSpec:
     test_patch: str
     fail_to_pass: list[str]
     pass_to_pass: list[str]
-    agent_patch: str           # non-test diff from the agent
+    agent_patch: str
     pytest_args: list[str] | None = None
 
 
 @dataclass
 class ScoreResult:
     instance_id: str
-    score: int                 # 0 or 1
+    score: int
+    mode: str = "docker"
     fail_to_pass_passed: list[str] = field(default_factory=list)
     fail_to_pass_missing: list[str] = field(default_factory=list)
     pass_to_pass_passed: list[str] = field(default_factory=list)
@@ -50,7 +51,9 @@ def score_patch(
     spec: ScoreSpec,
     *,
     work_root: Path,
+    mode: str = "docker",
     console: Console | None = None,
+    backend_image: str = "prototypebench/backend:latest",
 ) -> ScoreResult:
     console = console or Console()
     work_root.mkdir(parents=True, exist_ok=True)
@@ -58,7 +61,7 @@ def score_patch(
     out_dir = work_root / "out"
     out_dir.mkdir(exist_ok=True)
 
-    result = ScoreResult(instance_id=spec.instance_id, score=0)
+    result = ScoreResult(instance_id=spec.instance_id, score=0, mode=mode)
 
     if not repo_dir.exists():
         console.log(f"cloning {spec.repo_url} → {repo_dir}")
@@ -78,10 +81,7 @@ def score_patch(
         result.error = f"test_patch apply failed: {e}"
         return result
 
-    # 3. agent_patch — must not touch test files (enforced by convention; we
-    # still let git apply fail naturally if conflicts overlap). An empty patch
-    # is treated as "agent produced nothing" (not an error) — expected to
-    # score 0 since FAIL_TO_PASS tests will still fail.
+    # 3. agent_patch — empty patch = "no-op" submission (score 0, not error).
     if spec.agent_patch.strip():
         try:
             git_ops.apply_diff(repo_dir, spec.agent_patch)
@@ -91,22 +91,35 @@ def score_patch(
     else:
         console.log("agent_patch is empty — skipping apply, scoring as-is")
 
-    # 4. postgres
-    pg_name = f"pbench-score-{spec.instance_id}"[:60]
+    # 4. postgres + runner
+    pg_name = f"pbench-db-score-{spec.instance_id}"[:60]
+    network_name: str | None = None
     postgres.stop(pg_name)
+    if mode == "docker":
+        network_name = f"pbench-net-score-{spec.instance_id}"[:60]
+        postgres.create_network(network_name)
     try:
-        pg = postgres.start(pg_name)
+        pg = postgres.start(pg_name, network=network_name)
     except postgres.PostgresError as e:
         result.error = f"postgres start failed: {e}"
         return result
+
+    runner = backend_runner.make(
+        mode,
+        image=backend_image,
+        network=network_name or "",
+        out_mount=out_dir,
+        container_prefix=f"pbench-s-{spec.instance_id}"[:50],
+    )
+    pg_env = pg.env_container() if mode == "docker" else pg.env_host()
 
     try:
         backend_dir = repo_dir / "backend"
 
         # 5. prestart
-        console.log("running prestart (alembic + initial data)")
+        console.log("running prestart")
         rc, so, se = runner.run_prestart(
-            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg.env()
+            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg_env
         )
         (out_dir / "agent.prestart.log").write_text(so + "\n---stderr---\n" + se)
         if rc != 0:
@@ -120,7 +133,7 @@ def score_patch(
             workspace_root=repo_dir,
             backend_dir=backend_dir,
             junit_path=out_dir / "agent.junit.xml",
-            env_overrides=pg.env(),
+            env_overrides=pg_env,
             pytest_args=spec.pytest_args,
         )
         result.phase_duration_s = time.monotonic() - t0
@@ -143,12 +156,17 @@ def score_patch(
         result.pass_to_pass_passed = sorted(p2p_set & passing_tests)
         result.pass_to_pass_regressed = sorted(p2p_set - passing_tests)
 
-        result.score = int(not result.fail_to_pass_missing and not result.pass_to_pass_regressed)
+        result.score = int(
+            not result.fail_to_pass_missing and not result.pass_to_pass_regressed
+        )
     finally:
         postgres.stop(pg_name)
+        if network_name:
+            postgres.remove_network(network_name)
 
-    # 8. write summary
-    (out_dir / "score_summary.json").write_text(json.dumps(asdict(result), indent=2, sort_keys=True))
+    (out_dir / "score_summary.json").write_text(
+        json.dumps(asdict(result), indent=2, sort_keys=True)
+    )
     console.log(
         f"score={result.score}  "
         f"F2P {len(result.fail_to_pass_passed)}/{len(spec.fail_to_pass)}  "
