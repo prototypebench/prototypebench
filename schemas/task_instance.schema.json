@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prototypebench.org/schemas/task_instance.schema.json",
+  "title": "PrototypeBench Task Instance",
+  "description": "Single benchmark task. Extends SWE-bench instances.jsonl with dual-test (backend pytest + frontend Playwright) fields.",
+  "type": "object",
+  "required": [
+    "instance_id",
+    "repo",
+    "pr_number",
+    "base_commit",
+    "head_commit",
+    "problem_statement",
+    "patch",
+    "test_patch",
+    "fail_to_pass",
+    "pass_to_pass",
+    "stack_domain",
+    "environment",
+    "created_at",
+    "schema_version"
+  ],
+  "properties": {
+    "instance_id": {
+      "type": "string",
+      "description": "Stable unique ID. Convention: '<owner>__<repo>-<pr_number>'. Example: 'fastapi__full-stack-fastapi-template-1234'.",
+      "pattern": "^[a-zA-Z0-9._-]+__[a-zA-Z0-9._-]+-[0-9]+$"
+    },
+    "repo": {
+      "type": "string",
+      "description": "Source repository, owner/name. E.g., 'fastapi/full-stack-fastapi-template'."
+    },
+    "pr_number": {
+      "type": "integer",
+      "description": "Merged PR number that this task is derived from.",
+      "minimum": 1
+    },
+    "pr_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "pr_title": { "type": "string" },
+    "pr_author": { "type": "string" },
+    "pr_labels": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "base_commit": {
+      "type": "string",
+      "description": "SHA of the PR's merge base — the state the agent starts from.",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "head_commit": {
+      "type": "string",
+      "description": "SHA of the PR's merge commit — reference solution state.",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "problem_statement": {
+      "type": "string",
+      "description": "Natural-language task description. Sourced from the closing issue body if available, else from PR description (with hints_text separated)."
+    },
+    "hints_text": {
+      "type": "string",
+      "description": "Optional: reviewer/discussion text that may leak the solution. Excluded by default at agent eval time."
+    },
+    "patch": {
+      "type": "string",
+      "description": "Unified diff of the reference solution (non-test files only)."
+    },
+    "test_patch": {
+      "type": "string",
+      "description": "Unified diff of the test file changes (combined backend + frontend). For split view see test_patch_backend/frontend."
+    },
+    "test_patch_backend": {
+      "type": "string",
+      "description": "Optional split: backend (pytest) test diff only."
+    },
+    "test_patch_frontend": {
+      "type": "string",
+      "description": "Optional split: frontend (Playwright) test diff only."
+    },
+    "fail_to_pass": {
+      "type": "object",
+      "description": "Tests that fail on base_commit and pass on head_commit. At least one of backend/frontend must be non-empty.",
+      "required": ["backend", "frontend"],
+      "properties": {
+        "backend": {
+          "type": "array",
+          "description": "pytest node IDs, e.g. 'backend/app/tests/api/routes/test_items.py::test_create_item'.",
+          "items": { "type": "string" }
+        },
+        "frontend": {
+          "type": "array",
+          "description": "Playwright test IDs, e.g. 'frontend/tests/items.spec.ts:42:3 › Items › create item'.",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pass_to_pass": {
+      "type": "object",
+      "description": "Tests that pass on base_commit and must still pass on the agent's patch (regression guard).",
+      "required": ["backend", "frontend"],
+      "properties": {
+        "backend": { "type": "array", "items": { "type": "string" } },
+        "frontend": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "stack_domain": {
+      "type": "string",
+      "enum": ["backend_only", "frontend_only", "fullstack"],
+      "description": "Which side the reference patch touches. 'fullstack' = both."
+    },
+    "environment": {
+      "type": "object",
+      "required": ["python_version", "node_version"],
+      "properties": {
+        "python_version": { "type": "string", "description": "e.g. '3.11'" },
+        "node_version": { "type": "string", "description": "e.g. '20'" },
+        "uv_lock_sha": { "type": "string", "description": "Content hash of uv.lock at base_commit." },
+        "bun_lock_sha": { "type": "string", "description": "Content hash of bun.lockb at base_commit." },
+        "docker_compose_sha": { "type": "string", "description": "Content hash of docker-compose.yml at base_commit." },
+        "setup_commit": {
+          "type": "string",
+          "description": "Optional override commit for dependency/image setup if different from base_commit.",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "PR merge timestamp (ISO 8601). Used for contamination-tier assignment relative to model cutoffs."
+    },
+    "contamination_tier": {
+      "type": "string",
+      "enum": ["public", "held_out", "internal_only"],
+      "description": "Public = pre-cutoff, usable openly. held_out = post-cutoff, rotated per leaderboard season. internal_only = excluded from public leaderboard."
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["easy", "medium", "hard"],
+      "description": "Post-curation label. Optional at creation time."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Curator notes — known caveats, why this PR was included/flagged."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Task schema version. Bump on breaking changes."
+    }
+  },
+  "additionalProperties": false
+}
