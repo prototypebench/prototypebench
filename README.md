@@ -12,8 +12,11 @@
 
 PrototypeBench is an open benchmark for evaluating the **full-stack product-shipping ability** of AI coding agents. Where SWE-Bench measures bug-fixing in mature Python libraries, PrototypeBench measures **"can the agent ship a full-stack feature on a modern AI-native stack?"**
 
-- **Task source**: merged PRs from [`fastapi/full-stack-fastapi-template`](https://github.com/fastapi/full-stack-fastapi-template) (MIT, 42.7k★).
+- **Task sources** (multi-source via `harness/sources/`):
+  - [`fastapi/full-stack-fastapi-template`](https://github.com/fastapi/full-stack-fastapi-template) — MIT, 42.7k★ — full-stack template (React+Vite+Tailwind+shadcn / FastAPI+SQLModel+Postgres).
+  - [`IBM/mcp-context-forge`](https://github.com/IBM/mcp-context-forge) — Apache-2, 3.6k★ — FastAPI MCP gateway, 1,645 PRs/yr, hermetic SQLite tests.
 - **Scoring**: all `FAIL_TO_PASS` pass + all `PASS_TO_PASS` don't regress = 1 point (binary). Dual runner (pytest + Playwright).
+- **Judge**: execution-based (no LLM-as-judge) — pytest/Playwright is the arbiter, ground-truth = the actual merged PR diff.
 - **Format**: extends the SWE-Bench `instances.jsonl` schema — existing tooling is re-usable with minimal glue.
 
 ## Why this stack?
@@ -84,6 +87,7 @@ This repo is currently the **task-curation pipeline**. The evaluation harness th
 
 - Python 3.11+, [`uv`](https://docs.astral.sh/uv/)
 - [`gh` CLI](https://cli.github.com/) (authenticated)
+- Docker (for hermetic backend + Playwright runners)
 
 ### Install
 
@@ -93,31 +97,45 @@ cd prototypebench
 uv sync
 ```
 
-### Pipeline
+### Pipeline (per-source)
+
+Every command takes `--source <short_name>` (default `fastapi-template`).
+Available sources are registered in [`harness/sources/`](harness/sources/).
 
 ```bash
-# 1. Crawl merged PRs from the source repo → raw/prs.jsonl
-uv run pbench crawl
+# 1. Crawl merged PRs → raw/<source>/prs.jsonl
+uv run pbench crawl   --source fastapi-template
+uv run pbench crawl   --source mcp-context-forge
 
-# 2. Filter + score → raw/candidates.jsonl (+ rejected.jsonl)
-uv run pbench filter
+# 2. Filter + score → raw/<source>/candidates.jsonl
+uv run pbench filter  --source mcp-context-forge
 
-# 3. Inspect candidate distribution
-uv run pbench stats
-uv run pbench top --n 20
+# 3. Inspect (filter by signal kind: backend | frontend | fullstack | any)
+uv run pbench top     --source mcp-context-forge --kind backend --n 20
 
-# 4. Draft N instances (with <<TODO:...>> markers) from the top candidates
-uv run pbench draft --top 10
+# 4. Auto-derive FAIL_TO_PASS / PASS_TO_PASS by running the source's tests
+#    on base vs head (Docker mode, --kind backend uses pytest)
+uv run pbench batch-extract --source mcp-context-forge --top 10
 
-# 5. Curator fills in TODOs, then validates against the schema
-uv run pbench validate -p tasks/instances.jsonl
+# 5. Convert usable extract results into schema-shaped task instances
+uv run pbench build-from-extract --source mcp-context-forge
+
+# 6. Validate against the schema
+uv run pbench validate -p tasks/instances.mcp-context-forge.jsonl
+
+# 7. Score an agent's submitted patch against an extracted instance
+uv run pbench score   --source fastapi-template --pr 1543 --patch-file solution.patch
 ```
 
 Full CLI help: `uv run pbench --help`.
 
-### Seed curation workflow
+### Adding a new task source
 
-The initial 10-task manual pass exists to validate the pipeline end-to-end, not as a finished task set. Checkout, test execution, FAIL/PASS extraction, and `problem_statement` authoring steps are in [`docs/seed-curation.md`](docs/seed-curation.md).
+Drop a `SourceConfig` registration in `harness/sources/<short_name>.py` —
+backend dir, uv-lock path, prestart steps, env-var aliasing for postgres,
+extras, image tag, etc. The harness reads the registry; no other module
+needs to change. See [`harness/sources/mcp_context_forge.py`](harness/sources/mcp_context_forge.py)
+for a minimal SQLite-only example.
 
 ## Repo layout
 

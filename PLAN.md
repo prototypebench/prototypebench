@@ -84,25 +84,77 @@ Indeed "fastapi react" 직무 공고 **16,209건** (2025).
 - **pytest**
 - uv (pkg mgr)
 
-### 3.2 태스크 베이스 repo
+### 3.2 태스크 베이스 repo (multi-source, 2026-04 갱신)
 
-**[fastapi/full-stack-fastapi-template](https://github.com/fastapi/full-stack-fastapi-template)**
+PrototypeBench 의 task source 는 **확장 가능한 registry** (`harness/sources/`).
+v1 에 등록된 source 는 두 개:
+
+#### A. fastapi/full-stack-fastapi-template — primary (full-stack)
 
 | 속성 | 값 |
 |---|---|
 | Stars | 42,731 (2026-04 기준) |
-| License | MIT (재배포·가공·상업 이용 가능) |
-| 최근 커밋 | 2026-04-19 (매우 활발) |
-| 스택 일치도 | **완벽** (3.1 과 동일) |
-| bug label merged PR | 21개 |
-| feature label merged PR | ~66개 (실질 코드변경 ~30개 추정) |
+| License | MIT |
+| 스택 일치도 | **완벽** (§3.1 과 동일) |
+| Backend | `backend/` · uv workspace · pytest · Postgres |
+| Frontend | `frontend/` · React+Vite+Tailwind+shadcn · Playwright |
 | CI 테스트 | `test-backend.yml` (pytest) + `playwright.yml` (Playwright) |
+| Filter pool (uv-era 이후) | 8 candidates (32 → 8 backend-test 강화 필터) |
+| 첫 batch usable rate | 9% (3/32) — 풀스택 차별화 핵심 source |
 
-**마이닝 가능 태스크 예상: 40~60개** (v1 충분).
+#### B. IBM/mcp-context-forge — backend-only secondary (2026-04 추가)
 
-### 3.3 대안 태스크 소스 (없음)
+| 속성 | 값 |
+|---|---|
+| Stars | 3,593 |
+| License | Apache-2.0 |
+| 스택 부분 일치 | Backend 만 — FastAPI + SQLAlchemy 2.x async + Alembic + pytest, **uv extras=[plugins]** |
+| Backend dir | repo root (`mcpgateway/` + `tests/`) |
+| Postgres 의존 | **없음** (SQLite-by-default conftest, opt-in Postgres) |
+| Python | **3.14** (별도 image: `prototypebench/backend-py312:latest`) |
+| 머지 PR | **1,645 / yr** (vs fastapi-template 의 ~수십) |
+| 첫 batch usable rate | **60%** (3/5 pilot) — 인기 + 활동성이 풀 품질을 지배 |
 
-같은 스택(React+Vite+Tailwind+FastAPI) 으로 stars>500 인 대안 템플릿 **부재**. 사실상 유일한 현실적 베이스.
+**B 채택 사유**: §3.3 의 정확-스택-일치 search 가 비었기 때문. backend-only 확장이 풀스택 차별화를 약화시키지 않으면서 pool 을 ×100 수준으로 키움. PLAN §5 fairness 기조 유지 (벤더 중립).
+
+### 3.3 대안 태스크 소스 — 리서치 결과 (2026-04-20)
+
+정확 스택 일치(React+Vite+Tailwind+shadcn / FastAPI+SQLModel+Postgres) OSS 풀스택 앱은 stars>500 기준 **사실상 유일** (`fastapi/full-stack-fastapi-template`).
+
+주요 honorable mentions (§3.2 B 의 채택 근거가 된 후보들):
+
+| Repo | Stars | License | 탈락 사유 |
+|---|---|---|---|
+| polarsource/polar | 9.7k | Apache-2 | Next.js 프런트, backend test infra가 매우 무거움 (Postgres + Redis + MinIO + Tinybird + email render) |
+| evroon/bracket | 1.6k | **AGPL ✗** | redistribution 불가 |
+| 0010aor/FlashNotes | 105 | MIT | 17 PR/yr — mineable material 부족 |
+| smithyhq/sqladmin | 2.7k | BSD-3 | library (admin templating), 50 PR/yr — 후보 |
+
+차후 Phase 3 이후 **backend 확장 source 1-2 개 추가** (smithyhq/sqladmin 등) + **frontend-only standalone source** (예: shadcn 기반 Vite 앱) 검토.
+
+### 3.4 SourceConfig 추상화
+
+새 source 추가는 `harness/sources/<short_name>.py` 한 파일:
+
+```python
+register(SourceConfig(
+    name="OWNER/REPO",
+    short_name="repo-alias",
+    repo_url="https://github.com/OWNER/REPO.git",
+    backend_dir="server",          # or "backend" or ""
+    uv_lock_path="server/uv.lock",
+    backend_image="prototypebench/backend-py312:latest",
+    python_version="3.12",
+    uv_extras=["plugins"],          # filtered to whatever exists at base commit
+    prestart_steps=[...],
+    pytest_extra_args=["-n", "auto"],
+    pg_required=True | False,
+    pg_env_map={"server": "POSTGRES_SERVER", ...},
+    extra_services=[...],
+))
+```
+
+`extract` / `score` / `batch-extract` / `filter` / `crawl` 모두 SourceConfig 기반으로 동작 — multi-source 가 native.
 
 ---
 
@@ -177,6 +229,30 @@ Indeed "fastapi react" 직무 공고 **16,209건** (2025).
 | AINativeBench | 에이전틱 시스템 + MCP/A2A | 추상화 레벨 다름 (인프라 vs 제품) |
 | NapthaAI StackBench | AI 에이전트의 라이브러리/문서 사용 능력 | 과업 유형 다름 |
 | WebArena / WebBench | 브라우저 에이전트 | 카테고리 다름 |
+
+---
+
+## 7.5 진행 상황 (2026-04-20 갱신)
+
+| Phase | 항목 | 상태 |
+|---|---|---|
+| 1 | repo 생성, 스키마 v0.1, validator | ✅ |
+| 1 | PR 크롤러 (multi-source) | ✅ |
+| 1 | filter (kind 라우팅 + uv-era cutoff) | ✅ |
+| 1 | seed 큐레이션 → instance 자동 빌드 | 🟡 6 / 40-60 (mcp 본격 batch 대기) |
+| 2 | 하네스 architecture doc | ✅ |
+| 2 | Backend FAIL_TO_PASS extractor (Docker) | ✅ |
+| 2 | Agent runner v1 (patch submission, 3-scenario validated) | ✅ |
+| 2 | Collection-error fallback | ✅ (#2104 검증) |
+| 2 | Frontend Playwright runner (compose stack) | ✅ (#2146 검증) |
+| 2 | SourceConfig 추상화 (multi-source) | ✅ (mcp-context-forge 검증) |
+| 2 | effective_uv_extras (extras lifecycle 대응) | ✅ |
+| 2 | batch validator + per-source artifact dir | ✅ |
+| 2 | build-from-extract → instances JSONL | ✅ |
+| 3 | 모델 평가 자동화 | ⏳ |
+| 4 | 공개 리더보드 | ⏳ |
+
+현재 instance pool: **6 task** (fastapi-template 3 + mcp-context-forge 3), 모두 backend_only · held_out · schema valid.
 
 ---
 
