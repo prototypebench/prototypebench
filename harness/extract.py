@@ -27,7 +27,7 @@ from pathlib import Path
 from rich.console import Console
 
 from . import backend_runner, git_ops, junit, postgres, test_patch_parser
-from .sources import SourceConfig
+from .sources import SourceConfig, effective_uv_extras
 
 
 @dataclass
@@ -179,12 +179,15 @@ def extract(
     backend_dir = repo_dir / source.backend_dir if source.backend_dir else repo_dir
 
     try:
-        # 4a. prestart (base)
+        # 4a. prestart (base) — derive available extras at this commit
+        base_extras = effective_uv_extras(source, repo_dir)
+        if base_extras != source.uv_extras:
+            console.log(f"effective extras at base: {base_extras} (vs configured {source.uv_extras})")
         console.log("running prestart on base")
         rc, so, se = runner.run_prestart(
             workspace_root=repo_dir, backend_dir=backend_dir,
             prestart_steps=source.prestart_steps,
-            uv_extras=source.uv_extras,
+            uv_extras=base_extras,
             env_overrides=pg_env,
         )
         (out_dir / "base.prestart.log").write_text(so + "\n---stderr---\n" + se)
@@ -201,7 +204,7 @@ def extract(
             junit_path=out_dir / "base.junit.xml",
             pytest_args=spec.pytest_args,
             pytest_extra_args=source.pytest_extra_args,
-            uv_extras=source.uv_extras,
+            uv_extras=base_extras,
             env_overrides=pg_env,
         )
         base_outcomes = junit.parse(base_run.junit_path) if base_run.junit_path.exists() else {}
@@ -215,11 +218,12 @@ def extract(
         console.log(f"checkout head {spec.head_commit[:10]}")
         git_ops.reset_hard(repo_dir, spec.base_commit)
         git_ops.checkout(repo_dir, spec.head_commit)
+        head_extras = effective_uv_extras(source, repo_dir)
         console.log("running prestart on head")
         rc, so, se = runner.run_prestart(
             workspace_root=repo_dir, backend_dir=backend_dir,
             prestart_steps=source.prestart_steps,
-            uv_extras=source.uv_extras,
+            uv_extras=head_extras,
             env_overrides=pg_env,
         )
         (out_dir / "head.prestart.log").write_text(so + "\n---stderr---\n" + se)
@@ -234,7 +238,7 @@ def extract(
             junit_path=out_dir / "head.junit.xml",
             pytest_args=spec.pytest_args,
             pytest_extra_args=source.pytest_extra_args,
-            uv_extras=source.uv_extras,
+            uv_extras=head_extras,
             env_overrides=pg_env,
         )
         head_outcomes = junit.parse(head_run.junit_path) if head_run.junit_path.exists() else {}

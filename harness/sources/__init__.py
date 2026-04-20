@@ -101,6 +101,35 @@ def all_sources() -> list[SourceConfig]:
     return out
 
 
+# --------------------------------------------------------------------------
+# Helpers
+# --------------------------------------------------------------------------
+
+
+def effective_uv_extras(source: SourceConfig, repo_dir) -> list[str]:
+    """Return the subset of `source.uv_extras` actually defined in the checked-out
+    pyproject.toml. PRs older than the addition of an extra would otherwise fail
+    with `Extra X is not defined in the project's optional-dependencies table`.
+    """
+    from pathlib import Path
+    try:
+        import tomllib
+    except ImportError:
+        import tomli as tomllib  # type: ignore
+
+    repo_dir = Path(repo_dir)
+    backend = repo_dir / source.backend_dir if source.backend_dir else repo_dir
+    pyproject = backend / "pyproject.toml"
+    if not pyproject.exists():
+        return list(source.uv_extras)
+    try:
+        data = tomllib.loads(pyproject.read_text())
+    except Exception:
+        return list(source.uv_extras)
+    available = set((data.get("project", {}) or {}).get("optional-dependencies", {}).keys())
+    return [e for e in source.uv_extras if e in available]
+
+
 # Eagerly populate the registry by importing each source module.
 from . import fastapi_full_stack_template  # noqa: F401, E402
 from . import mcp_context_forge  # noqa: F401, E402

@@ -19,7 +19,7 @@ from pathlib import Path
 from rich.console import Console
 
 from . import backend_runner, git_ops, junit, postgres
-from .sources import SourceConfig
+from .sources import SourceConfig, effective_uv_extras
 
 
 @dataclass
@@ -126,12 +126,13 @@ def score_patch(
     backend_dir = repo_dir / source.backend_dir if source.backend_dir else repo_dir
 
     try:
-        # 5. prestart
+        # 5. prestart — use extras available at the (base + agent_patch) commit
+        eff_extras = effective_uv_extras(source, repo_dir)
         console.log("running prestart")
         rc, so, se = runner.run_prestart(
             workspace_root=repo_dir, backend_dir=backend_dir,
             prestart_steps=source.prestart_steps,
-            uv_extras=source.uv_extras,
+            uv_extras=eff_extras,
             env_overrides=pg_env,
         )
         (out_dir / "agent.prestart.log").write_text(so + "\n---stderr---\n" + se)
@@ -147,7 +148,7 @@ def score_patch(
             junit_path=out_dir / "agent.junit.xml",
             pytest_args=spec.pytest_args,
             pytest_extra_args=source.pytest_extra_args,
-            uv_extras=source.uv_extras,
+            uv_extras=eff_extras,
             env_overrides=pg_env,
         )
         result.phase_duration_s = time.monotonic() - t0
