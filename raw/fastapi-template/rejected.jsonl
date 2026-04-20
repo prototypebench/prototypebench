@@ -1,0 +1,621 @@
+{"number": 2246, "reason": "non-task title prefix: 🔒 pin github actions by commit sha", "title": "🔒 Pin GitHub actions by commit SHA"}
+{"number": 2234, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.159.10 to 1.166.7"}
+{"number": 2233, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 25.3.2 to 25.5.0"}
+{"number": 2231, "reason": "bot author: app/dependabot", "title": "⬆ Bump pyjwt from 2.10.1 to 2.12.0"}
+{"number": 2230, "reason": "bot author: app/dependabot", "title": "⬆ Bump dorny/paths-filter from 3 to 4"}
+{"number": 2227, "reason": "no test file changes (neither backend nor frontend)", "title": "👷 Add `ty` to precommit"}
+{"number": 2226, "reason": "bot author: app/dependabot", "title": "⬆ Bump tailwindcss from 4.2.0 to 4.2.1"}
+{"number": 2215, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router from 1.157.3 to 1.163.3"}
+{"number": 2214, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 25.1.0 to 25.3.2"}
+{"number": 2213, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query from 5.90.20 to 5.90.21"}
+{"number": 2212, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router-devtools from 1.159.10 to 1.163.3"}
+{"number": 2208, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/download-artifact from 7 to 8"}
+{"number": 2207, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/upload-artifact from 6 to 7"}
+{"number": 2206, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Add FastAPI VS Code extension to recommended extensions"}
+{"number": 2205, "reason": "no test file changes (neither backend nor frontend)", "title": "🔨 Add pre-commit hook to ensure latest release header has date"}
+{"number": 2200, "reason": "bot author: app/dependabot", "title": "⬆ Bump @vitejs/plugin-react-swc from 4.2.2 to 4.2.3"}
+{"number": 2199, "reason": "bot author: app/dependabot", "title": "⬆ Bump axios from 1.13.4 to 1.13.5"}
+{"number": 2198, "reason": "bot author: app/dependabot", "title": "⬆ Bump tailwindcss from 4.1.18 to 4.2.0"}
+{"number": 2188, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router-devtools from 1.157.17 to 1.159.10"}
+{"number": 2186, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.157.17 to 1.159.10"}
+{"number": 2185, "reason": "bot author: app/dependabot", "title": "⬆ Bump dotenv from 17.2.3 to 17.3.1"}
+{"number": 2181, "reason": "non-task title prefix: ⬆️ upgrade sentry and fastapi", "title": "⬆️ Upgrade Sentry and FastAPI"}
+{"number": 2179, "reason": "no test file changes (neither backend nor frontend)", "title": "♻️ Update meta titles"}
+{"number": 2178, "reason": "non-task title prefix: ⬆️ bump biome schema version from 2.3.12", "title": "⬆️ Bump biome schema version from 2.3.12 to 2.3.14"}
+{"number": 2177, "reason": "bot author: app/dependabot", "title": "⬆ Bump @biomejs/biome from 2.3.12 to 2.3.14"}
+{"number": 2176, "reason": "bot author: app/dependabot", "title": "⬆ Bump lucide-react from 0.562.0 to 0.563.0"}
+{"number": 2175, "reason": "bot author: app/dependabot", "title": "⬆ Bump playwright from v1.58.0-noble to v1.58.2-noble in /frontend"}
+{"number": 2174, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query from 5.90.19 to 5.90.20"}
+{"number": 2169, "reason": "no test file changes (neither backend nor frontend)", "title": "👷 Run mypy by pre-commit"}
+{"number": 2168, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 25.0.10 to 25.1.0"}
+{"number": 2166, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.153.2 to 1.157.17"}
+{"number": 2164, "reason": "bot author: app/dependabot", "title": "⬆ Bump axios from 1.13.2 to 1.13.4"}
+{"number": 2159, "reason": "no test file changes (neither backend nor frontend)", "title": "📝 Add `CONTRIBUTING.md`"}
+{"number": 2154, "reason": "non-task title prefix: ⬆️ bump biome schema version to 2.3.12 i", "title": "⬆️ Bump biome schema version to 2.3.12 in biome.json"}
+{"number": 2153, "reason": "bot author: app/dependabot", "title": "⬆ Bump @biomejs/biome from 2.3.11 to 2.3.12"}
+{"number": 2152, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router from 1.153.2 to 1.156.0"}
+{"number": 2151, "reason": "bot author: app/dependabot", "title": "⬆ Bump zod from 4.3.5 to 4.3.6"}
+{"number": 2150, "reason": "bot author: app/dependabot", "title": "⬆ Bump playwright from v1.57.0-noble to v1.58.0-noble in /frontend"}
+{"number": 2149, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 25.0.9 to 25.0.10"}
+{"number": 2147, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router-devtools from 1.153.2 to 1.156.0"}
+{"number": 2145, "reason": "no test file changes (neither backend nor frontend)", "title": "🐛 Add user authentication check in admin route to restrict access for non-superusers"}
+{"number": 2144, "reason": "no test file changes (neither backend nor frontend)", "title": "✨ Add created_at field to User and Item models and update endpoints"}
+{"number": 2143, "reason": "no test file changes (neither backend nor frontend)", "title": "🔥 Remove debugpy from recommended extensions, it's included by the Python extension"}
+{"number": 2111, "reason": "no test file changes (neither backend nor frontend)", "title": "🔨 Generate frontend SDK on pre-commit, remove custom workflow"}
+{"number": 2110, "reason": "no test file changes (neither backend nor frontend)", "title": "🔨 Update generate-client.sh and docs"}
+{"number": 2109, "reason": "no test file changes (neither backend nor frontend)", "title": "📝 Update deployment docs"}
+{"number": 2108, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Update the frontend build context for prod with the new top level setup"}
+{"number": 2107, "reason": "no test file changes (neither backend nor frontend)", "title": "🔥 Remove old unused scripts"}
+{"number": 2106, "reason": "no test file changes (neither backend nor frontend)", "title": "🚚 Rename Docker Compose files to new names, `compose.yml`"}
+{"number": 2105, "reason": "non-task title prefix: 🔒️ ensure authentication takes constant ", "title": "🔒️ Ensure authentication takes constant time, to avoid enumeration attacks"}
+{"number": 2103, "reason": "only docs/ci/lock files", "title": "👷 Add `maybe-ai` for issue manager"}
+{"number": 2102, "reason": "non-task title prefix: ⬆️ bump uv to 0.9.26 in dockerfile", "title": "⬆️ Bump uv to 0.9.26 in Dockerfile"}
+{"number": 2101, "reason": "bot author: app/dependabot", "title": "⬆ Bump lucide-react from 0.556.0 to 0.562.0"}
+{"number": 2100, "reason": "only docs/ci/lock files", "title": "🔧 Update dependabot configuration for package ecosystems"}
+{"number": 2099, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Update Biome schema version to 2.3.11"}
+{"number": 2098, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Add tests scripts in `package.json`"}
+{"number": 2097, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Migrate from npm to Bun"}
+{"number": 2096, "reason": "only docs/ci/lock files", "title": "👷 Update pre-commit workflow"}
+{"number": 2095, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Set up node monorepo"}
+{"number": 2092, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Update biome.json schema version"}
+{"number": 2091, "reason": "non-task title prefix: revert \"🔧 update pre-commit-config.yaml ", "title": "Revert \"🔧 Update pre-commit-config.yaml ruff format to use --check\""}
+{"number": 2090, "reason": "no test file changes (neither backend nor frontend)", "title": "🧑‍💻 Implement uv workspaces"}
+{"number": 2077, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Update pre-commit-config.yaml ruff format to use --check"}
+{"number": 2074, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/checkout from 5 to 6"}
+{"number": 2064, "reason": "bot author: app/dependabot", "title": "⬆ Bump zod from 4.1.13 to 4.2.1 in /frontend"}
+{"number": 2063, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router-devtools from 1.139.12 to 1.142.8 in /frontend"}
+{"number": 2062, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router from 1.141.2 to 1.142.8 in /frontend"}
+{"number": 2061, "reason": "bot author: app/dependabot", "title": "⬆ Bump @biomejs/biome from 2.3.8 to 2.3.10 in /frontend"}
+{"number": 2060, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.140.0 to 1.142.8 in /frontend"}
+{"number": 2056, "reason": "pre-uv-era merge (2025-12-26) — harness unsupported for fastapi-template", "title": "👷 Add pre-commit workflow"}
+{"number": 2054, "reason": "pre-uv-era merge (2025-12-19) — harness unsupported for fastapi-template", "title": "👷 Configure coverage, error on main tests, don't wait for Smokeshow"}
+{"number": 2053, "reason": "pre-uv-era merge (2025-12-19) — harness unsupported for fastapi-template", "title": "👷 Run Smokeshow always, even on test failures"}
+{"number": 2051, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/download-artifact from 6 to 7"}
+{"number": 2050, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/upload-artifact from 5 to 6"}
+{"number": 2049, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tailwindcss/vite from 4.1.17 to 4.1.18 in /frontend"}
+{"number": 2048, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 24.10.1 to 25.0.2 in /frontend"}
+{"number": 2047, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 7.2.7 to 7.3.0 in /frontend"}
+{"number": 2046, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-dom from 19.2.1 to 19.2.3 in /frontend"}
+{"number": 2045, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router from 1.140.0 to 1.141.2 in /frontend"}
+{"number": 2039, "reason": "pre-uv-era merge (2025-12-08) — harness unsupported for fastapi-template", "title": "✨ Add meta title support to all pages"}
+{"number": 2038, "reason": "pre-uv-era merge (2025-12-08) — harness unsupported for fastapi-template", "title": "📝 Add Mailcatcher setup instructions for local email testing"}
+{"number": 2037, "reason": "pre-uv-era merge (2025-12-08) — harness unsupported for fastapi-template", "title": "📝 Update `README` to include link for Vite"}
+{"number": 2036, "reason": "pre-uv-era merge (2025-12-08) — harness unsupported for fastapi-template", "title": "📝 Update docs"}
+{"number": 2035, "reason": "pre-uv-era merge (2025-12-08) — harness unsupported for fastapi-template", "title": "🔥 Remove unused dependencies"}
+{"number": 2034, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-plugin from 1.139.12 to 1.140.0 in /frontend"}
+{"number": 2033, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 7.2.6 to 7.2.7 in /frontend"}
+{"number": 2032, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-dom from 19.2.0 to 19.2.1 in /frontend"}
+{"number": 2031, "reason": "bot author: app/dependabot", "title": "⬆ Bump lucide-react from 0.555.0 to 0.556.0 in /frontend"}
+{"number": 2029, "reason": "pre-uv-era merge (2025-12-07) — harness unsupported for fastapi-template", "title": "🔧 Add Tailwind CSS directives support in biome config"}
+{"number": 2028, "reason": "pre-uv-era merge (2025-12-08) — harness unsupported for fastapi-template", "title": "📝 Fix outdated workflow badge"}
+{"number": 2021, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.139.3 to 1.139.12 in /frontend"}
+{"number": 2020, "reason": "bot author: app/dependabot", "title": "⬆ Bump axios from 1.12.2 to 1.13.2 in /frontend"}
+{"number": 2019, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query from 5.90.10 to 5.90.11 in /frontend"}
+{"number": 2018, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-hook-form from 7.66.1 to 7.67.0 in /frontend"}
+{"number": 2017, "reason": "non-task title prefix: ⬆️ update schema version in `biome.json`", "title": "⬆️ Update schema version in `biome.json`"}
+{"number": 2016, "reason": "bot author: app/dependabot", "title": "⬆ Bump playwright from v1.56.1-noble to v1.57.0-noble in /frontend"}
+{"number": 2015, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 7.2.2 to 7.2.6 in /frontend"}
+{"number": 2014, "reason": "bot author: app/dependabot", "title": "⬆ Bump @biomejs/biome from 2.3.7 to 2.3.8 in /frontend"}
+{"number": 2013, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query-devtools from 5.91.0 to 5.91.1 in /frontend"}
+{"number": 2012, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-plugin from 1.133.15 to 1.139.12 in /frontend"}
+{"number": 2011, "reason": "bot author: app/dependabot", "title": "⬆ Bump form-data from 4.0.4 to 4.0.5 in /frontend"}
+{"number": 2010, "reason": "pre-uv-era merge (2025-12-07) — harness unsupported for fastapi-template", "title": "🛂 Migrate frontend to Shadcn"}
+{"number": 2007, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/checkout from 5 to 6"}
+{"number": 2006, "reason": "pre-uv-era merge (2025-11-24) — harness unsupported for fastapi-template", "title": "👷 Upgrade `latest-changes` GitHub Action and pin `actions/checkout@v5`"}
+{"number": 2005, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 24.10.0 to 24.10.1 in /frontend"}
+{"number": 2004, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/react-dom from 19.2.2 to 19.2.3 in /frontend"}
+{"number": 2003, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/react from 19.2.2 to 19.2.7 in /frontend"}
+{"number": 2002, "reason": "bot author: app/dependabot", "title": "⬆ Bump typescript from 5.9.2 to 5.9.3 in /frontend"}
+{"number": 2001, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.131.42 to 1.139.3 in /frontend"}
+{"number": 2000, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic-settings from 2.11.0 to 2.12.0 in /backend"}
+{"number": 1999, "reason": "bot author: app/dependabot", "title": "⬆ Bump alembic from 1.17.1 to 1.17.2 in /backend"}
+{"number": 1998, "reason": "bot author: app/dependabot", "title": "⬆ Bump @biomejs/biome from 2.2.4 to 2.3.7 in /frontend"}
+{"number": 1997, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-hook-form from 7.66.0 to 7.66.1 in /frontend"}
+{"number": 1996, "reason": "bot author: app/dependabot", "title": "⬆ Bump @vitejs/plugin-react-swc from 4.2.1 to 4.2.2 in /frontend"}
+{"number": 1995, "reason": "bot author: app/dependabot", "title": "⬆ Bump @chakra-ui/react from 3.29.0 to 3.30.0 in /frontend"}
+{"number": 1994, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query-devtools from 5.90.2 to 5.91.0 in /frontend"}
+{"number": 1992, "reason": "pre-uv-era merge (2025-11-24) — harness unsupported for fastapi-template", "title": "🔧 Add labels to Dependabot updates"}
+{"number": 1988, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/checkout from 5 to 6"}
+{"number": 1983, "reason": "bot author: app/dependabot", "title": "⬆ Bump js-yaml from 4.1.0 to 4.1.1 in /frontend"}
+{"number": 1978, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic from 2.12.3 to 2.12.4 in /backend"}
+{"number": 1977, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 7.1.11 to 7.2.2 in /frontend"}
+{"number": 1976, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query from 5.90.2 to 5.90.7 in /frontend"}
+{"number": 1975, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/react-dom from 19.2.1 to 19.2.2 in /frontend"}
+{"number": 1974, "reason": "bot author: app/dependabot", "title": "⬆ Bump @chakra-ui/react from 3.27.0 to 3.29.0 in /frontend"}
+{"number": 1973, "reason": "bot author: app/dependabot", "title": "⬆ Bump traefik from 3.0 to 3.6"}
+{"number": 1972, "reason": "pre-uv-era merge (2025-11-09) — harness unsupported for fastapi-template", "title": "🔧 Fix issue-manager config for reminder"}
+{"number": 1970, "reason": "bot author: app/dependabot", "title": "⬆ Bump alembic from 1.17.0 to 1.17.1 in /backend"}
+{"number": 1964, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-hook-form from 7.62.0 to 7.65.0 in /frontend"}
+{"number": 1962, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/upload-artifact from 4 to 5"}
+{"number": 1961, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 24.5.2 to 24.9.1 in /frontend"}
+{"number": 1959, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/download-artifact from 5 to 6"}
+{"number": 1958, "reason": "bot author: app/dependabot", "title": "⬆ Bump @vitejs/plugin-react-swc from 4.1.0 to 4.2.0 in /frontend"}
+{"number": 1957, "reason": "bot author: app/dependabot", "title": "⬆ Bump dotenv from 17.2.2 to 17.2.3 in /frontend"}
+{"number": 1949, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 7.1.9 to 7.1.11 in /frontend"}
+{"number": 1947, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic from 2.11.10 to 2.12.3 in /backend"}
+{"number": 1946, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-plugin from 1.132.41 to 1.133.15 in /frontend"}
+{"number": 1943, "reason": "bot author: app/dependabot", "title": "⬆ Bump playwright from v1.55.0-noble to v1.56.1-noble in /frontend"}
+{"number": 1940, "reason": "pre-uv-era merge (2025-12-01) — harness unsupported for fastapi-template", "title": "🐛 Fix `EMAILS_FROM_NAME` type to be `str` instead of `EmailStr`"}
+{"number": 1939, "reason": "pre-uv-era merge (2025-10-25) — harness unsupported for fastapi-template", "title": "🔧 Configure reminder for `waiting` label in `issue-manager`"}
+{"number": 1937, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/setup-node from 5 to 6"}
+{"number": 1935, "reason": "bot author: app/dependabot", "title": "⬆ Bump alembic from 1.16.5 to 1.17.0 in /backend"}
+{"number": 1934, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-dom and @types/react-dom in /frontend"}
+{"number": 1925, "reason": "bot author: app/dependabot", "title": "⬆ Bump astral-sh/setup-uv from 6 to 7"}
+{"number": 1922, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic from 2.11.9 to 2.11.10 in /backend"}
+{"number": 1921, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query-devtools from 5.87.4 to 5.90.2 in /frontend"}
+{"number": 1920, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-plugin from 1.131.44 to 1.132.41 in /frontend"}
+{"number": 1919, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 7.1.7 to 7.1.9 in /frontend"}
+{"number": 1912, "reason": "bot author: app/dependabot", "title": "⬆ Bump tiangolo/issue-manager from 0.5.1 to 0.6.0"}
+{"number": 1910, "reason": "bot author: app/dependabot", "title": "⬆ Bump postgres from 17 to 18"}
+{"number": 1907, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic-settings from 2.10.1 to 2.11.0 in /backend"}
+{"number": 1906, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/react from 19.1.13 to 19.1.15 in /frontend"}
+{"number": 1905, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query from 5.90.1 to 5.90.2 in /frontend"}
+{"number": 1903, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 24.4.0 to 24.5.2 in /frontend"}
+{"number": 1897, "reason": "bot author: app/dependabot", "title": "⬆ Bump @vitejs/plugin-react-swc from 4.0.1 to 4.1.0 in /frontend"}
+{"number": 1896, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query from 5.87.4 to 5.90.1 in /frontend"}
+{"number": 1894, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router from 1.131.44 to 1.131.50 in /frontend"}
+{"number": 1893, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 7.1.5 to 7.1.7 in /frontend"}
+{"number": 1891, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic from 2.11.7 to 2.11.9 in /backend"}
+{"number": 1890, "reason": "bot author: app/dependabot", "title": "⬆ Bump @chakra-ui/react from 3.26.0 to 3.27.0 in /frontend"}
+{"number": 1889, "reason": "bot author: app/dependabot", "title": "⬆ Bump axios from 1.12.0 to 1.12.2 in /frontend"}
+{"number": 1888, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/react from 19.1.12 to 19.1.13 in /frontend"}
+{"number": 1887, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-plugin from 1.131.41 to 1.131.43 in /frontend"}
+{"number": 1886, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 24.3.1 to 24.4.0 in /frontend"}
+{"number": 1881, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.131.41 to 1.131.42 in /frontend"}
+{"number": 1880, "reason": "pre-uv-era merge (2025-09-12) — harness unsupported for fastapi-template", "title": "🔧 Update dependabot intervals for uv and npm dependencies to weekly"}
+{"number": 1879, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-plugin from 1.131.39 to 1.131.41 in /frontend"}
+{"number": 1878, "reason": "bot author: app/dependabot", "title": "⬆ Bump axios from 1.11.0 to 1.12.0 in /frontend"}
+{"number": 1877, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.131.40 to 1.131.41 in /frontend"}
+{"number": 1876, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query-devtools from 5.87.3 to 5.87.4 in /frontend"}
+{"number": 1875, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router from 1.131.40 to 1.131.41 in /frontend"}
+{"number": 1872, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-router from 1.131.36 to 1.131.37 in /frontend"}
+{"number": 1871, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-devtools from 1.131.36 to 1.131.37 in /frontend"}
+{"number": 1870, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/router-plugin from 1.131.36 to 1.131.37 in /frontend"}
+{"number": 1869, "reason": "bot author: app/dependabot", "title": "⬆ Bump @biomejs/biome from 2.2.3 to 2.2.4 in /frontend"}
+{"number": 1868, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query from 5.87.1 to 5.87.4 in /frontend"}
+{"number": 1867, "reason": "pre-uv-era merge (2025-09-09) — harness unsupported for fastapi-template", "title": "🔧 Update coverage configuration and simplify test script"}
+{"number": 1865, "reason": "pre-uv-era merge (2025-09-09) — harness unsupported for fastapi-template", "title": "🔧 Add T201 rule to ruff linting configuration to disallow print statements"}
+{"number": 1864, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic from 2.9.2 to 2.11.7 in /backend"}
+{"number": 1863, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query-devtools from 5.87.1 to 5.87.3 in /frontend"}
+{"number": 1862, "reason": "pre-uv-era merge (2025-09-20) — harness unsupported for fastapi-template", "title": "🚚 Move backend tests outside the `app` directory"}
+{"number": 1861, "reason": "non-task title prefix: ⬆️ upgrade biome to the latest version", "title": "⬆️ Upgrade Biome to the latest version"}
+{"number": 1860, "reason": "pre-uv-era merge (2025-09-08) — harness unsupported for fastapi-template", "title": "✨ Add ImportMetaEnv and ImportMeta interfaces for Vite environment variables"}
+{"number": 1859, "reason": "pre-uv-era merge (2025-09-08) — harness unsupported for fastapi-template", "title": "🔧 Update `tsconfig.json` and fix errors"}
+{"number": 1857, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 6.3.4 to 7.1.5 in /frontend"}
+{"number": 1856, "reason": "bot author: app/dependabot", "title": "⬆ Bump @vitejs/plugin-react-swc from 3.9.0 to 4.0.1 in /frontend"}
+{"number": 1855, "reason": "bot author: app/dependabot", "title": "⬆ Bump axios from 1.9.0 to 1.11.0 in /frontend"}
+{"number": 1854, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 22.15.3 to 24.3.1 in /frontend"}
+{"number": 1853, "reason": "non-task title prefix: ⬆️ update tanstack router dependencies", "title": "⬆️ Update TansTack Router dependencies"}
+{"number": 1852, "reason": "non-task title prefix: ⬆️ bump @tanstack/react-query from 5.28.", "title": "⬆️ Bump @tanstack/react-query from 5.28.14 to 5.87.1"}
+{"number": 1851, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic-settings from 2.9.1 to 2.10.1 in /backend"}
+{"number": 1850, "reason": "bot author: app/dependabot", "title": "⬆ Bump email-validator from 2.2.0 to 2.3.0 in /backend"}
+{"number": 1849, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-error-boundary from 5.0.0 to 6.0.0 in /frontend"}
+{"number": 1848, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query-devtools from 5.74.9 to 5.87.1 in /frontend"}
+{"number": 1847, "reason": "bot author: app/dependabot", "title": "⬆ Bump alembic from 1.15.2 to 1.16.5 in /backend"}
+{"number": 1846, "reason": "bot author: app/dependabot", "title": "⬆ Bump dotenv from 16.4.5 to 17.2.2 in /frontend"}
+{"number": 1845, "reason": "non-task title prefix: ⬆️ update @hey-api/openapi-ts dependency", "title": "⬆️ Update @hey-api/openapi-ts dependency version and update dependabot config"}
+{"number": 1844, "reason": "pre-uv-era merge (2025-09-07) — harness unsupported for fastapi-template", "title": "♻️ Remove disabled attribute from Save button in ChangePassword component"}
+{"number": 1843, "reason": "non-task title prefix: ⬆️ upgrade react and related dependencie", "title": "⬆️ Upgrade React and related dependencies"}
+{"number": 1839, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/labeler from 5 to 6"}
+{"number": 1838, "reason": "pre-uv-era merge (2025-09-05) — harness unsupported for fastapi-template", "title": "👷 Detect and label merge conflicts on PRs automatically"}
+{"number": 1836, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/setup-node from 4 to 5"}
+{"number": 1835, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/setup-python from 5 to 6"}
+{"number": 1796, "reason": "bot author: app/dependabot", "title": "⬆ Bump @chakra-ui/react from 3.8.0 to 3.26.0 in /frontend"}
+{"number": 1793, "reason": "non-task title prefix: ⬆️ update playwright", "title": "⬆️ Update Playwright"}
+{"number": 1791, "reason": "pre-uv-era merge (2025-08-30) — harness unsupported for fastapi-template", "title": "🔧 Add frontend linter pre-commit hook"}
+{"number": 1768, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/checkout from 4 to 5"}
+{"number": 1754, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/download-artifact from 4 to 5"}
+{"number": 1744, "reason": "bot author: app/dependabot", "title": "⬆ Bump tiangolo/latest-changes from 0.3.2 to 0.4.0"}
+{"number": 1725, "reason": "bot author: app/dependabot", "title": "⬆ Bump form-data from 4.0.2 to 4.0.4 in /frontend"}
+{"number": 1679, "reason": "pre-uv-era merge (2025-06-24) — harness unsupported for fastapi-template", "title": "✏️ Fix small typo in `deployment.md`"}
+{"number": 1672, "reason": "pre-uv-era merge (2025-09-20) — harness unsupported for fastapi-template", "title": "🐛 Fix `parse_cors` function to be consistent for both empty string and empty list"}
+{"number": 1621, "reason": "bot author: app/dependabot", "title": "⬆ Bump node from 20 to 24 in /frontend"}
+{"number": 1608, "reason": "bot author: app/dependabot", "title": "⬆ Bump vite from 6.3.3 to 6.3.4 in /frontend"}
+{"number": 1602, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-error-boundary from 4.0.13 to 5.0.0 in /frontend"}
+{"number": 1601, "reason": "bot author: app/dependabot", "title": "⬆ Bump bcrypt from 4.0.1 to 4.3.0 in /backend"}
+{"number": 1599, "reason": "bot author: app/dependabot", "title": "⬆ Bump @types/node from 20.10.5 to 22.15.3 in /frontend"}
+{"number": 1598, "reason": "bot author: app/dependabot", "title": "⬆ Bump next-themes from 0.4.4 to 0.4.6 in /frontend"}
+{"number": 1597, "reason": "bot author: app/dependabot", "title": "⬆ Bump @tanstack/react-query-devtools from 5.28.14 to 5.74.9 in /frontend"}
+{"number": 1596, "reason": "bot author: app/dependabot", "title": "⬆ Bump sqlmodel from 0.0.22 to 0.0.24 in /backend"}
+{"number": 1595, "reason": "bot author: app/dependabot", "title": "⬆ Bump python-multipart from 0.0.10 to 0.0.20 in /backend"}
+{"number": 1594, "reason": "bot author: app/dependabot", "title": "⬆ Bump alembic from 1.13.2 to 1.15.2 in /backend"}
+{"number": 1592, "reason": "bot author: app/dependabot", "title": "⬆ Bump axios from 1.8.2 to 1.9.0 in /frontend"}
+{"number": 1591, "reason": "bot author: app/dependabot", "title": "⬆ Bump jinja2 from 3.1.4 to 3.1.6 in /backend"}
+{"number": 1589, "reason": "bot author: app/dependabot", "title": "⬆ Bump pydantic-settings from 2.5.2 to 2.9.1 in /backend"}
+{"number": 1588, "reason": "bot author: app/dependabot", "title": "⬆ Bump pyjwt from 2.9.0 to 2.10.1 in /backend"}
+{"number": 1587, "reason": "bot author: app/dependabot", "title": "⬆ Bump httpx from 0.27.2 to 0.28.1 in /backend"}
+{"number": 1586, "reason": "bot author: app/dependabot", "title": "⬆ Bump @playwright/test from 1.45.2 to 1.52.0 in /frontend"}
+{"number": 1582, "reason": "bot author: app/dependabot", "title": "⬆ Bump @biomejs/biome from 1.6.1 to 1.9.4 in /frontend"}
+{"number": 1581, "reason": "bot author: app/dependabot", "title": "⬆ Bump react-icons from 5.4.0 to 5.5.0 in /frontend"}
+{"number": 1580, "reason": "bot author: app/dependabot", "title": "⬆ Bump postgres from 12 to 17"}
+{"number": 1578, "reason": "bot author: app/dependabot", "title": "⬆ Bump form-data from 4.0.0 to 4.0.2 in /frontend"}
+{"number": 1577, "reason": "non-task title prefix: ⬆️ update dependabot configuration to ta", "title": "⬆️ Update Dependabot configuration to target the backend directory for Python uv updates"}
+{"number": 1576, "reason": "pre-uv-era merge (2025-04-28) — harness unsupported for fastapi-template", "title": "🔧 Update Dependabot config"}
+{"number": 1573, "reason": "pre-uv-era merge (2025-04-27) — harness unsupported for fastapi-template", "title": "👷🏻‍♀️  Update CI for client generation"}
+{"number": 1571, "reason": "bot author: app/dependabot", "title": "Bump esbuild, @vitejs/plugin-react-swc and vite in /frontend"}
+{"number": 1570, "reason": "bot author: app/dependabot", "title": "Bump @babel/runtime from 7.23.9 to 7.27.0 in /frontend"}
+{"number": 1568, "reason": "bot author: app/dependabot", "title": "Bump axios from 1.7.4 to 1.8.2 in /frontend"}
+{"number": 1566, "reason": "bot author: app/dependabot", "title": "⬆ Bump astral-sh/setup-uv from 5 to 6"}
+{"number": 1535, "reason": "pre-uv-era merge (2025-04-01) — harness unsupported for fastapi-template", "title": "🔧  Add npm and docker package ecosystems to Dependabot configuration"}
+{"number": 1520, "reason": "pre-uv-era merge (2025-03-19) — harness unsupported for fastapi-template", "title": "♻️ Remove redundant field in inherited class"}
+{"number": 1515, "reason": "pre-uv-era merge (2025-03-19) — harness unsupported for fastapi-template", "title": "🐛 Close sidebar drawer on user selection"}
+{"number": 1508, "reason": "pre-uv-era merge (2025-02-22) — harness unsupported for fastapi-template", "title": "🐛 Fix required password validation when editing user fields"}
+{"number": 1507, "reason": "pre-uv-era merge (2025-02-21) — harness unsupported for fastapi-template", "title": "🎨 Add minor UI tweaks in Skeletons and other components"}
+{"number": 1506, "reason": "pre-uv-era merge (2025-02-21) — harness unsupported for fastapi-template", "title": "🎨 Add minor UI tweaks"}
+{"number": 1501, "reason": "pre-uv-era merge (2025-02-19) — harness unsupported for fastapi-template", "title": "♻️ Redirect the user to `login` if we get 401/403"}
+{"number": 1499, "reason": "pre-uv-era merge (2025-02-19) — harness unsupported for fastapi-template", "title": "🐛 Refactor reset password test to create normal user instead of using super user"}
+{"number": 1498, "reason": "pre-uv-era merge (2025-02-18) — harness unsupported for fastapi-template", "title": "🔧 Remove unused context from router creation"}
+{"number": 1497, "reason": "pre-uv-era merge (2025-02-17) — harness unsupported for fastapi-template", "title": "🔧 Configure path alias for cleaner imports"}
+{"number": 1496, "reason": "pre-uv-era merge (2025-02-17) — harness unsupported for fastapi-template", "title": "🛂 Migrate to Chakra UI v3 "}
+{"number": 1494, "reason": "pre-uv-era merge (2025-02-17) — harness unsupported for fastapi-template", "title": "📝 Removing deprecated manual client SDK step"}
+{"number": 1492, "reason": "pre-uv-era merge (2025-02-18) — harness unsupported for fastapi-template", "title": "♻️ Replace email types from `str` to `EmailStr` in `config.py`"}
+{"number": 1485, "reason": "pre-uv-era merge (2025-02-10) — harness unsupported for fastapi-template", "title": "✏️ Fix a couple of spelling mistakes"}
+{"number": 1481, "reason": "pre-uv-era merge (2025-02-10) — harness unsupported for fastapi-template", "title": "♻️ Remove redundant item deletion code leveraging cascade delete"}
+{"number": 1469, "reason": "bot author: app/dependabot", "title": "Bump vite from 5.0.13 to 5.4.14 in /frontend"}
+{"number": 1462, "reason": "pre-uv-era merge (2025-02-10) — harness unsupported for fastapi-template", "title": "📝 Update Frontend README.md"}
+{"number": 1456, "reason": "pre-uv-era merge (2025-01-06) — harness unsupported for fastapi-template", "title": "🧑‍🔧 Replace correct value for 'htmlFor'"}
+{"number": 1454, "reason": "non-task title prefix: ⬆️ update dockerfile to use uv version 0", "title": "⬆️ Update Dockerfile to use uv version 0.5.11"}
+{"number": 1453, "reason": "bot author: app/dependabot", "title": "⬆ Bump astral-sh/setup-uv from 4 to 5"}
+{"number": 1452, "reason": "pre-uv-era merge (2024-12-21) — harness unsupported for fastapi-template", "title": "📝 Update `frontend/README.md` to also remove Playwright when removing Frontend"}
+{"number": 1447, "reason": "pre-uv-era merge (2025-10-23) — harness unsupported for fastapi-template", "title": "♻️ Update password max length"}
+{"number": 1440, "reason": "no test file changes (neither backend nor frontend)", "title": "♻️ Simplify reset password logic by removing duplicate code"}
+{"number": 1439, "reason": "pre-uv-era merge (2024-12-02) — harness unsupported for fastapi-template", "title": "🎨 Move `prefix` and `tags` to routers"}
+{"number": 1434, "reason": "pre-uv-era merge (2024-11-27) — harness unsupported for fastapi-template", "title": "♻️ Remove modify id script in favor of openapi-ts config"}
+{"number": 1433, "reason": "bot author: app/dependabot", "title": "⬆ Bump astral-sh/setup-uv from 3 to 4"}
+{"number": 1430, "reason": "pre-uv-era merge (2024-11-27) — harness unsupported for fastapi-template", "title": "✨ Migrate to latest openapi-ts"}
+{"number": 1429, "reason": "pre-uv-era merge (2024-12-02) — harness unsupported for fastapi-template", "title": "✨ Add private, local only, API for usage in E2E tests"}
+{"number": 1418, "reason": "bot author: app/dependabot", "title": "⬆ Bump tiangolo/latest-changes from 0.3.1 to 0.3.2"}
+{"number": 1412, "reason": "pre-uv-era merge (2024-11-01) — harness unsupported for fastapi-template", "title": "📝 Update `deployment.md`, instructions to install GitHub Runner in non-root VMs"}
+{"number": 1405, "reason": "pre-uv-era merge (2024-10-25) — harness unsupported for fastapi-template", "title": "👷 Improve Playwright CI speed: sharding (paralel runs), run in Docker to use cache, use env vars"}
+{"number": 1398, "reason": "pre-uv-era merge (2024-10-14) — harness unsupported for fastapi-template", "title": "👷 Update issue manager workflow"}
+{"number": 1395, "reason": "pre-uv-era merge (2024-10-12) — harness unsupported for fastapi-template", "title": "👷 Fix smokeshow, checkout files on CI"}
+{"number": 1388, "reason": "pre-uv-era merge (2024-10-07) — harness unsupported for fastapi-template", "title": "👷 Update `labeler.yml`"}
+{"number": 1387, "reason": "pre-uv-era merge (2024-10-12) — harness unsupported for fastapi-template", "title": "📝 Add MailCatcher to `development.md`"}
+{"number": 1386, "reason": "no test file changes (neither backend nor frontend)", "title": "🔧 Add recommended VS Code extensions"}
+{"number": 1383, "reason": "pre-uv-era merge (2024-10-03) — harness unsupported for fastapi-template", "title": "🔧 Add .auth playwright folder to `.gitignore`"}
+{"number": 1381, "reason": "pre-uv-era merge (2024-10-03) — harness unsupported for fastapi-template", "title": "♻️ Add PaginationFooter component"}
+{"number": 1379, "reason": "bot author: app/dependabot", "title": "⬆️ Bump rollup from 4.6.1 to 4.22.5 in /frontend"}
+{"number": 1378, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": "🔧 Add `ENV PYTHONUNBUFFERED=1` to log output directly to Docker"}
+{"number": 1377, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": "👷 Tweak generate client to error out if there are errors"}
+{"number": 1376, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": "👷 Generate and commit client only on same repo PRs, on forks, show the error"}
+{"number": 1374, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": "🔊 Enable logging for email utils by default"}
+{"number": 1366, "reason": "pre-uv-era merge (2024-09-24) — harness unsupported for fastapi-template", "title": "👷 Use uv cache on GitHub Actions"}
+{"number": 1364, "reason": "bot author: app/dependabot", "title": "⬆ Bump astral-sh/setup-uv from 2 to 3"}
+{"number": 1363, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "👷 Update GitHub Actions format"}
+{"number": 1362, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "👷 Use `uv` for Python env to generate client"}
+{"number": 1361, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "👷 Run tests from Python environment (with `uv`), not from Docker container"}
+{"number": 1360, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "🔨 Update `generate-client.sh` script, make it fail on errors, fix generation"}
+{"number": 1359, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "♻️ Update settings to use top level `.env` file"}
+{"number": 1358, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "👷 Add GitHub Actions workflow to lint backend apart from tests"}
+{"number": 1357, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "💡 Add comments to Dockerfile with uv references"}
+{"number": 1356, "reason": "non-task title prefix: ⬆️ migrate from poetry to uv", "title": "⬆️ Migrate from Poetry to uv"}
+{"number": 1355, "reason": "pre-uv-era merge (2024-09-23) — harness unsupported for fastapi-template", "title": "🔥 Remove logic for development dependencies and Jupyter, it was never documented, and I no longer use that trick"}
+{"number": 1354, "reason": "pre-uv-era merge (2024-09-22) — harness unsupported for fastapi-template", "title": "♻️ Use Docker Compose `watch`"}
+{"number": 1352, "reason": "pre-uv-era merge (2024-09-22) — harness unsupported for fastapi-template", "title": "🚚 Move location of scripts to simplify file structure"}
+{"number": 1351, "reason": "pre-uv-era merge (2024-09-22) — harness unsupported for fastapi-template", "title": "🔧 Use plain base official Python Docker image"}
+{"number": 1350, "reason": "pre-uv-era merge (2024-09-20) — harness unsupported for fastapi-template", "title": "♻️ Refactor prestart (migrations), move that to its own container"}
+{"number": 1349, "reason": "non-task title prefix: ⬆️ upgrade fastapi", "title": "⬆️ Upgrade FastAPI"}
+{"number": 1348, "reason": "pre-uv-era merge (2024-09-20) — harness unsupported for fastapi-template", "title": "♻️ Include `FRONTEND_HOST` in CORS origins by default"}
+{"number": 1344, "reason": "pre-uv-era merge (2024-09-19) — harness unsupported for fastapi-template", "title": "♻️ Simplify domains with `api.example.com` for API and `dashboard.example.com` for frontend, improve local development with `localhost`"}
+{"number": 1343, "reason": "pre-uv-era merge (2024-09-16) — harness unsupported for fastapi-template", "title": "🔥 Simplify Traefik, remove www-redirects that add complexity"}
+{"number": 1342, "reason": "pre-uv-era merge (2024-09-16) — harness unsupported for fastapi-template", "title": "🩺 Add DB healthcheck"}
+{"number": 1341, "reason": "pre-uv-era merge (2024-09-16) — harness unsupported for fastapi-template", "title": "🔥 Enable support for Arm Docker images in Mac, remove old patch"}
+{"number": 1335, "reason": "pre-uv-era merge (2024-09-12) — harness unsupported for fastapi-template", "title": "👷 Improve playwright CI job"}
+{"number": 1332, "reason": "bot author: app/dependabot", "title": "⬆ Bump tiangolo/issue-manager from 0.5.0 to 0.5.1"}
+{"number": 1329, "reason": "pre-uv-era merge (2024-09-07) — harness unsupported for fastapi-template", "title": "👷 Update `issue-manager.yml`"}
+{"number": 1327, "reason": "pre-uv-era merge (2024-09-02) — harness unsupported for fastapi-template", "title": "💚 Set `include-hidden-files` to `True` when using the `upload-artifact` GH action"}
+{"number": 1322, "reason": "pre-uv-era merge (2024-08-29) — harness unsupported for fastapi-template", "title": "🐛 Fix in `.github/labeler.yml`"}
+{"number": 1321, "reason": "pre-uv-era merge (2024-08-29) — harness unsupported for fastapi-template", "title": "👷 Update `.github/labeler.yml`"}
+{"number": 1320, "reason": "pre-uv-era merge (2024-08-29) — harness unsupported for fastapi-template", "title": "👷🏻 Auto-generate frontend client "}
+{"number": 1315, "reason": "pre-uv-era merge (2024-08-26) — harness unsupported for fastapi-template", "title": "👷 Update `latest-changes` GitHub Action"}
+{"number": 1311, "reason": "pre-uv-era merge (2024-08-17) — harness unsupported for fastapi-template", "title": "📝 Add Email Templates to `backend/README.md`"}
+{"number": 1308, "reason": "pre-uv-era merge (2024-08-15) — harness unsupported for fastapi-template", "title": "👷 Update configs for labeler"}
+{"number": 1307, "reason": "pre-uv-era merge (2024-08-15) — harness unsupported for fastapi-template", "title": "👷 Do not sync labels as it overrides manually added labels"}
+{"number": 1304, "reason": "pre-uv-era merge (2024-08-14) — harness unsupported for fastapi-template", "title": "👷 Update GitHub Action labeler to add only one label"}
+{"number": 1302, "reason": "pre-uv-era merge (2024-08-14) — harness unsupported for fastapi-template", "title": "👷 Update GitHub Action labeler dependencies"}
+{"number": 1301, "reason": "bot author: app/dependabot", "title": "⬆️ Bump axios from 1.6.2 to 1.7.4 in /frontend"}
+{"number": 1300, "reason": "pre-uv-era merge (2024-08-13) — harness unsupported for fastapi-template", "title": "👷 Update GitHub Action labeler permissions"}
+{"number": 1299, "reason": "pre-uv-era merge (2024-08-13) — harness unsupported for fastapi-template", "title": "👷 Add GitHub Action label-checker"}
+{"number": 1298, "reason": "pre-uv-era merge (2024-08-13) — harness unsupported for fastapi-template", "title": "👷 Add GitHub Action labeler"}
+{"number": 1297, "reason": "pre-uv-era merge (2024-08-13) — harness unsupported for fastapi-template", "title": "👷 Add GitHub Action add-to-project"}
+{"number": 1296, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": " 👷 Update pre-commit end-of-file-fixer hook to exclude email-templates"}
+{"number": 1288, "reason": "pre-uv-era merge (2024-08-03) — harness unsupported for fastapi-template", "title": "👷 Update issue-manager"}
+{"number": 1287, "reason": "pre-uv-era merge (2024-08-13) — harness unsupported for fastapi-template", "title": "♻️ Remove duplicate information in the ItemCreate model"}
+{"number": 1285, "reason": "pre-uv-era merge (2024-08-02) — harness unsupported for fastapi-template", "title": "📝 Update links from tiangolo repo to fastapi org repo"}
+{"number": 1284, "reason": "pre-uv-era merge (2024-08-02) — harness unsupported for fastapi-template", "title": "🔧 Update deploy workflows to exclude the main repository"}
+{"number": 1283, "reason": "pre-uv-era merge (2024-08-02) — harness unsupported for fastapi-template", "title": "🚨 Fix Docker build warning"}
+{"number": 1281, "reason": "pre-uv-era merge (2024-08-01) — harness unsupported for fastapi-template", "title": "♻️ Regenerate client to use UUID instead of ID integers and update frontend"}
+{"number": 1279, "reason": "pre-uv-era merge (2024-08-01) — harness unsupported for fastapi-template", "title": "📝 Add End-to-End Testing with Playwright to frontend `README.md`"}
+{"number": 1278, "reason": "pre-uv-era merge (2024-08-01) — harness unsupported for fastapi-template", "title": "👷 Update issue-manager.yml GitHub Action permissions"}
+{"number": 1277, "reason": "pre-uv-era merge (2024-08-01) — harness unsupported for fastapi-template", "title": "♻️ Add random password util and refactor tests"}
+{"number": 1276, "reason": "pre-uv-era merge (2024-08-01) — harness unsupported for fastapi-template", "title": "♻️ Refactor models to use cascade delete relationships "}
+{"number": 1275, "reason": "non-task title prefix: ⬆️ update sqlmodel to version `>=0.0.21`", "title": "⬆️ Update SQLModel to version `>=0.0.21`"}
+{"number": 1274, "reason": "pre-uv-era merge (2024-07-31) — harness unsupported for fastapi-template", "title": "🔥 Remove `USERS_OPEN_REGISTRATION` config, make registration enabled by default"}
+{"number": 1273, "reason": "pre-uv-era merge (2024-08-01) — harness unsupported for fastapi-template", "title": "♻️ Tweaks in frontend"}
+{"number": 1271, "reason": "pre-uv-era merge (2024-07-30) — harness unsupported for fastapi-template", "title": "✨ Add User Settings e2e tests "}
+{"number": 1270, "reason": "pre-uv-era merge (2024-07-30) — harness unsupported for fastapi-template", "title": "✨ Add Reset Password e2e tests"}
+{"number": 1268, "reason": "pre-uv-era merge (2024-07-29) — harness unsupported for fastapi-template", "title": "✨ Add Sign Up e2e tests "}
+{"number": 1266, "reason": "pre-uv-era merge (2024-07-23) — harness unsupported for fastapi-template", "title": "🔧 Update Playwright config and tests to use env variables"}
+{"number": 1265, "reason": "pre-uv-era merge (2024-07-23) — harness unsupported for fastapi-template", "title": "✨ Add Sign Up and make `OPEN_USER_REGISTRATION=True` by default"}
+{"number": 1264, "reason": "pre-uv-era merge (2024-07-22) — harness unsupported for fastapi-template", "title": "✨ Add Login e2e tests"}
+{"number": 1263, "reason": "pre-uv-era merge (2024-07-22) — harness unsupported for fastapi-template", "title": "♻️ Update form inputs width"}
+{"number": 1262, "reason": "pre-uv-era merge (2024-07-22) — harness unsupported for fastapi-template", "title": "🎨 Format frontend"}
+{"number": 1261, "reason": "pre-uv-era merge (2024-07-22) — harness unsupported for fastapi-template", "title": "✨ Add initial setup for frontend / end-to-end tests with Playwright"}
+{"number": 1260, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": "💡 Remove unnecessary comment"}
+{"number": 1259, "reason": "pre-uv-era merge (2024-07-22) — harness unsupported for fastapi-template", "title": "♻️ Edit refactor db models to use UUID's instead of integer ID's"}
+{"number": 1257, "reason": "pre-uv-era merge (2024-07-18) — harness unsupported for fastapi-template", "title": "♻️ Update `login.tsx` to prevent error if username or password are empty"}
+{"number": 1255, "reason": "bot author: app/dependabot", "title": "⬆️ Bump setuptools from 69.1.1 to 70.0.0 in /backend"}
+{"number": 1250, "reason": "bot author: app/dependabot", "title": "⬆️ Bump certifi from 2024.2.2 to 2024.7.4 in /backend"}
+{"number": 1247, "reason": "pre-uv-era merge (2024-07-22) — harness unsupported for fastapi-template", "title": "♻️ Replace deprecated utcnow() with now(timezone.utc) in utils module"}
+{"number": 1246, "reason": "pre-uv-era merge (2024-07-18) — harness unsupported for fastapi-template", "title": "♻️ Abstraction of specific AddModal component out of the Navbar"}
+{"number": 1244, "reason": "pre-uv-era merge (2024-06-30) — harness unsupported for fastapi-template", "title": "✨ Add mailcatcher configuration"}
+{"number": 1243, "reason": "pre-uv-era merge (2024-06-27) — harness unsupported for fastapi-template", "title": "🎨 Format and lint "}
+{"number": 1242, "reason": "pre-uv-era merge (2024-06-28) — harness unsupported for fastapi-template", "title": "♻️ Refactor recover password"}
+{"number": 1241, "reason": "non-task title prefix: ⬆️ upgrade traefik", "title": "⬆️ Upgrade Traefik"}
+{"number": 1239, "reason": "pre-uv-era merge (2024-06-27) — harness unsupported for fastapi-template", "title": "✨ Introduce pagination in items"}
+{"number": 1235, "reason": "bot author: app/dependabot", "title": "⬆️ Bump urllib3 from 2.2.1 to 2.2.2 in /backend"}
+{"number": 1233, "reason": "pre-uv-era merge (2024-06-19) — harness unsupported for fastapi-template", "title": "🗃️ Add max_length validation for database models and input data"}
+{"number": 1229, "reason": "pre-uv-era merge (2024-07-30) — harness unsupported for fastapi-template", "title": "🔧 Reuse database url from config in alembic setup"}
+{"number": 1226, "reason": "pre-uv-era merge (2024-06-27) — harness unsupported for fastapi-template", "title": "🎨 Run biome after OpenAPI client generation"}
+{"number": 1224, "reason": "pre-uv-era merge (2024-06-05) — harness unsupported for fastapi-template", "title": "♻️ Update DeleteConfirmation component to use new service"}
+{"number": 1223, "reason": "pre-uv-era merge (2024-06-05) — harness unsupported for fastapi-template", "title": "♻️ Update client services"}
+{"number": 1220, "reason": "pre-uv-era merge (2024-06-01) — harness unsupported for fastapi-template", "title": "📝 Update release-notes.md"}
+{"number": 1218, "reason": "pre-uv-era merge (2024-06-01) — harness unsupported for fastapi-template", "title": "🐛 Fix welcome page to show logged-in user"}
+{"number": 1217, "reason": "pre-uv-era merge (2024-06-01) — harness unsupported for fastapi-template", "title": "✨ Add TanStack React Query devtools in dev build"}
+{"number": 1211, "reason": "bot author: app/dependabot", "title": "⬆️ Bump requests from 2.31.0 to 2.32.0 in /backend"}
+{"number": 1210, "reason": "pre-uv-era merge (2024-05-20) — harness unsupported for fastapi-template", "title": "⚒️ Add minor frontend tweaks"}
+{"number": 1208, "reason": "pre-uv-era merge (2024-05-19) — harness unsupported for fastapi-template", "title": "♻️ Refactor redirect labels to simplify removing the frontend"}
+{"number": 1206, "reason": "pre-uv-era merge (2024-05-20) — harness unsupported for fastapi-template", "title": "🚚 Move assets to public folder"}
+{"number": 1205, "reason": "pre-uv-era merge (2024-05-16) — harness unsupported for fastapi-template", "title": "✏️ Update `README.md`"}
+{"number": 1203, "reason": "non-task title prefix: 🔒️ refactor migrate from python-jose to ", "title": "🔒️ Refactor migrate from python-jose to PyJWT"}
+{"number": 1198, "reason": "pre-uv-era merge (2024-05-10) — harness unsupported for fastapi-template", "title": "👷 Update Smokeshow download artifact GitHub Action"}
+{"number": 1196, "reason": "bot author: app/dependabot", "title": "⬆️ Bump jinja2 from 3.1.3 to 3.1.4 in /backend"}
+{"number": 1194, "reason": "pre-uv-era merge (2024-05-04) — harness unsupported for fastapi-template", "title": "✏️ Fix Adminer URL in `deployment.md`"}
+{"number": 1192, "reason": "pre-uv-era merge (2024-05-03) — harness unsupported for fastapi-template", "title": "🔧 Update Node.js version in `.nvmrc`"}
+{"number": 1191, "reason": "pre-uv-era merge (2024-05-03) — harness unsupported for fastapi-template", "title": "📝 Add `Enabling Open User Registration` to backend docs"}
+{"number": 1185, "reason": "pre-uv-era merge (2024-04-26) — harness unsupported for fastapi-template", "title": "🔥 Remove duplicated code"}
+{"number": 1184, "reason": "pre-uv-era merge (2024-04-26) — harness unsupported for fastapi-template", "title": "🐛 Fix local Traefik proxy network config to fix Gateway Timeouts"}
+{"number": 1179, "reason": "pre-uv-era merge (2024-04-26) — harness unsupported for fastapi-template", "title": "♻️ Add delete_user_me endpoint and corresponding test cases"}
+{"number": 1178, "reason": "pre-uv-era merge (2024-04-23) — harness unsupported for fastapi-template", "title": "✅ Update test to add verification database records"}
+{"number": 1176, "reason": "bot author: app/dependabot", "title": "Bump gunicorn from 21.2.0 to 22.0.0 in /backend"}
+{"number": 1175, "reason": "pre-uv-era merge (2024-04-16) — harness unsupported for fastapi-template", "title": "🔧 Ignore `src/routeTree.gen.ts` in biome"}
+{"number": 1174, "reason": "pre-uv-era merge (2024-04-16) — harness unsupported for fastapi-template", "title": "🚸 Use `useSuspenseQuery` to fetch members and show skeleton"}
+{"number": 1173, "reason": "pre-uv-era merge (2024-04-15) — harness unsupported for fastapi-template", "title": "🎨 Format Utils"}
+{"number": 1171, "reason": "pre-uv-era merge (2024-04-15) — harness unsupported for fastapi-template", "title": "🐛 Fix bug when resetting password"}
+{"number": 1168, "reason": "bot author: app/dependabot", "title": "Bump idna from 3.6 to 3.7 in /backend"}
+{"number": 1167, "reason": "pre-uv-era merge (2024-04-15) — harness unsupported for fastapi-template", "title": "♻️ Use suspense for items page"}
+{"number": 1166, "reason": "pre-uv-era merge (2024-04-12) — harness unsupported for fastapi-template", "title": "🚸 Mark login field as required"}
+{"number": 1165, "reason": "pre-uv-era merge (2024-04-15) — harness unsupported for fastapi-template", "title": "♻️ Fix tests when first superuser password is changed in .env"}
+{"number": 1164, "reason": "pre-uv-era merge (2024-04-09) — harness unsupported for fastapi-template", "title": "📝 Update release-notes.md"}
+{"number": 1163, "reason": "pre-uv-era merge (2024-04-09) — harness unsupported for fastapi-template", "title": "🚸 Improve login"}
+{"number": 1162, "reason": "pre-uv-era merge (2024-04-09) — harness unsupported for fastapi-template", "title": "🥅 Handle AxiosErrors in Login page"}
+{"number": 1161, "reason": "pre-uv-era merge (2024-04-08) — harness unsupported for fastapi-template", "title": "🎨 Format frontend"}
+{"number": 1160, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": "♻️ Refactored code to use encryption algorithm name from settings for consistency"}
+{"number": 1157, "reason": "pre-uv-era merge (2024-09-27) — harness unsupported for fastapi-template", "title": "🔧 Run task by the same Python environment used to run Copier"}
+{"number": 1156, "reason": "pre-uv-era merge (2024-04-06) — harness unsupported for fastapi-template", "title": "♻️ Regenerate frontend client"}
+{"number": 1155, "reason": "pre-uv-era merge (2024-04-05) — harness unsupported for fastapi-template", "title": "🔧 Update mypy config to ignore .venv directories"}
+{"number": 1154, "reason": "pre-uv-era merge (2024-04-06) — harness unsupported for fastapi-template", "title": "♻️ Refactor rename ModelsOut to ModelsPublic"}
+{"number": 1153, "reason": "pre-uv-era merge (2024-04-04) — harness unsupported for fastapi-template", "title": "🆙 Update React Query to TanStack Query"}
+{"number": 1152, "reason": "pre-uv-era merge (2024-04-05) — harness unsupported for fastapi-template", "title": "🚨 Enable `ARG001` to prevent unused arguments"}
+{"number": 1151, "reason": "pre-uv-era merge (2024-04-03) — harness unsupported for fastapi-template", "title": "♻️ Migrate frontend client generation from `openapi-typescript-codegen` to `@hey-api/openapi-ts`"}
+{"number": 1150, "reason": "pre-uv-era merge (2024-04-03) — harness unsupported for fastapi-template", "title": "🔧 Update pre-commit config to exclude generated client folder"}
+{"number": 1149, "reason": "bot author: app/dependabot", "title": "Bump vite from 5.0.12 to 5.0.13 in /frontend"}
+{"number": 1148, "reason": "pre-uv-era merge (2024-04-03) — harness unsupported for fastapi-template", "title": "🔧 Change `.nvmrc` format"}
+{"number": 1146, "reason": "pre-uv-era merge (2024-04-03) — harness unsupported for fastapi-template", "title": "🔥 Remove unused exports and update dependencies"}
+{"number": 1145, "reason": "pre-uv-era merge (2024-04-03) — harness unsupported for fastapi-template", "title": "🔧 Update sentry dns initialization following the environment settings"}
+{"number": 1144, "reason": "pre-uv-era merge (2024-04-05) — harness unsupported for fastapi-template", "title": "🔥 Remove isort configuration, since we use Ruff now"}
+{"number": 1143, "reason": "pre-uv-era merge (2024-04-02) — harness unsupported for fastapi-template", "title": "♻️ Refactor and tweaks, rename `UserCreateOpen` to `UserRegister` and others"}
+{"number": 1140, "reason": "pre-uv-era merge (2024-03-29) — harness unsupported for fastapi-template", "title": "🎨 Format imports"}
+{"number": 1139, "reason": "pre-uv-era merge (2024-03-29) — harness unsupported for fastapi-template", "title": "♻️ Refactor and remove `React.FC`"}
+{"number": 1138, "reason": "pre-uv-era merge (2024-03-29) — harness unsupported for fastapi-template", "title": "♻️ Add email pattern and refactor in frontend"}
+{"number": 1136, "reason": "pre-uv-era merge (2024-03-28) — harness unsupported for fastapi-template", "title": "🥅 Set up Sentry for FastAPI applications"}
+{"number": 1131, "reason": "pre-uv-era merge (2024-03-27) — harness unsupported for fastapi-template", "title": "🎨 Ignore alembic from ruff lint and format"}
+{"number": 1129, "reason": "pre-uv-era merge (2024-03-25) — harness unsupported for fastapi-template", "title": "🔥 Remove deprecated Docker Compose version key"}
+{"number": 1128, "reason": "pre-uv-era merge (2024-03-25) — harness unsupported for fastapi-template", "title": "✨ Add support for deploying multiple environments (staging, production) to the same server"}
+{"number": 1127, "reason": "pre-uv-era merge (2024-03-25) — harness unsupported for fastapi-template", "title": "📝 Update instructions to clone for a private repo, including updates"}
+{"number": 1126, "reason": "pre-uv-era merge (2024-03-25) — harness unsupported for fastapi-template", "title": "📝 Add docs about CI keys, LATEST_CHANGES and SMOKESHOW_AUTH_KEY"}
+{"number": 1125, "reason": "pre-uv-era merge (2024-03-25) — harness unsupported for fastapi-template", "title": "👷 Update CI GitHub Actions to allow running in private repos"}
+{"number": 1116, "reason": "pre-uv-era merge (2024-03-22) — harness unsupported for fastapi-template", "title": "✏️ Fix file path in `backend/README.md` when not wanting to use migrations"}
+{"number": 1105, "reason": "pre-uv-era merge (2024-03-18) — harness unsupported for fastapi-template", "title": "🔧 Add GitHub templates for discussions and issues, and security policy"}
+{"number": 1103, "reason": "bot author: app/dependabot", "title": "⬆ Bump dawidd6/action-download-artifact from 3.1.2 to 3.1.4"}
+{"number": 1099, "reason": "pre-uv-era merge (2024-03-17) — harness unsupported for fastapi-template", "title": "📝 Fix localhost URLs in `development.md`"}
+{"number": 1098, "reason": "pre-uv-era merge (2024-03-17) — harness unsupported for fastapi-template", "title": "🔧 Add Biome to pre-commit config"}
+{"number": 1097, "reason": "pre-uv-era merge (2024-03-17) — harness unsupported for fastapi-template", "title": "🎨 Format with Biome "}
+{"number": 1096, "reason": "pre-uv-era merge (2024-03-17) — harness unsupported for fastapi-template", "title": "🔥 Remove ESLint and Prettier from pre-commit config"}
+{"number": 1095, "reason": "pre-uv-era merge (2024-03-17) — harness unsupported for fastapi-template", "title": "🎨 Update quote style in Biome formatter"}
+{"number": 1094, "reason": "pre-uv-era merge (2024-03-17) — harness unsupported for fastapi-template", "title": "🐛 Fix 403 when the frontend has a directory without an index.html"}
+{"number": 734, "reason": "bot author: app/dependabot", "title": "Bump follow-redirects from 1.15.5 to 1.15.6 in /frontend"}
+{"number": 727, "reason": "pre-uv-era merge (2024-03-16) — harness unsupported for fastapi-template", "title": "🔥 Delete leftover celery file"}
+{"number": 722, "reason": "pre-uv-era merge (2024-03-15) — harness unsupported for fastapi-template", "title": "🎨 Replace buttons styling for variants for consistency"}
+{"number": 720, "reason": "pre-uv-era merge (2024-03-14) — harness unsupported for fastapi-template", "title": "🛠️ Improve `modify-openapi-operationids.js`"}
+{"number": 719, "reason": "pre-uv-era merge (2024-03-17) — harness unsupported for fastapi-template", "title": "♻️ Replace ESLint and Prettier with Biome to format and lint frontend"}
+{"number": 718, "reason": "pre-uv-era merge (2024-03-21) — harness unsupported for fastapi-template", "title": "📝 Add documentation for pre-commit and code linting"}
+{"number": 717, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "♻️ Replace pytest-mock with unittest.mock and remove pytest-cov"}
+{"number": 716, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "📝 Update `README.md`"}
+{"number": 715, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "🛠️ Minor changes in frontend"}
+{"number": 714, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "⚙️ Update pre-commit config with Prettier and ESLint"}
+{"number": 711, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "✏ Fix typo in variable names in `backend/app/api/routes/items.py` and `backend/app/api/routes/users.py`"}
+{"number": 710, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "♻ Update Docker image to prevent errors in M1 Macs"}
+{"number": 708, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "✏ Update header titles for consistency"}
+{"number": 706, "reason": "pre-uv-era merge (2024-03-13) — harness unsupported for fastapi-template", "title": "📝 Update `README.md`, dark mode screenshot position"}
+{"number": 703, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🦇 Add dark mode to `README.md`"}
+{"number": 702, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "📌 Upgrade Poetry lock dependencies"}
+{"number": 701, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🍱 Update GitHub image"}
+{"number": 700, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🍱 Add GitHub image"}
+{"number": 699, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🚚 Rename project to Full Stack FastAPI Template"}
+{"number": 698, "reason": "non-task title prefix: 🔒️ ensure the default values of \"changet", "title": "🔒️ Ensure the default values of \"changethis\" are not deployed"}
+{"number": 697, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "◀ Revert \"📸 Rename Dashboard to Home and update screenshots\""}
+{"number": 696, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🐛 Fix allowing a user to update the email to the same email they already have"}
+{"number": 695, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🐛 Fixed items count when retrieving data for all items by user"}
+{"number": 694, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🔥 Remove Celery and Flower, they are currently not used nor recommended"}
+{"number": 693, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "📸 Rename Dashboard to Home and update screenshots"}
+{"number": 692, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "✨ Migrate from pgAdmin to Adminer"}
+{"number": 691, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "📝 Update `README.md`"}
+{"number": 690, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "✅ Add test for deleting user without privileges"}
+{"number": 689, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "♻️ Refactor user update"}
+{"number": 688, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "👷 Add Lint to GitHub Actions outside of tests"}
+{"number": 687, "reason": "bot author: app/dependabot", "title": "Bump fastapi from 0.104.1 to 0.109.1 in /backend"}
+{"number": 686, "reason": "bot author: app/dependabot", "title": "Bump python-multipart from 0.0.6 to 0.0.7 in /backend"}
+{"number": 685, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "📌 Add Poetry lock to git"}
+{"number": 684, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🎨 Adjust color and spacing"}
+{"number": 683, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "♻️ Refactor logic to allow running pytest tests locally"}
+{"number": 682, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🔧 Add a default Flower password"}
+{"number": 681, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "📝 Add docs for wildcard domains"}
+{"number": 679, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "📝 Add the required GitHub Actions secrets to docs"}
+{"number": 678, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "📝 Update `README.md` and `deployment.md`"}
+{"number": 677, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "👷 Avoid creating unnecessary *.pyc files with PYTHONDONTWRITEBYTECODE=1"}
+{"number": 676, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "🔧 Update VS Code debug config"}
+{"number": 675, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "📝 Update frontend `README.md`"}
+{"number": 674, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "♻️ Refactor code structure for tests"}
+{"number": 673, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "🎨 Improve styles"}
+{"number": 672, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "👷 Tweak test GitHub Action names"}
+{"number": 671, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "🐛 Set up Sentry only when used"}
+{"number": 670, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "📝 Update deployment docs to use a different directory for traefik-public"}
+{"number": 668, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "🔧 Set TanStack Router devtools only in dev mode"}
+{"number": 667, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "👷 Add continuous deployment and refactors needed for it"}
+{"number": 666, "reason": "pre-uv-era merge (2024-03-11) — harness unsupported for fastapi-template", "title": "🎨 Update theme"}
+{"number": 664, "reason": "pre-uv-era merge (2024-03-09) — harness unsupported for fastapi-template", "title": "✨ Create endpoint to show password recovery email content and update email template"}
+{"number": 663, "reason": "pre-uv-era merge (2024-03-09) — harness unsupported for fastapi-template", "title": "♻️ Refactor email logic to allow re-using util functions for testing and development"}
+{"number": 662, "reason": "pre-uv-era merge (2024-03-09) — harness unsupported for fastapi-template", "title": "🔥 Remove unnecessary validation"}
+{"number": 661, "reason": "pre-uv-era merge (2024-03-09) — harness unsupported for fastapi-template", "title": "💬 Improve Delete Account description and confirmation"}
+{"number": 660, "reason": "pre-uv-era merge (2024-03-09) — harness unsupported for fastapi-template", "title": "📝 Update deployment files and docs"}
+{"number": 659, "reason": "pre-uv-era merge (2024-03-09) — harness unsupported for fastapi-template", "title": "♻️ Refactor email templates"}
+{"number": 658, "reason": "pre-uv-era merge (2024-03-10) — harness unsupported for fastapi-template", "title": "🔧 Add `.gitattributes` file to ensure LF endings for `.sh` files"}
+{"number": 657, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "📸 Add new screenshots "}
+{"number": 656, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🔥 Remove unused schemas"}
+{"number": 655, "reason": "pre-uv-era merge (2024-03-10) — harness unsupported for fastapi-template", "title": " 🏷️ Add mypy to the GitHub Action for tests and fixed types in the whole project"}
+{"number": 654, "reason": "bot author: app/dependabot", "title": "Bump follow-redirects from 1.15.3 to 1.15.5 in /frontend"}
+{"number": 653, "reason": "bot author: app/dependabot", "title": "Bump vite from 5.0.4 to 5.0.12 in /frontend"}
+{"number": 652, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🚚 Move new-frontend to frontend"}
+{"number": 651, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🐛 Fix bug when editing own user"}
+{"number": 650, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🔧 Add script for ESLint"}
+{"number": 649, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🔥 Remove old frontend"}
+{"number": 648, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🙈 Add .prettierignore and include client folder"}
+{"number": 647, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "⚙️ Add Prettier config"}
+{"number": 646, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🎨 Format with Prettier"}
+{"number": 645, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "🔧 Update pre-commit config"}
+{"number": 644, "reason": "pre-uv-era merge (2024-03-08) — harness unsupported for fastapi-template", "title": "⏪ Revert \"⚙️ Add Prettier and ESLint config with pre-commit\""}
+{"number": 643, "reason": "bot author: app/dependabot", "title": "⬆ Bump dawidd6/action-download-artifact from 2.28.0 to 3.1.2"}
+{"number": 642, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/upload-artifact from 3 to 4"}
+{"number": 641, "reason": "bot author: app/dependabot", "title": "⬆ Bump actions/setup-python from 4 to 5"}
+{"number": 640, "reason": "pre-uv-era merge (2024-03-07) — harness unsupported for fastapi-template", "title": "⚙️ Add Prettier and ESLint config with pre-commit"}
+{"number": 639, "reason": "pre-uv-era merge (2024-03-07) — harness unsupported for fastapi-template", "title": "📝 Refactor README into separate README.md files for backend, frontend, deployment, development"}
+{"number": 638, "reason": "pre-uv-era merge (2024-03-07) — harness unsupported for fastapi-template", "title": "👷 Add coverage with Smokeshow to CI and badge"}
+{"number": 637, "reason": "pre-uv-era merge (2024-03-07) — harness unsupported for fastapi-template", "title": "✨ Migrate to TanStack Query (React Query) and TanStack Router"}
+{"number": 632, "reason": "pre-uv-era merge (2024-03-07) — harness unsupported for fastapi-template", "title": "✅ Add tests to raise coverage to at least 90% and fix recover password logic"}
+{"number": 631, "reason": "pre-uv-era merge (2024-03-07) — harness unsupported for fastapi-template", "title": "🐛 Fix copier to handle string vars with spaces in quotes"}
+{"number": 630, "reason": "pre-uv-era merge (2024-03-07) — harness unsupported for fastapi-template", "title": "♻ Move project source files to top level from src, update Sentry dependency"}
+{"number": 629, "reason": "pre-uv-era merge (2024-03-02) — harness unsupported for fastapi-template", "title": "♻ Refactor Python folder tree"}
+{"number": 628, "reason": "pre-uv-era merge (2024-03-01) — harness unsupported for fastapi-template", "title": "📝 Update README"}
+{"number": 626, "reason": "pre-uv-era merge (2024-03-01) — harness unsupported for fastapi-template", "title": "✅ Add setup and teardown database for tests"}
+{"number": 625, "reason": "pre-uv-era merge (2024-03-01) — harness unsupported for fastapi-template", "title": "✨ Update new-frontend client"}
+{"number": 624, "reason": "pre-uv-era merge (2024-02-29) — harness unsupported for fastapi-template", "title": "✨ Add password reset functionality"}
+{"number": 622, "reason": "pre-uv-era merge (2024-02-29) — harness unsupported for fastapi-template", "title": "♻️ Refactor old CRUD utils and tests"}
+{"number": 621, "reason": "pre-uv-era merge (2024-02-29) — harness unsupported for fastapi-template", "title": "✨ Add private/public routing"}
+{"number": 620, "reason": "pre-uv-era merge (2024-02-29) — harness unsupported for fastapi-template", "title": "🔧 Add VS Code debug configs"}
+{"number": 619, "reason": "pre-uv-era merge (2024-02-29) — harness unsupported for fastapi-template", "title": "👷 Update GitHub Action latest-changes and move release notes to independent file"}
+{"number": 618, "reason": "pre-uv-era merge (2024-02-29) — harness unsupported for fastapi-template", "title": "🔧 Update .env to allow local debug for the backend"}
+{"number": 617, "reason": "pre-uv-era merge (2024-02-29) — harness unsupported for fastapi-template", "title": "♻️ Refactor and update CORS, remove trailing slash from new Pydantic v2"}
+{"number": 616, "reason": "pre-uv-era merge (2024-02-28) — harness unsupported for fastapi-template", "title": "✨ Add form validation to Admin, Items and Login"}
+{"number": 615, "reason": "non-task title prefix: ⬆ upgrade code to support pydantic v2", "title": "⬆ Upgrade code to support pydantic V2"}
+{"number": 614, "reason": "pre-uv-era merge (2024-02-27) — harness unsupported for fastapi-template", "title": "✨ Support delete own account and other tweaks"}
+{"number": 613, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "📝 Update internal README and referred files"}
+{"number": 612, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "✨ Add Copier, migrate from Cookiecutter, in a way that supports using the project as is, forking or cloning it"}
+{"number": 611, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "🎨 Format files with pre-commit and Ruff"}
+{"number": 610, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "➕ Replace black, isort, flake8, autoflake with ruff and upgrade mypy"}
+{"number": 609, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "🚚 Refactor and simplify backend file structure"}
+{"number": 608, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "🔥 Clean up old files no longer relevant"}
+{"number": 607, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "♻ Re-structure Docker Compose files, discard Docker Swarm specific logic"}
+{"number": 603, "reason": "pre-uv-era merge (2024-02-26) — harness unsupported for fastapi-template", "title": "✨ Restructure folders, allow editing of users/items, and implement other refactors and improvements"}
+{"number": 602, "reason": "pre-uv-era merge (2024-02-21) — harness unsupported for fastapi-template", "title": "♻️ Refactor update endpoints and regenerate client for new-frontend"}
+{"number": 601, "reason": "pre-uv-era merge (2024-02-17) — harness unsupported for fastapi-template", "title": "✨ Add support for updating items and upgrade SQLModel to 0.0.16 (which supports model object updates)"}
+{"number": 600, "reason": "pre-uv-era merge (2024-02-16) — harness unsupported for fastapi-template", "title": "✨ Add dark mode to new-frontend and conditional sidebar items"}
+{"number": 599, "reason": "pre-uv-era merge (2024-02-25) — harness unsupported for fastapi-template", "title": "♻ Refactor items and services endpoints to return count and data, and add CI tests"}
+{"number": 598, "reason": "pre-uv-era merge (2024-02-15) — harness unsupported for fastapi-template", "title": "✨ Migrate to RouterProvider and other refactors "}
+{"number": 595, "reason": "pre-uv-era merge (2024-02-13) — harness unsupported for fastapi-template", "title": "✨ Add `Not Found` page"}
+{"number": 594, "reason": "pre-uv-era merge (2024-02-13) — harness unsupported for fastapi-template", "title": "✨ Add delete_user; refactor delete_item"}
+{"number": 593, "reason": "pre-uv-era merge (2024-02-12) — harness unsupported for fastapi-template", "title": "✨ Add new pages, components, panels, modals, and theme; refactor and improvements in existing components"}
+{"number": 592, "reason": "pre-uv-era merge (2024-02-12) — harness unsupported for fastapi-template", "title": "✨ Add state store to new frontend"}
+{"number": 591, "reason": "bot author: app/dependabot", "title": "⬆ Bump tiangolo/issue-manager from 0.2.0 to 0.5.0"}
+{"number": 589, "reason": "pre-uv-era merge (2024-01-29) — harness unsupported for fastapi-template", "title": "🐛  Add `onClose` to `SidebarItems`"}
+{"number": 588, "reason": "pre-uv-era merge (2024-01-29) — harness unsupported for fastapi-template", "title": "✨ Add Layout to App"}
+{"number": 587, "reason": "pre-uv-era merge (2024-01-29) — harness unsupported for fastapi-template", "title": "✨ Add Sidebar to new frontend"}
+{"number": 585, "reason": "pre-uv-era merge (2024-01-23) — harness unsupported for fastapi-template", "title": "✨ Add Login to new frontend"}
+{"number": 584, "reason": "pre-uv-era merge (2024-01-22) — harness unsupported for fastapi-template", "title": "✨ Include schemas in generated frontend client"}
+{"number": 575, "reason": "pre-uv-era merge (2023-12-27) — harness unsupported for fastapi-template", "title": "✨ Regenerate frontend client with recent changes"}
+{"number": 574, "reason": "pre-uv-era merge (2023-12-27) — harness unsupported for fastapi-template", "title": "♻️ Re-enable user update path operations for frontend client generation"}
+{"number": 573, "reason": "pre-uv-era merge (2023-12-27) — harness unsupported for fastapi-template", "title": "♻️ Refactor API in `utils.py`"}
+{"number": 572, "reason": "pre-uv-era merge (2023-12-27) — harness unsupported for fastapi-template", "title": "♻️ Remove type ignores and add `response_model`"}
+{"number": 571, "reason": "pre-uv-era merge (2023-12-27) — harness unsupported for fastapi-template", "title": "✨ Update code for login API"}
+{"number": 569, "reason": "pre-uv-era merge (2023-12-26) — harness unsupported for fastapi-template", "title": "✨ Add client in frontend and client generation"}
+{"number": 564, "reason": "pre-uv-era merge (2023-12-04) — harness unsupported for fastapi-template", "title": "🐳 Set up Docker config for new-frontend"}
+{"number": 563, "reason": "pre-uv-era merge (2023-11-30) — harness unsupported for fastapi-template", "title": "✨ Set up new frontend with Vite, TypeScript and React"}
+{"number": 562, "reason": "pre-uv-era merge (2023-11-29) — harness unsupported for fastapi-template", "title": "🐛 Fix positional argument bug in `init_db.py`"}
+{"number": 561, "reason": "pre-uv-era merge (2023-11-29) — harness unsupported for fastapi-template", "title": "♻️ Refactor Users API and dependencies"}
+{"number": 560, "reason": "pre-uv-era merge (2023-11-24) — harness unsupported for fastapi-template", "title": "✨ Upgrade items router with new SQLModel models, simplified logic, and new FastAPI Annotated dependencies"}
+{"number": 559, "reason": "pre-uv-era merge (2023-11-24) — harness unsupported for fastapi-template", "title": "✨ Adopt SQLModel, create models, start using it"}
+{"number": 558, "reason": "non-task title prefix: ⬆️ upgrade python version and dependenci", "title": "⬆️ Upgrade Python version and dependencies"}
+{"number": 555, "reason": "pre-uv-era merge (2023-11-15) — harness unsupported for fastapi-template", "title": "♻️ Refactor frontend Docker build setup, use plain NodeJS, use custom Nginx config, fix build for old Vue"}
+{"number": 554, "reason": "pre-uv-era merge (2023-11-15) — harness unsupported for fastapi-template", "title": "🔧 Add missing dotenv variables"}
+{"number": 553, "reason": "pre-uv-era merge (2023-11-15) — harness unsupported for fastapi-template", "title": "♻️ Refactor project generation, discard cookiecutter, use plain git/clone/fork"}
+{"number": 552, "reason": "pre-uv-era merge (2023-11-15) — harness unsupported for fastapi-template", "title": "📝 Update README with in construction notice"}
+{"number": 551, "reason": "pre-uv-era merge (2023-11-15) — harness unsupported for fastapi-template", "title": "📌 Add NodeJS version management and instructions"}
+{"number": 547, "reason": "pre-uv-era merge (2023-11-04) — harness unsupported for fastapi-template", "title": "👷 Add dependabot"}
+{"number": 546, "reason": "pre-uv-era merge (2023-11-04) — harness unsupported for fastapi-template", "title": "👷 Fix latest-changes GitHub Action token, strike 2"}
+{"number": 545, "reason": "pre-uv-era merge (2023-11-04) — harness unsupported for fastapi-template", "title": "👷 Fix latest-changes GitHub Action token config"}
+{"number": 544, "reason": "pre-uv-era merge (2023-11-04) — harness unsupported for fastapi-template", "title": "👷 Add latest-changes GitHub Action"}
+{"number": 480, "reason": "pre-uv-era merge (2023-11-14) — harness unsupported for fastapi-template", "title": "🐛 Fix Poetry installation in Dockerfile and upgrade Python version and packages to fix Docker build"}
+{"number": 447, "reason": "non-task title prefix: ⬆ upgrade flower version and command", "title": "⬆ Upgrade Flower version and command"}
+{"number": 443, "reason": "pre-uv-era merge (2023-11-15) — harness unsupported for fastapi-template", "title": "🐛 Fix Celery worker command"}
+{"number": 438, "reason": "non-task title prefix: ⬆ add `uvicorn[standard] to include `wat", "title": "⬆ Add `uvicorn[standard] to include `watchgod` and `uvloop`"}
+{"number": 417, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "♻ Update error messages"}
+{"number": 396, "reason": "pre-uv-era merge (2023-11-15) — harness unsupported for fastapi-template", "title": "📌 Fix flower Docker image, pin version"}
+{"number": 365, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "🔧 Add `SMTP_SSL` option for older SMTP servers"}
+{"number": 333, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "✨ Add support for setting `POSTGRES_PORT`"}
+{"number": 309, "reason": "pre-uv-era merge (2024-03-12) — harness unsupported for fastapi-template", "title": "✏ Fix typo in `development.md`"}
+{"number": 211, "reason": "non-task title prefix: ⬆️ update issue-manager", "title": "⬆️ Update issue-manager"}
+{"number": 201, "reason": "pre-uv-era merge (2020-05-25) — harness unsupported for fastapi-template", "title": "✨ Add GitHub Sponsors button"}
+{"number": 200, "reason": "pre-uv-era merge (2020-05-25) — harness unsupported for fastapi-template", "title": "🔊 Add consistent errors for env vars not set"}
+{"number": 199, "reason": "pre-uv-era merge (2020-05-24) — harness unsupported for fastapi-template", "title": "✨ Traefik v2"}
+{"number": 161, "reason": "pre-uv-era merge (2020-04-20) — harness unsupported for fastapi-template", "title": "Add docs about reporting coverage in HTML"}
+{"number": 160, "reason": "pre-uv-era merge (2020-04-20) — harness unsupported for fastapi-template", "title": "Test using the TestClient"}
+{"number": 159, "reason": "pre-uv-era merge (2020-04-20) — harness unsupported for fastapi-template", "title": "Format fixes"}
+{"number": 158, "reason": "pre-uv-era merge (2020-04-20) — harness unsupported for fastapi-template", "title": "Refactor backend, settings, DB sessions, types, configs, plugins"}
+{"number": 156, "reason": "pre-uv-era merge (2020-04-19) — harness unsupported for fastapi-template", "title": "Add docs about removing the frontend"}
+{"number": 155, "reason": "pre-uv-era merge (2020-04-19) — harness unsupported for fastapi-template", "title": "Simplify scripts"}
+{"number": 153, "reason": "pre-uv-era merge (2020-04-19) — harness unsupported for fastapi-template", "title": "Simplify Docker Compose files and deployment"}
+{"number": 152, "reason": "pre-uv-era merge (2020-04-19) — harness unsupported for fastapi-template", "title": "Simplify tests, run in same backend service"}
+{"number": 151, "reason": "pre-uv-era merge (2020-04-19) — harness unsupported for fastapi-template", "title": "Simplify env files, merge to one .env"}
+{"number": 150, "reason": "pre-uv-era merge (2020-04-19) — harness unsupported for fastapi-template", "title": "Make the public Traefik network a fixed default"}
+{"number": 149, "reason": "pre-uv-era merge (2020-04-18) — harness unsupported for fastapi-template", "title": "Fix Windows line endings for shell scripts after generation"}
+{"number": 148, "reason": "pre-uv-era merge (2020-04-19) — harness unsupported for fastapi-template", "title": "upgrade to postgres 12"}
+{"number": 144, "reason": "pre-uv-era merge (2020-04-18) — harness unsupported for fastapi-template", "title": "use poetry insted of Pipfile"}
+{"number": 139, "reason": "pre-uv-era merge (2020-04-06) — harness unsupported for fastapi-template", "title": "Simplify Traefik labels in services"}
+{"number": 135, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "Remove duplicate 'login' tags"}
+{"number": 129, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "dashboard welcome message to show email if full name doe not exists"}
+{"number": 121, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "Bring Python code into compliance with Black and Flake8"}
+{"number": 120, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "Upgrade to Vue CLI 4"}
+{"number": 117, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "Simplify DB base class declaration"}
+{"number": 106, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "Update CRUD utils for users handling password hashing"}
+{"number": 98, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "Use . instead of source in build-push.sh"}
+{"number": 87, "reason": "pre-uv-era merge (2020-04-17) — harness unsupported for fastapi-template", "title": "Use Pydantic BaseSettings for config settings"}
+{"number": 83, "reason": "pre-uv-era merge (2020-02-07) — harness unsupported for fastapi-template", "title": "Update README.md"}
+{"number": 80, "reason": "pre-uv-era merge (2020-02-07) — harness unsupported for fastapi-template", "title": "Update README.md"}
+{"number": 74, "reason": "pre-uv-era merge (2020-02-07) — harness unsupported for fastapi-template", "title": "Fix typo in `read_item` GET view"}
+{"number": 70, "reason": "pre-uv-era merge (2020-02-07) — harness unsupported for fastapi-template", "title": "correcting grammer on init_db file"}
+{"number": 40, "reason": "pre-uv-era merge (2020-04-06) — harness unsupported for fastapi-template", "title": "Add email validation"}
+{"number": 37, "reason": "pre-uv-era merge (2020-02-07) — harness unsupported for fastapi-template", "title": "Modified docker configuration for flower"}
+{"number": 34, "reason": "pre-uv-era merge (2019-05-29) — harness unsupported for fastapi-template", "title": "Receive token as body in reset password"}
+{"number": 33, "reason": "pre-uv-era merge (2019-05-29) — harness unsupported for fastapi-template", "title": "Update login.py"}
+{"number": 32, "reason": "pre-uv-era merge (2019-05-22) — harness unsupported for fastapi-template", "title": "Fix operation error"}
+{"number": 29, "reason": "pre-uv-era merge (2019-05-22) — harness unsupported for fastapi-template", "title": "Fix sqlalchemy class lookup"}
+{"number": 23, "reason": "pre-uv-era merge (2020-01-19) — harness unsupported for fastapi-template", "title": "Simplify CRUD definitions, make a clearer distinction between schemas and models"}
+{"number": 20, "reason": "pre-uv-era merge (2020-01-19) — harness unsupported for fastapi-template", "title": "Feature reusable normal user for tests"}
+{"number": 19, "reason": "pre-uv-era merge (2019-05-03) — harness unsupported for fastapi-template", "title": "Fix the paths of the scripts in README"}
+{"number": 17, "reason": "pre-uv-era merge (2019-05-03) — harness unsupported for fastapi-template", "title": "Feature to forward CLI args to pytest"}
+{"number": 14, "reason": "pre-uv-era merge (2019-04-19) — harness unsupported for fastapi-template", "title": "Add Items (crud, models, endpoints), utils, refactor"}
+{"number": 10, "reason": "pre-uv-era merge (2019-04-16) — harness unsupported for fastapi-template", "title": "Pushes up versions to python to 3.7 and celery to ~=4.3"}
+{"number": 9, "reason": "pre-uv-era merge (2019-04-20) — harness unsupported for fastapi-template", "title": "removed postgres_password from alembic.ini"}
+{"number": 6, "reason": "pre-uv-era merge (2019-04-11) — harness unsupported for fastapi-template", "title": "Fix frontend hijacking /docs in development"}
+{"number": 4, "reason": "pre-uv-era merge (2019-03-29) — harness unsupported for fastapi-template", "title": "Fixed read_user_by_id docstring"}
+{"number": 2, "reason": "pre-uv-era merge (2019-03-11) — harness unsupported for fastapi-template", "title": "Refactor/upgrade backend and frontend parts"}

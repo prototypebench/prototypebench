@@ -24,6 +24,7 @@ from rich.table import Table
 from . import extract as ex
 from . import frontend_extract as fe
 from . import git_ops
+from .sources import SourceConfig
 
 
 @dataclass
@@ -61,13 +62,15 @@ def _classify_frontend(result: fe.FrontendExtractResult) -> str:
     return "no_signal"
 
 
-def _scope_pytest(test_patch: str) -> list[str]:
-    hits = re.findall(
-        r"^\+\+\+ b/(backend/(?:tests|app/tests)/[^\s]+)",
-        test_patch,
-        re.MULTILINE,
-    )
-    return sorted({p.replace("backend/", "", 1) for p in hits})
+def _scope_pytest(test_patch: str, source: SourceConfig) -> list[str]:
+    """Source-aware: use the SourceConfig regex + strip-prefix to scope pytest."""
+    added_paths = re.findall(r"^\+\+\+ b/(\S+)", test_patch, re.MULTILINE)
+    path_re = re.compile(source.backend_test_path_re)
+    prefix = source.backend_test_path_strip_prefix
+    return sorted({
+        (p[len(prefix):] if prefix and p.startswith(prefix) else p)
+        for p in added_paths if path_re.match(p)
+    })
 
 
 def _scope_playwright(test_patch: str) -> list[str]:
@@ -92,13 +95,16 @@ def batch_extract(
     candidates_path: Path,
     work_root: Path,
     report_path: Path,
-    repo_url: str,
+    source: SourceConfig,
     top_n: int | None,
     mode: str,
     kind: str = "backend",
     console: Console | None = None,
 ) -> list[BatchRow]:
     console = console or Console()
+    repo_url = source.repo_url
+    owner, name = source.name.split("/", 1)
+    instance_prefix = f"{owner.replace('-','_')}__{name}-"
 
     rows = []
     with candidates_path.open() as f:
@@ -115,7 +121,7 @@ def batch_extract(
         rows = rows[:top_n]
 
     work_root.mkdir(parents=True, exist_ok=True)
-    shared_repo = work_root / "_shared_repo"
+    shared_repo = work_root / f"_shared_repo_{source.short_name}"
     if not shared_repo.exists():
         console.log(f"first-time clone of shared repo → {shared_repo}")
         git_ops.clone(repo_url, shared_repo)
@@ -134,7 +140,7 @@ def batch_extract(
         for r in rows:
             pr = r["pr"]
             number = pr["number"]
-            instance_id = f"fastapi__full-stack-fastapi-template-{number}"
+            instance_id = f"{instance_prefix}{number}"
             progress.update(task, advance=1, description=f"PR #{number}")
             t0 = time.monotonic()
 
@@ -153,9 +159,17 @@ def batch_extract(
                 git_ops.checkout(shared_repo, head_commit)
                 base_commit = git_ops.rev_parse(shared_repo, f"{head_commit}^")
                 if kind == "backend":
+                    # Source-specific test glob.
+                    test_paths_glob = (
+                        ["backend/tests/**", "backend/app/tests/**"]
+                        if source.backend_dir == "backend"
+                        else (
+                            ["server/tests/**"] if source.backend_dir == "server"
+                            else ["tests/**"]
+                        )
+                    )
                     test_patch = git_ops.diff(
-                        shared_repo, base_commit, head_commit,
-                        paths=["backend/tests/**", "backend/app/tests/**"],
+                        shared_repo, base_commit, head_commit, paths=test_paths_glob,
                     )
                 else:
                     test_patch = git_ops.diff(
@@ -180,7 +194,7 @@ def batch_extract(
 
             try:
                 if kind == "backend":
-                    scoped = _scope_pytest(test_patch) if test_patch else None
+                    scoped = _scope_pytest(test_patch, source) if test_patch else None
                     spec_be = ex.ExtractSpec(
                         instance_id=instance_id,
                         repo_url=repo_url,
@@ -190,7 +204,7 @@ def batch_extract(
                         pytest_args=scoped or None,
                     )
                     result_be = ex.extract(
-                        spec_be, work_root=work_dir, mode=mode,
+                        spec_be, source=source, work_root=work_dir, mode=mode,
                         console=quiet_console, repo_dir=shared_repo,
                     )
                     results.append(BatchRow(

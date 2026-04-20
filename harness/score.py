@@ -19,6 +19,7 @@ from pathlib import Path
 from rich.console import Console
 
 from . import backend_runner, git_ops, junit, postgres
+from .sources import SourceConfig
 
 
 @dataclass
@@ -38,6 +39,7 @@ class ScoreResult:
     instance_id: str
     score: int
     mode: str = "docker"
+    source: str = ""
     fail_to_pass_passed: list[str] = field(default_factory=list)
     fail_to_pass_missing: list[str] = field(default_factory=list)
     pass_to_pass_passed: list[str] = field(default_factory=list)
@@ -50,10 +52,10 @@ class ScoreResult:
 def score_patch(
     spec: ScoreSpec,
     *,
+    source: SourceConfig,
     work_root: Path,
     mode: str = "docker",
     console: Console | None = None,
-    backend_image: str = "prototypebench/backend:latest",
 ) -> ScoreResult:
     console = console or Console()
     work_root.mkdir(parents=True, exist_ok=True)
@@ -61,7 +63,7 @@ def score_patch(
     out_dir = work_root / "out"
     out_dir.mkdir(exist_ok=True)
 
-    result = ScoreResult(instance_id=spec.instance_id, score=0, mode=mode)
+    result = ScoreResult(instance_id=spec.instance_id, score=0, mode=mode, source=source.name)
 
     if not repo_dir.exists():
         console.log(f"cloning {spec.repo_url} → {repo_dir}")
@@ -70,7 +72,7 @@ def score_patch(
         console.log(f"reusing checkout: {repo_dir}")
         git_ops.clean(repo_dir)
 
-    # 1. base checkout
+    # 1. base
     console.log(f"checkout base {spec.base_commit[:10]}")
     git_ops.checkout(repo_dir, spec.base_commit)
 
@@ -94,32 +96,43 @@ def score_patch(
     # 4. postgres + runner
     pg_name = f"pbench-db-score-{spec.instance_id}"[:60]
     network_name: str | None = None
-    postgres.stop(pg_name)
-    if mode == "docker":
-        network_name = f"pbench-net-score-{spec.instance_id}"[:60]
-        postgres.create_network(network_name)
-    try:
-        pg = postgres.start(pg_name, network=network_name)
-    except postgres.PostgresError as e:
-        result.error = f"postgres start failed: {e}"
-        return result
+    pg: postgres.PostgresHandle | None = None
+    pg_env: dict[str, str] = {}
+    if source.pg_required:
+        postgres.stop(pg_name)
+        if mode == "docker":
+            network_name = f"pbench-net-score-{spec.instance_id}"[:60]
+            postgres.create_network(network_name)
+        try:
+            pg = postgres.start(
+                pg_name,
+                network=network_name,
+                user=source.pg_defaults.get("user", "postgres"),
+                password=source.pg_defaults.get("password", "changethis"),
+                db=source.pg_defaults.get("db", "app"),
+            )
+        except postgres.PostgresError as e:
+            result.error = f"postgres start failed: {e}"
+            return result
+        pg_env = pg.env_for(env_map=source.pg_env_map, from_container=(mode == "docker"))
 
     runner = backend_runner.make(
         mode,
-        image=backend_image,
-        network=network_name or "",
+        image=source.backend_image,
+        network=network_name,
         out_mount=out_dir,
         container_prefix=f"pbench-s-{spec.instance_id}"[:50],
     )
-    pg_env = pg.env_container() if mode == "docker" else pg.env_host()
+    backend_dir = repo_dir / source.backend_dir if source.backend_dir else repo_dir
 
     try:
-        backend_dir = repo_dir / "backend"
-
         # 5. prestart
         console.log("running prestart")
         rc, so, se = runner.run_prestart(
-            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg_env
+            workspace_root=repo_dir, backend_dir=backend_dir,
+            prestart_steps=source.prestart_steps,
+            uv_extras=source.uv_extras,
+            env_overrides=pg_env,
         )
         (out_dir / "agent.prestart.log").write_text(so + "\n---stderr---\n" + se)
         if rc != 0:
@@ -130,11 +143,12 @@ def score_patch(
         console.log("running agent pytest")
         t0 = time.monotonic()
         run = runner.run_pytest(
-            workspace_root=repo_dir,
-            backend_dir=backend_dir,
+            workspace_root=repo_dir, backend_dir=backend_dir,
             junit_path=out_dir / "agent.junit.xml",
-            env_overrides=pg_env,
             pytest_args=spec.pytest_args,
+            pytest_extra_args=source.pytest_extra_args,
+            uv_extras=source.uv_extras,
+            env_overrides=pg_env,
         )
         result.phase_duration_s = time.monotonic() - t0
         result.phase_returncode = run.returncode
@@ -148,7 +162,7 @@ def score_patch(
         outcomes = junit.parse(run.junit_path)
         passing_tests = junit.passing(outcomes)
 
-        # 7. compare against the curator's FAIL_TO_PASS / PASS_TO_PASS
+        # 7. compare
         f2p_set = set(spec.fail_to_pass)
         p2p_set = set(spec.pass_to_pass)
         result.fail_to_pass_passed = sorted(f2p_set & passing_tests)
@@ -160,7 +174,8 @@ def score_patch(
             not result.fail_to_pass_missing and not result.pass_to_pass_regressed
         )
     finally:
-        postgres.stop(pg_name)
+        if pg:
+            postgres.stop(pg_name)
         if network_name:
             postgres.remove_network(network_name)
 

@@ -31,43 +31,59 @@ DEFAULT_REPO = "fastapi/full-stack-fastapi-template"
 DEFAULT_RAW_DIR = Path("raw")
 
 
+def _raw_path(source: str | None, fname: str) -> Path:
+    """Per-source raw artifact path: raw/<source>/<fname> if source given, else raw/<fname>."""
+    if source:
+        return DEFAULT_RAW_DIR / source / fname
+    return DEFAULT_RAW_DIR / fname
+
+
 @app.command(name="crawl")
 def crawl_cmd(
-    repo: str = typer.Option(DEFAULT_REPO, "--repo", help="Source repo in owner/name form."),
+    source: str = typer.Option(
+        "fastapi-template", "--source", help="Source short name (registered config)."
+    ),
     output: Path = typer.Option(
-        DEFAULT_RAW_DIR / "prs.jsonl", "--output", "-o", help="Output JSONL path."
+        None, "--output", "-o",
+        help="Output JSONL. Default: raw/<source>/prs.jsonl",
     ),
     limit: int = typer.Option(1000, "--limit", help="Max merged PRs to pull."),
     no_resume: bool = typer.Option(False, "--no-resume", help="Re-enrich from scratch."),
 ) -> None:
-    """Phase 1 step 1 — crawl merged PRs from the source repo into raw/prs.jsonl."""
-    count = crawl(repo, output, limit=limit, resume=not no_resume, console=console)
-    console.print(f"[bold green]done[/bold green]: {count} PRs in {output}")
+    """Phase 1 step 1 — crawl merged PRs from a source repo into raw/<source>/prs.jsonl."""
+    from harness.sources import get as get_source
+    src = get_source(source)
+    out = output or _raw_path(src.short_name, "prs.jsonl")
+    count = crawl(src.name, out, limit=limit, resume=not no_resume, console=console)
+    console.print(f"[bold green]done[/bold green]: {count} PRs in {out}")
 
 
 @app.command(name="filter")
 def filter_cmd(
-    input: Path = typer.Option(
-        DEFAULT_RAW_DIR / "prs.jsonl", "--input", "-i", help="Crawled PRs JSONL."
+    source: str = typer.Option(
+        "fastapi-template", "--source", help="Source short name."
     ),
-    candidates: Path = typer.Option(
-        DEFAULT_RAW_DIR / "candidates.jsonl", "--candidates", help="Accepted + scored output."
-    ),
-    rejected: Path = typer.Option(
-        DEFAULT_RAW_DIR / "rejected.jsonl", "--rejected", help="Dropped PRs with reasons."
-    ),
+    input: Path = typer.Option(None, "--input", "-i", help="Crawled PRs JSONL (default: raw/<source>/prs.jsonl)."),
+    candidates: Path = typer.Option(None, "--candidates", help="Default: raw/<source>/candidates.jsonl."),
+    rejected: Path = typer.Option(None, "--rejected", help="Default: raw/<source>/rejected.jsonl."),
 ) -> None:
     """Phase 1 step 2 — score and filter crawled PRs into a candidate pool."""
-    n_ok, n_drop = filter_prs(input, candidates, rejected)
-    console.print(f"[green]accepted[/green] {n_ok} → {candidates}")
-    console.print(f"[yellow]rejected[/yellow] {n_drop} → {rejected}")
+    from harness.sources import get as get_source
+    src = get_source(source)
+    inp = input or _raw_path(src.short_name, "prs.jsonl")
+    cand = candidates or _raw_path(src.short_name, "candidates.jsonl")
+    rej = rejected or _raw_path(src.short_name, "rejected.jsonl")
+    n_ok, n_drop = filter_prs(inp, cand, rej, source=src)
+    console.print(f"[green]accepted[/green] {n_ok} → {cand}")
+    console.print(f"[yellow]rejected[/yellow] {n_drop} → {rej}")
 
 
 @app.command(name="top")
 def top_cmd(
-    candidates: Path = typer.Option(
-        DEFAULT_RAW_DIR / "candidates.jsonl", "--candidates", help="Candidate pool JSONL."
+    source: str = typer.Option(
+        "fastapi-template", "--source", help="Source short name."
     ),
+    candidates: Path = typer.Option(None, "--candidates", help="Default: raw/<source>/candidates.jsonl."),
     n: int = typer.Option(20, "--n", help="Number of candidates to show."),
     kind: str = typer.Option(
         "any", "--kind",
@@ -75,7 +91,10 @@ def top_cmd(
     ),
 ) -> None:
     """Quick look: print top-N candidates by score, optionally filtered by kind."""
-    rows = load_jsonl(candidates)
+    from harness.sources import get as get_source
+    src = get_source(source)
+    cand = candidates or _raw_path(src.short_name, "candidates.jsonl")
+    rows = load_jsonl(cand)
 
     def _matches(r: dict) -> bool:
         s = r.get("signals") or {}
@@ -158,17 +177,14 @@ def draft_cmd(
 
 @app.command(name="build-from-extract")
 def build_from_extract_cmd(
-    report: Path = typer.Option(
-        DEFAULT_RAW_DIR / "extract_report.jsonl", "--report", help="Batch-extract JSONL."
-    ),
-    prs: Path = typer.Option(
-        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL."
-    ),
+    source: str = typer.Option("fastapi-template", "--source", help="Source short name."),
+    report: Path = typer.Option(None, "--report", help="Default: raw/<source>/extract_report.jsonl."),
+    prs: Path = typer.Option(None, "--prs", help="Default: raw/<source>/prs.jsonl."),
     work_root: Path = typer.Option(
         Path("/tmp/pbench"), "--work-root", help="Same scratch dir used by batch-extract."
     ),
     output: Path = typer.Option(
-        Path("tasks/instances.jsonl"), "--output", "-o", help="Output instances JSONL."
+        None, "--output", "-o", help="Default: tasks/instances.<source>.jsonl."
     ),
     statuses: str = typer.Option(
         "exact,fallback", "--statuses",
@@ -185,22 +201,34 @@ def build_from_extract_cmd(
       - Extract summary (work_root/.../summary.json) → F2P, P2P, base/head commits
       - Shared repo    (work_root/_shared_repo)    → patch, test_patch_*, lock SHAs
     """
+    from harness.sources import get as get_source
     from scripts.build_from_extract import build_from_extract as bfe
 
-    repo_dir = work_root / "_shared_repo"
+    src = get_source(source)
+    rep = report or _raw_path(src.short_name, "extract_report.jsonl")
+    pr_path = prs or _raw_path(src.short_name, "prs.jsonl")
+    out = output or Path(f"tasks/instances.{src.short_name}.jsonl")
+
+    repo_dir = work_root / f"_shared_repo_{src.short_name}"
     if not repo_dir.exists():
-        raise typer.BadParameter(
-            f"shared repo not found at {repo_dir} — run `pbench batch-extract` first."
-        )
+        # fall back to the legacy per-source location used previously
+        legacy = work_root / "_shared_repo"
+        if legacy.exists() and src.short_name == "fastapi-template":
+            repo_dir = legacy
+        else:
+            raise typer.BadParameter(
+                f"shared repo not found at {repo_dir} — run "
+                f"`pbench batch-extract --source {source}` first."
+            )
     status_set = {s.strip() for s in statuses.split(",") if s.strip()}
     n_built, n_skipped = bfe(
-        report_path=report, prs_path=prs, repo_dir=repo_dir,
-        work_root=work_root, output=output,
-        statuses=status_set, cutoff=cutoff,
+        report_path=rep, prs_path=pr_path, repo_dir=repo_dir,
+        work_root=work_root, output=out,
+        statuses=status_set, cutoff=cutoff, repo=src.name, source=src,
     )
-    console.print(f"[green]built[/green] {n_built} instance(s) → {output}")
+    console.print(f"[green]built[/green] {n_built} instance(s) → {out}")
     console.print(f"[yellow]skipped[/yellow] {n_skipped} (status not in {sorted(status_set)} or missing artifacts)")
-    console.print(f"\nNext: [bold]pbench validate -p {output}[/bold]")
+    console.print(f"\nNext: [bold]pbench validate -p {out}[/bold]")
 
 
 @app.command(name="validate")
@@ -236,38 +264,65 @@ def _find_pr(prs_path: Path, pr_number: int) -> dict:
     raise typer.BadParameter(f"PR #{pr_number} not found in {prs_path}")
 
 
+def _fetch_pr_head_commit(repo: str, pr: int) -> str:
+    """Fall back to gh API if the PR isn't in our crawled list."""
+    import subprocess
+    r = subprocess.run(
+        ["gh", "pr", "view", str(pr), "--repo", repo, "--json", "mergeCommit"],
+        capture_output=True, text=True,
+    )
+    if r.returncode != 0:
+        raise typer.BadParameter(f"gh pr view {pr}: {r.stderr.strip()}")
+    data = json.loads(r.stdout)
+    head = (data.get("mergeCommit") or {}).get("oid") or ""
+    if not head:
+        raise typer.BadParameter(f"PR #{pr} has no mergeCommit.oid")
+    return head
+
+
 @app.command(name="extract")
 def extract_cmd(
     pr: int = typer.Option(..., "--pr", help="Merged PR number from the source repo."),
-    repo_url: str = typer.Option(
-        "https://github.com/fastapi/full-stack-fastapi-template.git",
-        "--repo-url",
+    source: str = typer.Option(
+        "fastapi-template", "--source",
+        help="Source short name (see `harness/sources/`).",
     ),
     prs: Path = typer.Option(
-        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL."
+        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL (optional)."
     ),
     work_root: Path = typer.Option(
         Path("/tmp/pbench"), "--work-root", help="Scratch dir for checkouts/outputs."
     ),
     pytest_args: str = typer.Option(
-        "", "--pytest-args", help="Extra pytest args, space-separated (e.g. 'tests/api/routes')."
+        "", "--pytest-args",
+        help="Extra pytest args, space-separated. If empty, auto-scoped from test_patch.",
     ),
     mode: str = typer.Option(
         "docker", "--mode", help="Execution mode: 'docker' (reproducible) or 'local' (host uv)."
     ),
 ) -> None:
     """Phase 2 — extract FAIL_TO_PASS / PASS_TO_PASS for a single PR (backend)."""
-    import json as _json
-
     from harness import extract as ex
     from harness import git_ops
+    from harness.sources import get as get_source
 
-    row = _find_pr(prs, pr)
-    head_commit = ((row.get("mergeCommit") or {}).get("oid")) or ""
+    src = get_source(source)
+    repo_url = src.repo_url
+
+    # PR head_commit lookup: prefer crawled jsonl, fall back to gh.
+    head_commit: str | None = None
+    if prs.exists():
+        try:
+            row = _find_pr(prs, pr)
+            head_commit = ((row.get("mergeCommit") or {}).get("oid")) or None
+        except typer.BadParameter:
+            head_commit = None
     if not head_commit:
-        raise typer.BadParameter(f"PR #{pr} has no mergeCommit.oid")
+        console.log(f"PR #{pr} not in {prs}; querying gh")
+        head_commit = _fetch_pr_head_commit(src.name, pr)
 
-    instance_id = f"fastapi__full-stack-fastapi-template-{pr}"
+    owner, name = src.name.split("/", 1)
+    instance_id = f"{owner.replace('-','_')}__{name}-{pr}"
     work_dir = work_root / instance_id
     work_dir.mkdir(parents=True, exist_ok=True)
     repo_dir = work_dir / "repo"
@@ -278,34 +333,28 @@ def extract_cmd(
     else:
         console.log(f"reusing checkout: {repo_dir}")
 
-    # base = first parent of the merge commit. For squash merges (this repo's
-    # default) the merge commit has exactly one parent on master — `<head>^`
-    # gives the pre-PR state. For true merge commits, ^ still yields the main-
-    # line parent.
     base_commit = git_ops.rev_parse(repo_dir, f"{head_commit}^")
-    console.log(f"base={base_commit[:10]} head={head_commit[:10]}")
+    console.log(f"source={src.short_name} base={base_commit[:10]} head={head_commit[:10]}")
 
     # Derive the test-only patch from the PR range.
     test_patch = git_ops.diff(
-        repo_dir,
-        base_commit,
-        head_commit,
+        repo_dir, base_commit, head_commit,
         paths=["*test*", "*.spec.ts", "*.spec.tsx", "*.test.ts", "*.test.tsx"],
     )
     (work_dir / "test_patch.diff").write_text(test_patch)
     console.log(f"test_patch: {len(test_patch)} bytes")
 
-    # Auto-scope pytest to the PR's changed backend test files when the user
-    # hasn't pinned a scope explicitly. Speeds up extraction substantially and
-    # matches what the curator cares about: the tests the PR actually targets.
+    # Auto-scope pytest using the source's path regex.
     scoped = [a for a in pytest_args.split() if a]
     if not scoped and test_patch:
-        hits = re.findall(
-            r"^\+\+\+ b/(backend/(?:tests|app/tests)/[^\s]+)",
-            test_patch,
-            re.MULTILINE,
-        )
-        rel = sorted({p.replace("backend/", "", 1) for p in hits})
+        # Extract +++ b/ paths from test_patch and match against source's test path regex.
+        added_paths = re.findall(r"^\+\+\+ b/(\S+)", test_patch, re.MULTILINE)
+        path_re = re.compile(src.backend_test_path_re)
+        prefix = src.backend_test_path_strip_prefix
+        rel = sorted({
+            (p[len(prefix):] if prefix and p.startswith(prefix) else p)
+            for p in added_paths if path_re.match(p)
+        })
         if rel:
             scoped = rel
             console.log(f"auto-scoped pytest: {' '.join(rel)}")
@@ -318,9 +367,11 @@ def extract_cmd(
         test_patch=test_patch or None,
         pytest_args=scoped or None,
     )
-    result = ex.extract(spec, work_root=work_dir, mode=mode, console=console)
+    result = ex.extract(spec, source=src, work_root=work_dir, mode=mode, console=console)
 
     console.print("")
+    if result.error:
+        console.print(f"[red]error:[/red] {result.error}")
     console.print(f"[bold]FAIL_TO_PASS[/bold]: {len(result.fail_to_pass)}")
     for t in result.fail_to_pass[:10]:
         console.print(f"  + {t}")
@@ -412,19 +463,12 @@ def extract_frontend_cmd(
 
 @app.command(name="batch-extract")
 def batch_extract_cmd(
-    candidates: Path = typer.Option(
-        DEFAULT_RAW_DIR / "candidates.jsonl", "--candidates", help="Filtered candidate pool."
-    ),
+    source: str = typer.Option("fastapi-template", "--source", help="Source short name."),
+    candidates: Path = typer.Option(None, "--candidates", help="Default: raw/<source>/candidates.jsonl."),
     top: int = typer.Option(0, "--top", help="Process only the top-N candidates (0 = all)."),
-    report: Path = typer.Option(
-        DEFAULT_RAW_DIR / "extract_report.jsonl", "--report", help="Per-PR JSONL report."
-    ),
+    report: Path = typer.Option(None, "--report", help="Default: raw/<source>/extract_report.jsonl."),
     work_root: Path = typer.Option(
         Path("/tmp/pbench"), "--work-root", help="Scratch dir; shares one repo checkout."
-    ),
-    repo_url: str = typer.Option(
-        "https://github.com/fastapi/full-stack-fastapi-template.git",
-        "--repo-url",
     ),
     mode: str = typer.Option(
         "docker", "--mode", help="Execution mode: 'docker' or 'local' (backend kind only)."
@@ -444,12 +488,16 @@ def batch_extract_cmd(
       error     — pipeline failed; see `error` field in the report
     """
     from harness import batch
+    from harness.sources import get as get_source
+    src = get_source(source)
+    cand = candidates or _raw_path(src.short_name, "candidates.jsonl")
+    rep = report or _raw_path(src.short_name, "extract_report.jsonl")
 
     results = batch.batch_extract(
-        candidates_path=candidates,
+        candidates_path=cand,
         work_root=work_root,
-        report_path=report,
-        repo_url=repo_url,
+        report_path=rep,
+        source=src,
         top_n=top or None,
         mode=mode,
         kind=kind,
@@ -457,15 +505,15 @@ def batch_extract_cmd(
     )
     console.print("")
     batch.render_summary(results, console)
-    console.print(f"\nreport → {report}")
+    console.print(f"\nreport → {rep}")
 
 
 @app.command(name="score")
 def score_cmd(
     pr: int = typer.Option(..., "--pr", help="Merged PR number (must have been extracted first)."),
     patch_file: Path = typer.Option(..., "--patch-file", help="Path to the agent's unified-diff patch."),
-    prs: Path = typer.Option(
-        DEFAULT_RAW_DIR / "prs.jsonl", "--prs", help="Crawled PRs JSONL."
+    source: str = typer.Option(
+        "fastapi-template", "--source", help="Source short name."
     ),
     work_root: Path = typer.Option(
         Path("/tmp/pbench"), "--work-root", help="Must match the extract run's --work-root."
@@ -479,19 +527,20 @@ def score_cmd(
 ) -> None:
     """Phase 2 — score an agent patch against a PR's FAIL_TO_PASS/PASS_TO_PASS.
 
-    Prereq: `pbench extract --pr <N>` has already run for this PR so that
-    work_root/<instance_id>/out/summary.json and test_patch.diff exist.
+    Prereq: `pbench extract --pr <N> --source <s>` has already run.
     """
     from harness import score as sc
+    from harness.sources import get as get_source
 
-    _find_pr(prs, pr)  # just validates the PR exists in the crawl
-    instance_id = f"fastapi__full-stack-fastapi-template-{pr}"
+    src = get_source(source)
+    owner, name = src.name.split("/", 1)
+    instance_id = f"{owner.replace('-','_')}__{name}-{pr}"
     work_dir = work_root / instance_id
 
     summary_path = work_dir / "out" / "summary.json"
     if not summary_path.exists():
         raise typer.BadParameter(
-            f"No extract summary at {summary_path}. Run `pbench extract --pr {pr}` first."
+            f"No extract summary at {summary_path}. Run `pbench extract --pr {pr} --source {source}` first."
         )
     summary = json.loads(summary_path.read_text())
 
@@ -504,7 +553,7 @@ def score_cmd(
 
     spec = sc.ScoreSpec(
         instance_id=instance_id,
-        repo_url="https://github.com/fastapi/full-stack-fastapi-template.git",
+        repo_url=src.repo_url,
         base_commit=summary["base_commit"],
         test_patch=test_patch,
         fail_to_pass=list(summary.get("fail_to_pass") or []),
@@ -512,7 +561,7 @@ def score_cmd(
         agent_patch=agent_patch,
         pytest_args=[a for a in pytest_args.split() if a] or None,
     )
-    result = sc.score_patch(spec, work_root=work_dir, mode=mode, console=console)
+    result = sc.score_patch(spec, source=src, work_root=work_dir, mode=mode, console=console)
 
     console.print("")
     color = "green" if result.score == 1 else "red"

@@ -22,6 +22,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from harness.sources import SourceConfig, get as get_source
+
 DROP_TITLE_PREFIXES = (
     "chore:",
     "docs:",
@@ -52,11 +54,10 @@ IGNORE_PATH_PATTERNS = (
 
 SIGNAL_LABELS = {"bug", "feature", "enhancement", "fix"}
 
-# Harness currently assumes uv-workspace layout, introduced in PR #2090
-# (merged 2026-01-20). PRs merged before this date targeted a poetry-based
-# project structure our harness can't drive — filter them out of the candidate
-# pool so curators don't waste time on them.
-UV_ERA_MIN_MERGED_AT = "2026-01-20"
+# Frontend test pattern is shared across sources for now (only fastapi-template
+# has Playwright; mcp-context-forge has none, so this regex matches nothing
+# there).
+_FRONTEND_TEST_RE = re.compile(r"^frontend/.*\.(spec|test)\.[tj]sx?$")
 
 
 def _author_login(pr: dict[str, Any]) -> str:
@@ -90,17 +91,10 @@ def _label_names(pr: dict[str, Any]) -> set[str]:
     return {l.get("name", "").lower() for l in labels if isinstance(l, dict)}
 
 
-def _is_backend_test(p: str) -> bool:
-    return p.startswith("backend/") and ("/tests/" in p or "/test_" in p) and p.endswith(".py")
-
-
-def _is_frontend_test(p: str) -> bool:
-    if not p.startswith("frontend/"):
-        return False
-    return p.endswith(".spec.ts") or p.endswith(".spec.tsx") or p.endswith(".test.ts") or p.endswith(".test.tsx")
-
-
-def score(pr: dict[str, Any]) -> tuple[int, list[str], str | None, dict[str, int]]:
+def score(
+    pr: dict[str, Any],
+    source: SourceConfig,
+) -> tuple[int, list[str], str | None, dict[str, int]]:
     """Return (score, reasons, drop_reason, signals).
 
     signals = {"backend_tests": N, "frontend_tests": N} — used downstream by
@@ -116,8 +110,8 @@ def score(pr: dict[str, Any]) -> tuple[int, list[str], str | None, dict[str, int
         return 0, reasons, f"non-task title prefix: {title[:40]}", signals
 
     merged_at = pr.get("mergedAt") or ""
-    if merged_at and merged_at[:10] < UV_ERA_MIN_MERGED_AT:
-        return 0, reasons, f"pre-uv-era merge ({merged_at[:10]}) — harness unsupported", signals
+    if merged_at and merged_at[:10] < source.uv_era_min_merged_at:
+        return 0, reasons, f"pre-uv-era merge ({merged_at[:10]}) — harness unsupported for {source.short_name}", signals
 
     paths = _file_paths(pr)
     if not paths:
@@ -128,8 +122,9 @@ def score(pr: dict[str, Any]) -> tuple[int, list[str], str | None, dict[str, int
         return 0, reasons, "only docs/ci/lock files", signals
 
     s = 0
-    backend_tests = [p for p in meaningful_paths if _is_backend_test(p)]
-    frontend_tests = [p for p in meaningful_paths if _is_frontend_test(p)]
+    backend_test_re = re.compile(source.backend_test_path_re)
+    backend_tests = [p for p in meaningful_paths if backend_test_re.match(p)]
+    frontend_tests = [p for p in meaningful_paths if _FRONTEND_TEST_RE.match(p)]
     signals["backend_tests"] = len(backend_tests)
     signals["frontend_tests"] = len(frontend_tests)
 
@@ -184,12 +179,17 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
             f.write("\n")
 
 
-def filter_prs(input_path: Path, candidates_path: Path, rejected_path: Path) -> tuple[int, int]:
+def filter_prs(
+    input_path: Path,
+    candidates_path: Path,
+    rejected_path: Path,
+    source: SourceConfig,
+) -> tuple[int, int]:
     prs = load_jsonl(input_path)
     accepted: list[dict] = []
     rejected: list[dict] = []
     for pr in prs:
-        s, reasons, drop, signals = score(pr)
+        s, reasons, drop, signals = score(pr, source)
         if drop:
             rejected.append({"number": pr.get("number"), "title": pr.get("title"), "reason": drop})
             continue

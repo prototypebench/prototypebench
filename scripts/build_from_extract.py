@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any
 
 from harness import git_ops
+from harness.sources import SourceConfig, get as get_source
 
 
 def _sha256_of_file_at_commit(repo_dir: Path, commit: str, rel_path: str) -> str | None:
@@ -76,6 +77,7 @@ def build_instance_from_extract(
     test_patch: str,
     repo_dir: Path,
     repo: str,
+    source: SourceConfig,
     cutoff: str = "2026-01-01",
 ) -> dict[str, Any]:
     base_commit = summary["base_commit"]
@@ -89,9 +91,14 @@ def build_instance_from_extract(
         exclude=["*test*", "*.spec.ts", "*.spec.tsx", "*.test.ts", "*.test.tsx"],
     )
 
+    # Test paths are source-specific. Use the source's backend test glob and
+    # the shared frontend glob.
+    backend_test_globs = (
+        ["backend/tests/**", "backend/app/tests/**"] if source.backend_dir == "backend"
+        else (["server/tests/**"] if source.backend_dir == "server" else ["tests/**"])
+    )
     test_patch_backend = git_ops.diff(
-        repo_dir, base_commit, head_commit,
-        paths=["backend/tests/**", "backend/app/tests/**"],
+        repo_dir, base_commit, head_commit, paths=backend_test_globs,
     )
     test_patch_frontend = git_ops.diff(
         repo_dir, base_commit, head_commit,
@@ -100,7 +107,7 @@ def build_instance_from_extract(
     )
 
     owner, name = repo.split("/", 1)
-    instance_id = f"{owner}__{name}-{number}"
+    instance_id = f"{owner.replace('-','_')}__{name}-{number}"
 
     notes: list[str] = []
     notes.extend(summary.get("notes") or [])
@@ -134,9 +141,9 @@ def build_instance_from_extract(
         "pass_to_pass": {"backend": pass_to_pass_be, "frontend": []},
         "stack_domain": _derive_stack_domain(patch),
         "environment": {
-            "python_version": "3.10",
+            "python_version": source.python_version,
             "node_version": "20",
-            "uv_lock_sha": _sha256_of_file_at_commit(repo_dir, base_commit, "uv.lock") or "",
+            "uv_lock_sha": _sha256_of_file_at_commit(repo_dir, base_commit, source.uv_lock_path) or "",
             "bun_lock_sha": _sha256_of_file_at_commit(repo_dir, base_commit, "bun.lock") or "",
             "docker_compose_sha": _sha256_of_file_at_commit(repo_dir, base_commit, "compose.yml") or "",
         },
@@ -157,6 +164,7 @@ def build_from_extract(
     work_root: Path,
     output: Path,
     statuses: set[str],
+    source: SourceConfig,
     repo: str = "fastapi/full-stack-fastapi-template",
     cutoff: str = "2026-01-01",
 ) -> tuple[int, int]:
@@ -206,6 +214,7 @@ def build_from_extract(
                 test_patch=test_patch,
                 repo_dir=repo_dir,
                 repo=repo,
+                source=source,
                 cutoff=cutoff,
             )
             out_f.write(json.dumps(instance, ensure_ascii=False, sort_keys=True))

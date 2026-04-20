@@ -34,28 +34,48 @@ class PostgresHandle:
     db: str
     network: str | None = None  # docker network it joined, if any
 
-    def env_host(self) -> dict[str, str]:
-        """Env for a host-side process (POSTGRES_SERVER=127.0.0.1:<port>)."""
+    # Default canonical env-var names. Source-specific names live in SourceConfig
+    # and are applied via the `env_for(...)` builder below.
+    DEFAULT_ENV_MAP = {
+        "server":   "POSTGRES_SERVER",
+        "port":     "POSTGRES_PORT",
+        "user":     "POSTGRES_USER",
+        "password": "POSTGRES_PASSWORD",
+        "db":       "POSTGRES_DB",
+    }
+
+    def env_for(
+        self,
+        *,
+        env_map: dict[str, str] | None = None,
+        from_container: bool = True,
+    ) -> dict[str, str]:
+        """Build env-var dict using a source-specific name map.
+
+        env_map: canonical-key → source-specific env var name (e.g. {"password":
+        "POLAR_POSTGRES_PWD"}). Missing keys fall back to DEFAULT_ENV_MAP.
+        from_container: True → use container DNS name + port 5432.
+                       False → use 127.0.0.1 + host-mapped port.
+        """
+        m = {**self.DEFAULT_ENV_MAP, **(env_map or {})}
+        if from_container:
+            server, port = self.container_name, "5432"
+        else:
+            server, port = "127.0.0.1", str(self.host_port)
         return {
-            "POSTGRES_SERVER": "127.0.0.1",
-            "POSTGRES_PORT": str(self.host_port),
-            "POSTGRES_USER": self.user,
-            "POSTGRES_PASSWORD": self.password,
-            "POSTGRES_DB": self.db,
+            m["server"]:   server,
+            m["port"]:     port,
+            m["user"]:     self.user,
+            m["password"]: self.password,
+            m["db"]:       self.db,
         }
+
+    # Back-compat shims — older callers pre-SourceConfig refactor.
+    def env_host(self) -> dict[str, str]:
+        return self.env_for(env_map=None, from_container=False)
 
     def env_container(self) -> dict[str, str]:
-        """Env for another container on the same docker network.
-
-        Uses the container name as DNS and postgres's native port 5432.
-        """
-        return {
-            "POSTGRES_SERVER": self.container_name,
-            "POSTGRES_PORT": "5432",
-            "POSTGRES_USER": self.user,
-            "POSTGRES_PASSWORD": self.password,
-            "POSTGRES_DB": self.db,
-        }
+        return self.env_for(env_map=None, from_container=True)
 
 
 def start(

@@ -1,22 +1,19 @@
-"""Single-PR FAIL_TO_PASS / PASS_TO_PASS extraction.
+"""Single-PR FAIL_TO_PASS / PASS_TO_PASS extraction (backend, source-aware).
 
-Backend-only. Supports two execution modes:
-
-- `mode='local'` — runs on the host via `uv run`. Fast for iteration; depends
-  on host python/uv.
-- `mode='docker'` — runs in `prototypebench/backend:<tag>` with repo bind-
-  mounted. Reproducible across hosts. Postgres joins a task-scoped docker
-  network; the backend container reaches it by container name.
+Driven by a SourceConfig — backend_dir, uv lock path, prestart sequence,
+pytest extras, postgres env mapping, etc. all come from the config rather
+than being hard-coded.
 
 Flow:
   1. clone/reuse repo checkout
-  2. git checkout <base_commit> + git apply <test_patch>
-  3. start postgres (attached to network in docker mode)
-  4. prestart (backend_pre_start + alembic upgrade + initial_data)
-  5. pytest --junitxml → base
-  6. reset/checkout <head_commit>
-  7. prestart + pytest → head
+  2. checkout base; bail if `<source.uv_lock_path>` is absent
+  3. apply test_patch
+  4. (if source.pg_required) start postgres on a task-scoped docker network
+  5. prestart (sync + source.prestart_steps) on base
+  6. pytest --junitxml on base
+  7. reset → checkout head → prestart → pytest
   8. diff outcomes → FAIL_TO_PASS / PASS_TO_PASS
+       (with collection-error fallback via test_patch_parser)
   9. write summary.json, tear down
 """
 
@@ -30,6 +27,7 @@ from pathlib import Path
 from rich.console import Console
 
 from . import backend_runner, git_ops, junit, postgres, test_patch_parser
+from .sources import SourceConfig
 
 
 @dataclass
@@ -59,11 +57,12 @@ class ExtractResult:
     base_commit: str
     head_commit: str
     mode: str
+    source: str
     fail_to_pass: list[str] = field(default_factory=list)
     pass_to_pass: list[str] = field(default_factory=list)
     base: PhaseResult | None = None
     head: PhaseResult | None = None
-    fallback_used: str | None = None  # e.g. "collection_error_test_patch_parse"
+    fallback_used: str | None = None
     notes: list[str] = field(default_factory=list)
     error: str | None = None
 
@@ -88,18 +87,12 @@ def _phase_summary(
 def extract(
     spec: ExtractSpec,
     *,
+    source: SourceConfig,
     work_root: Path,
     mode: str = "docker",
     console: Console | None = None,
-    backend_image: str = "prototypebench/backend:latest",
     repo_dir: Path | None = None,
 ) -> ExtractResult:
-    """Extract FAIL_TO_PASS / PASS_TO_PASS for a single task spec.
-
-    `repo_dir` defaults to `work_root/repo`. Pass an explicit path to share a
-    single checkout across multiple extract calls (sequential only) — saves
-    the per-PR clone cost.
-    """
     console = console or Console()
     work_root.mkdir(parents=True, exist_ok=True)
     if repo_dir is None:
@@ -112,6 +105,7 @@ def extract(
         base_commit=spec.base_commit,
         head_commit=spec.head_commit,
         mode=mode,
+        source=source.name,
     )
 
     def _write_summary() -> None:
@@ -119,7 +113,7 @@ def extract(
             json.dumps(asdict(result), indent=2, sort_keys=True)
         )
 
-    # 1. clone (or reuse)
+    # 1. clone / reuse
     if not repo_dir.exists():
         console.log(f"cloning {spec.repo_url} → {repo_dir}")
         git_ops.clone(spec.repo_url, repo_dir)
@@ -127,19 +121,15 @@ def extract(
         console.log(f"reusing checkout: {repo_dir}")
         git_ops.clean(repo_dir)
 
-    # 2-3. base + test_patch
+    # 2. base
     console.log(f"checkout base {spec.base_commit[:10]}")
     git_ops.checkout(repo_dir, spec.base_commit)
 
-    # Sanity: our harness assumes uv-workspace layout (introduced in PR #2090,
-    # merged 2026-01-20). Earlier commits were poetry-based and need a
-    # different runner — bail early with an actionable message instead of
-    # letting `uv sync` fail deep inside the container.
-    if not (repo_dir / "uv.lock").exists():
+    # uv-lock presence guard (source-specific path)
+    if not (repo_dir / source.uv_lock_path).exists():
         result.error = (
-            "base_commit predates the uv-workspace migration (need merge of "
-            "fastapi/full-stack-fastapi-template#2090 or later, 2026-01-20). "
-            "This PR is not supported by the current harness."
+            f"base_commit lacks `{source.uv_lock_path}` — likely predates uv adoption "
+            f"in {source.name} (cutoff {source.uv_era_min_merged_at}). PR not supported."
         )
         _write_summary()
         return result
@@ -152,56 +142,69 @@ def extract(
             _write_summary()
             return result
 
-    # 4. postgres + runner
+    # 3. postgres + runner
     pg_name = f"pbench-db-{spec.instance_id}"[:60]
     network_name: str | None = None
-    postgres.stop(pg_name)
-    if mode == "docker":
-        network_name = f"pbench-net-{spec.instance_id}"[:60]
-        postgres.create_network(network_name)
-    console.log(f"start postgres {pg_name} (mode={mode})")
-    try:
-        pg = postgres.start(pg_name, network=network_name)
-    except postgres.PostgresError as e:
-        result.error = f"postgres start failed: {e}"
-        _write_summary()
-        return result
+    pg: postgres.PostgresHandle | None = None
+    pg_env: dict[str, str] = {}
+    if source.pg_required:
+        postgres.stop(pg_name)
+        if mode == "docker":
+            network_name = f"pbench-net-{spec.instance_id}"[:60]
+            postgres.create_network(network_name)
+        console.log(f"start postgres {pg_name} (mode={mode})")
+        try:
+            pg = postgres.start(
+                pg_name,
+                network=network_name,
+                user=source.pg_defaults.get("user", "postgres"),
+                password=source.pg_defaults.get("password", "changethis"),
+                db=source.pg_defaults.get("db", "app"),
+            )
+        except postgres.PostgresError as e:
+            result.error = f"postgres start failed: {e}"
+            _write_summary()
+            return result
+        pg_env = pg.env_for(env_map=source.pg_env_map, from_container=(mode == "docker"))
+    else:
+        console.log("postgres not required for this source")
 
     runner = backend_runner.make(
         mode,
-        image=backend_image,
-        network=network_name or "",
+        image=source.backend_image,
+        network=network_name,
         out_mount=out_dir,
         container_prefix=f"pbench-b-{spec.instance_id}"[:50],
     )
-    pg_env = pg.env_container() if mode == "docker" else pg.env_host()
+    backend_dir = repo_dir / source.backend_dir if source.backend_dir else repo_dir
 
     try:
-        backend_dir = repo_dir / "backend"
-
         # 4a. prestart (base)
         console.log("running prestart on base")
         rc, so, se = runner.run_prestart(
-            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg_env
+            workspace_root=repo_dir, backend_dir=backend_dir,
+            prestart_steps=source.prestart_steps,
+            uv_extras=source.uv_extras,
+            env_overrides=pg_env,
         )
         (out_dir / "base.prestart.log").write_text(so + "\n---stderr---\n" + se)
         if rc != 0:
             result.error = f"prestart failed on base (rc={rc}). See base.prestart.log"
+            _write_summary()
             return result
 
         # 5. base pytest
         console.log("running base pytest")
         t0 = time.monotonic()
         base_run = runner.run_pytest(
-            workspace_root=repo_dir,
-            backend_dir=backend_dir,
+            workspace_root=repo_dir, backend_dir=backend_dir,
             junit_path=out_dir / "base.junit.xml",
-            env_overrides=pg_env,
             pytest_args=spec.pytest_args,
+            pytest_extra_args=source.pytest_extra_args,
+            uv_extras=source.uv_extras,
+            env_overrides=pg_env,
         )
-        base_outcomes = (
-            junit.parse(base_run.junit_path) if base_run.junit_path.exists() else {}
-        )
+        base_outcomes = junit.parse(base_run.junit_path) if base_run.junit_path.exists() else {}
         result.base = _phase_summary(
             base_outcomes, base_run.returncode, base_run.crashed, time.monotonic() - t0
         )
@@ -214,24 +217,27 @@ def extract(
         git_ops.checkout(repo_dir, spec.head_commit)
         console.log("running prestart on head")
         rc, so, se = runner.run_prestart(
-            workspace_root=repo_dir, backend_dir=backend_dir, env_overrides=pg_env
+            workspace_root=repo_dir, backend_dir=backend_dir,
+            prestart_steps=source.prestart_steps,
+            uv_extras=source.uv_extras,
+            env_overrides=pg_env,
         )
         (out_dir / "head.prestart.log").write_text(so + "\n---stderr---\n" + se)
         if rc != 0:
             result.error = f"prestart failed on head (rc={rc}). See head.prestart.log"
+            _write_summary()
             return result
         console.log("running head pytest")
         t0 = time.monotonic()
         head_run = runner.run_pytest(
-            workspace_root=repo_dir,
-            backend_dir=backend_dir,
+            workspace_root=repo_dir, backend_dir=backend_dir,
             junit_path=out_dir / "head.junit.xml",
-            env_overrides=pg_env,
             pytest_args=spec.pytest_args,
+            pytest_extra_args=source.pytest_extra_args,
+            uv_extras=source.uv_extras,
+            env_overrides=pg_env,
         )
-        head_outcomes = (
-            junit.parse(head_run.junit_path) if head_run.junit_path.exists() else {}
-        )
+        head_outcomes = junit.parse(head_run.junit_path) if head_run.junit_path.exists() else {}
         result.head = _phase_summary(
             head_outcomes, head_run.returncode, head_run.crashed, time.monotonic() - t0
         )
@@ -246,10 +252,7 @@ def extract(
         result.fail_to_pass = sorted(base_fail & head_pass)
         result.pass_to_pass = sorted((base_pass & head_pass) - set(result.fail_to_pass))
 
-        # Fallback for base collection errors (e.g. test_patch imports a symbol
-        # the base impl doesn't have yet — pytest emits file-level errors with
-        # no per-test nodeids, so the diff above yields F2P=0 even when the
-        # PR is a legitimate feature task. Recover by parsing test_patch.
+        # collection-error fallback
         base_collection_error = (
             base_run.returncode >= 2
             and bool(base_outcomes)
@@ -260,13 +263,10 @@ def extract(
             added = test_patch_parser.parse_added_tests(spec.test_patch)
             candidates: set[str] = set()
             for a in added:
-                candidates.update(test_patch_parser.candidate_nodeids(a))
+                candidates.update(test_patch_parser.candidate_nodeids(a, backend_root=source.backend_test_path_strip_prefix))
             recovered = sorted(candidates & head_pass)
             if recovered:
                 result.fail_to_pass = recovered
-                # P2P can't be computed from base when base never collected
-                # the patched files — leave it as the head-passing remainder
-                # for curator review, with a note.
                 result.pass_to_pass = sorted(head_pass - set(recovered))
                 result.fallback_used = "collection_error_test_patch_parse"
                 result.notes.append(
@@ -278,16 +278,14 @@ def extract(
                     "PASS_TO_PASS is head-passing minus FAIL_TO_PASS — "
                     "verify regression coverage manually before promoting."
                 )
-                console.log(
-                    f"[yellow]fallback used:[/yellow] recovered F2P={len(recovered)} from test_patch"
-                )
+                console.log(f"[yellow]fallback used:[/yellow] recovered F2P={len(recovered)}")
     finally:
-        console.log(f"stop postgres {pg_name}")
-        postgres.stop(pg_name)
+        if pg:
+            console.log(f"stop postgres {pg_name}")
+            postgres.stop(pg_name)
         if network_name:
             postgres.remove_network(network_name)
 
-    # 9. write summary
     _write_summary()
     console.log(
         f"FAIL_TO_PASS={len(result.fail_to_pass)} PASS_TO_PASS={len(result.pass_to_pass)}"

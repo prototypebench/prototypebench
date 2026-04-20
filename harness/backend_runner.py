@@ -1,8 +1,11 @@
 """Unified backend pytest runner — local (host `uv`) or docker container.
 
-Same interface both modes. extract/score call `runner = make(mode, ...)` and
-then `runner.run_prestart(...)` / `runner.run_pytest(...)` without caring which
-implementation is underneath.
+Both runners take SourceConfig-derived arguments:
+  - prestart_steps: list of argv lists, each invoked via `uv run [--extra X]…`
+  - pytest_extra_args: extra args passed to pytest (e.g. `-n auto`, `--no-cov`)
+  - uv_extras: extras to enable for both `uv sync` and `uv run`
+This lets one runner drive any source repo in the registry without each runner
+hard-coding `app/backend_pre_start.py`-style invocations.
 """
 
 from __future__ import annotations
@@ -27,10 +30,8 @@ class PytestResult:
 
     @property
     def crashed(self) -> bool:
-        """pytest exit codes ≥ 2 mean collection/internal errors.
-        0=all passed, 1=some failed, 2=interrupted, 3=internal, 4=usage,
-        5=no tests collected. Treat anything outside {0,1,5} as a crash.
-        """
+        """0=all passed, 1=some failed, 2=interrupted, 3=internal, 4=usage,
+        5=no tests collected. Anything outside {0,1,5} is a crash."""
         return self.returncode not in (0, 1, 5)
 
 
@@ -40,7 +41,9 @@ class BackendRunner(Protocol):
         *,
         workspace_root: Path,
         backend_dir: Path,
+        prestart_steps: list[list[str]],
         env_overrides: dict[str, str] | None = None,
+        uv_extras: list[str] | None = None,
         timeout: float = 300.0,
     ) -> tuple[int, str, str]: ...
 
@@ -50,10 +53,19 @@ class BackendRunner(Protocol):
         workspace_root: Path,
         backend_dir: Path,
         junit_path: Path,
-        env_overrides: dict[str, str] | None = None,
         pytest_args: list[str] | None = None,
+        pytest_extra_args: list[str] | None = None,
+        env_overrides: dict[str, str] | None = None,
+        uv_extras: list[str] | None = None,
         timeout: float = 900.0,
     ) -> PytestResult: ...
+
+
+def _extras_flags(uv_extras: list[str] | None) -> list[str]:
+    out: list[str] = []
+    for e in uv_extras or []:
+        out += ["--extra", e]
+    return out
 
 
 # --- local implementation (host uv) -----------------------------------------
@@ -65,21 +77,21 @@ class LocalRunner:
         *,
         workspace_root: Path,
         backend_dir: Path,
+        prestart_steps: list[list[str]],
         env_overrides: dict[str, str] | None = None,
+        uv_extras: list[str] | None = None,
         timeout: float = 300.0,
     ) -> tuple[int, str, str]:
+        if not prestart_steps:
+            return 0, "(no prestart steps)", ""
         env = os.environ.copy()
         if env_overrides:
             env.update(env_overrides)
         env.setdefault("PYTHONDONTWRITEBYTECODE", "1")
         stdout: list[str] = []
         stderr: list[str] = []
-        for step in (
-            ["python", "app/backend_pre_start.py"],
-            ["alembic", "upgrade", "head"],
-            ["python", "app/initial_data.py"],
-        ):
-            cmd = ["uv", "run", "--project", str(workspace_root), *step]
+        for step in prestart_steps:
+            cmd = ["uv", "run", "--project", str(workspace_root), *_extras_flags(uv_extras), *step]
             r = subprocess.run(
                 cmd, cwd=backend_dir, capture_output=True, text=True, env=env, timeout=timeout
             )
@@ -95,8 +107,10 @@ class LocalRunner:
         workspace_root: Path,
         backend_dir: Path,
         junit_path: Path,
-        env_overrides: dict[str, str] | None = None,
         pytest_args: list[str] | None = None,
+        pytest_extra_args: list[str] | None = None,
+        env_overrides: dict[str, str] | None = None,
+        uv_extras: list[str] | None = None,
         timeout: float = 900.0,
     ) -> PytestResult:
         junit_path.parent.mkdir(parents=True, exist_ok=True)
@@ -104,13 +118,14 @@ class LocalRunner:
         if env_overrides:
             env.update(env_overrides)
         env.setdefault("PYTHONDONTWRITEBYTECODE", "1")
-        args = pytest_args or ["tests"]
+        scope = pytest_args or ["tests"]
         cmd = [
-            "uv", "run", "--project", str(workspace_root),
+            "uv", "run", "--project", str(workspace_root), *_extras_flags(uv_extras),
             "pytest",
             f"--junitxml={junit_path}",
             "-q", "--tb=short",
-            *args,
+            *(pytest_extra_args or []),
+            *scope,
         ]
         r = subprocess.run(
             cmd, cwd=backend_dir, capture_output=True, text=True, env=env, timeout=timeout
@@ -122,22 +137,17 @@ class LocalRunner:
 
 
 class DockerRunner:
-    """Runs inside `prototypebench/backend:<tag>` with repo bind-mounted at /work.
+    """Runs inside the source-config's backend image with repo bind-mounted at /work.
 
-    Mapping:
-      workspace_root  →  mounted at /work  (cwd is set to /work/<rel backend_dir>)
-      out_dir         →  mounted at /out   (junit_path must live inside out_dir)
-      uv cache        →  named docker volume mounted at /root/.cache/uv
-
-    The postgres container must be on `network` so env POSTGRES_SERVER can be
-    the DB's container name.
+    The postgres container (if any) must be on `network` so that env-var
+    container DNS works.
     """
 
     def __init__(
         self,
         *,
         image: str,
-        network: str,
+        network: str | None,
         uv_cache_volume: str,
         out_mount: Path,
         container_prefix: str,
@@ -158,16 +168,20 @@ class DockerRunner:
         env_overrides: dict[str, str] | None,
         timeout: float,
     ) -> subprocess.CompletedProcess[str]:
-        rel_backend = backend_dir.relative_to(workspace_root)
+        rel_backend = backend_dir.relative_to(workspace_root) if backend_dir != workspace_root else Path(".")
         container_name = f"{self.container_prefix}-{name_suffix}"[:60]
+        workdir = "/work" if str(rel_backend) in (".", "") else f"/work/{rel_backend}"
         cmd: list[str] = [
             "docker", "run", "--rm",
             "--name", container_name,
-            "--network", self.network,
+        ]
+        if self.network:
+            cmd += ["--network", self.network]
+        cmd += [
             "-v", f"{workspace_root}:/work",
             "-v", f"{self.uv_cache_volume}:/root/.cache/uv",
             "-v", f"{self.out_mount}:/out",
-            "-w", f"/work/{rel_backend}",
+            "-w", workdir,
             "-e", "PYTHONDONTWRITEBYTECODE=1",
         ]
         for k, v in (env_overrides or {}).items():
@@ -175,22 +189,31 @@ class DockerRunner:
         cmd += [self.image, "bash", "-c", shell_cmd]
         return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
 
+    def _uv_sync_cmd(self, uv_extras: list[str] | None) -> str:
+        extras = " ".join(f"--extra {e}" for e in (uv_extras or []))
+        return f"uv sync --frozen --project /work {extras}".strip()
+
+    def _uv_run_prefix(self, uv_extras: list[str] | None) -> str:
+        extras = " ".join(f"--extra {e}" for e in (uv_extras or []))
+        return f"uv run --project /work {extras}".strip()
+
     def run_prestart(
         self,
         *,
         workspace_root: Path,
         backend_dir: Path,
+        prestart_steps: list[list[str]],
         env_overrides: dict[str, str] | None = None,
+        uv_extras: list[str] | None = None,
         timeout: float = 600.0,
     ) -> tuple[int, str, str]:
-        # One-shot container: `uv sync` → backend_pre_start → alembic → initial_data.
-        shell_cmd = (
-            "set -e; "
-            "uv sync --frozen --project /work; "
-            "uv run --project /work python app/backend_pre_start.py; "
-            "uv run --project /work alembic upgrade head; "
-            "uv run --project /work python app/initial_data.py"
-        )
+        sync_cmd = self._uv_sync_cmd(uv_extras)
+        run_prefix = self._uv_run_prefix(uv_extras)
+        steps_shell = "; ".join(f"{run_prefix} {' '.join(step)}" for step in prestart_steps)
+        if not prestart_steps:
+            shell_cmd = f"set -e; {sync_cmd}"  # still need to install deps
+        else:
+            shell_cmd = f"set -e; {sync_cmd}; {steps_shell}"
         r = self._docker_run(
             name_suffix="prestart",
             workspace_root=workspace_root,
@@ -207,12 +230,13 @@ class DockerRunner:
         workspace_root: Path,
         backend_dir: Path,
         junit_path: Path,
-        env_overrides: dict[str, str] | None = None,
         pytest_args: list[str] | None = None,
+        pytest_extra_args: list[str] | None = None,
+        env_overrides: dict[str, str] | None = None,
+        uv_extras: list[str] | None = None,
         timeout: float = 900.0,
     ) -> PytestResult:
         junit_path.parent.mkdir(parents=True, exist_ok=True)
-        # junit_path must live under out_mount so /out/<name> writes back to host.
         try:
             rel_junit = junit_path.relative_to(self.out_mount)
         except ValueError as e:
@@ -220,11 +244,13 @@ class DockerRunner:
                 f"junit_path {junit_path} is not under out_mount {self.out_mount}"
             ) from e
         container_junit = f"/out/{rel_junit}"
-        args = " ".join(pytest_args or ["tests"])
+        sync_cmd = self._uv_sync_cmd(uv_extras)
+        run_prefix = self._uv_run_prefix(uv_extras)
+        scope = " ".join(pytest_args or ["tests"])
+        extras_args = " ".join(pytest_extra_args or [])
         shell_cmd = (
-            "set -e; "
-            "uv sync --frozen --project /work; "
-            f"uv run --project /work pytest --junitxml={container_junit} -q --tb=short {args}"
+            f"set -e; {sync_cmd}; "
+            f"{run_prefix} pytest --junitxml={container_junit} -q --tb=short {extras_args} {scope}"
         )
         r = self._docker_run(
             name_suffix="pytest",
@@ -243,7 +269,6 @@ class DockerRunner:
 def make(
     mode: str,
     *,
-    # docker-only:
     image: str = "prototypebench/backend:latest",
     network: str | None = None,
     uv_cache_volume: str = "pbench-uv-cache",
@@ -259,8 +284,8 @@ def make(
         return LocalRunner()
     if mode != "docker":
         raise RunnerError(f"unknown mode: {mode}")
-    if not network or not out_mount:
-        raise RunnerError("docker mode requires `network` and `out_mount`")
+    if not out_mount:
+        raise RunnerError("docker mode requires `out_mount`")
     return DockerRunner(
         image=image,
         network=network,
