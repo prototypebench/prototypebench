@@ -90,9 +90,17 @@ def _signal_for_kind(r: dict, kind: str) -> int:
     return s.get("frontend_tests", 0)
 
 
-def _load_existing_summary(work_dir: Path) -> dict | None:
-    """Return parsed summary.json if a prior extract finished cleanly."""
-    p = work_dir / "out" / "summary.json"
+def _load_existing_summary(work_dir: Path, kind: str) -> dict | None:
+    """Return parsed summary.json if a prior extract of this kind finished cleanly.
+
+    backend extract writes <work_dir>/out/summary.json
+    frontend extract writes <work_dir>/frontend_out/summary.json
+
+    Without the kind discriminator, a backend summary would be (incorrectly)
+    reused as a frontend batch row.
+    """
+    sub = "out" if kind == "backend" else "frontend_out"
+    p = work_dir / sub / "summary.json"
     if not p.exists():
         return None
     try:
@@ -204,10 +212,11 @@ def batch_extract(
             patch_filename = "test_patch.diff" if kind == "backend" else "frontend_test_patch.diff"
             (work_dir / patch_filename).write_text(test_patch)
 
-            # Incremental skip: if a prior summary.json exists for this PR,
+            # Incremental skip: if a prior summary.json exists for this PR
+            # AND for this kind (backend vs frontend writes to different dirs),
             # reuse it instead of re-running the (expensive) extract.
             if skip_existing:
-                cached = _load_existing_summary(work_dir)
+                cached = _load_existing_summary(work_dir, kind)
                 if cached:
                     f2p = list(cached.get("fail_to_pass") or [])
                     p2p = list(cached.get("pass_to_pass") or [])
