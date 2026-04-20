@@ -46,3 +46,631 @@
 {"number": 3918, "reason": "no test file changes (neither backend nor frontend)", "title": "refactor: rewrite pr-review skill as review-only with design guidance"}
 {"number": 3903, "reason": "non-task title prefix: chore: add uv exclude-newer policy", "title": "chore: add uv exclude-newer policy"}
 {"number": 3887, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: remove unmaintained rustls-pemfile from MCP runtime"}
+{"number": 3885, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): remove duplicate disabled badge and tag/hook truncation on plugin cards"}
+{"number": 3878, "reason": "no test file changes (neither backend nor frontend)", "title": "remove old docs"}
+{"number": 3874, "reason": "no test file changes (neither backend nor frontend)", "title": "chore(ci): remove unused linting-security-trufflehog make target"}
+{"number": 3863, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: infinite /partial request loop triggered by search input"}
+{"number": 3860, "reason": "no test file changes (neither backend nor frontend)", "title": "Bh/detect secrets"}
+{"number": 3854, "reason": "non-task title prefix: chore: pipeline cleanup", "title": "chore: pipeline cleanup"}
+{"number": 3844, "reason": "no test file changes (neither backend nor frontend)", "title": "Restores pinned dependency versions for Rust"}
+{"number": 3819, "reason": "non-task title prefix: chore: add rust code owners", "title": "chore: add rust code owners"}
+{"number": 3806, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed model selection dropdown appearance and interaction "}
+{"number": 3805, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: resolve psycopg import error on s390x architecture (#3804)"}
+{"number": 3797, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(infra): s390x wheel builder container and workflow"}
+{"number": 3775, "reason": "non-task title prefix: ci: use native github runners for s390x ", "title": "ci: use native GitHub runners for s390x and ppc64le Docker builds"}
+{"number": 3772, "reason": "no test file changes (neither backend nor frontend)", "title": "updating dependancies for dependabot"}
+{"number": 3759, "reason": "non-task title prefix: chore: standardize cargo-deny coverage f", "title": "chore: standardize cargo-deny coverage for rust projects"}
+{"number": 3718, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: bump dependency pins and resolve grpc/protobuf version conflict"}
+{"number": 3717, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): preserve tag filters across page navigation on Virtual Servers"}
+{"number": 3716, "reason": "non-task title prefix: chore: remove redundant linters, fix cov", "title": "chore: remove redundant linters, fix coverage output, update roadmap"}
+{"number": 3712, "reason": "non-task title prefix: chore: prevent fake aws key in unit test", "title": "chore: prevent fake AWS key in unit test from falsely flagged as exposed secrets"}
+{"number": 3708, "reason": "non-task title prefix: chore: remove unused paginationparams, o", "title": "chore: remove unused PaginationParams, ObservabilityQueryParams, and PerformanceHistoryParams schemas"}
+{"number": 3700, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: resolve s390x container build and protobuf segfault (fixes #3699)"}
+{"number": 3698, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): clean z-index structure"}
+{"number": 3697, "reason": "no test file changes (neither backend nor frontend)", "title": "[FEATURE][UI]: Add padding to input, select and textarea HTML elements for consistency"}
+{"number": 3688, "reason": "non-task title prefix: docs: fix inaccurate claims in readme.md", "title": "docs: fix inaccurate claims in README.md"}
+{"number": 3684, "reason": "non-task title prefix: chore: remove mysql/mariadb/mongodb supp", "title": "chore: remove MySQL/MariaDB/MongoDB support - PostgreSQL and SQLite only"}
+{"number": 3674, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(skill): force single recommendation in pr-review"}
+{"number": 3672, "reason": "only docs/ci/lock files", "title": "Update feature-request.md"}
+{"number": 3656, "reason": "no test file changes (neither backend nor frontend)", "title": "[FIX][UI]: Fix message animation being incorrect in LLM Chat"}
+{"number": 3647, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(ui): persist admin table filters across HTMX pagination and partial refresh"}
+{"number": 3645, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: resolve JS syntax error in pagination and login redirect loop"}
+{"number": 3624, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(plugins): add enforce_ignore_error to plugins admin dropdown"}
+{"number": 3614, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: resource test modal buttons triggering page refresh on click"}
+{"number": 3612, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(testing): add end-to-end wrapper test workflow for mcpgateway"}
+{"number": 3596, "reason": "non-task title prefix: docs: add postgresql and team limit trou", "title": "docs: add PostgreSQL and team limit troubleshooting entries"}
+{"number": 3556, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(charts): fix ingress template YAML rendering for gateway and fast-time"}
+{"number": 3552, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(charts): fix TRANSPORT_TYPE validation and enable minikube testing profile"}
+{"number": 3550, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(security): harden Helm chart values.yaml with secure production defaults"}
+{"number": 3547, "reason": "no test file changes (neither backend nor frontend)", "title": "pre-commit fixes"}
+{"number": 3546, "reason": "non-task title prefix: chore: release 1.0.0-rc-2", "title": "chore: release 1.0.0-RC-2"}
+{"number": 3534, "reason": "non-task title prefix: docs: add release management process doc", "title": "docs: add release management process documentation"}
+{"number": 3511, "reason": "no test file changes (neither backend nor frontend)", "title": "[FIX][UI]: Make \"+N more\" badges clickable to expand full list in server details modal"}
+{"number": 3508, "reason": "no test file changes (neither backend nor frontend)", "title": "[FIX][UI]: Remove non-functional Show/Hide toggle buttons from admin UI"}
+{"number": 3507, "reason": "no test file changes (neither backend nor frontend)", "title": "[CHORE][CI]: Add configurable PLATFORMS variable for multiarch container builds"}
+{"number": 3498, "reason": "no test file changes (neither backend nor frontend)", "title": "refactor(rust): replace rustls with native-tls for license compliance"}
+{"number": 3497, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(rust): resolve macOS path canonicalization in filesystem-server tests"}
+{"number": 3496, "reason": "only docs/ci/lock files", "title": "docs(howto): add RBAC and IBM Cloud how-to guides section"}
+{"number": 3492, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: preserve search filters across pagination pages"}
+{"number": 3482, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(testing): suppress JSON log noise in make doctest output"}
+{"number": 3474, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(deps): dependency security hardening updates"}
+{"number": 3464, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): exclude display name from required-field validation in tool form"}
+{"number": 3458, "reason": "no test file changes (neither backend nor frontend)", "title": "chore(dev): add Makefile target for remote debugging with debugpy"}
+{"number": 3456, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: restore OAuth settings in server edit form"}
+{"number": 3454, "reason": "only docs/ci/lock files", "title": "feat(ci): add Helm chart lint and OCI publish workflow"}
+{"number": 3450, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(tests): auto-install pytest-playwright for test-mcp-rbac target"}
+{"number": 3440, "reason": "no test file changes (neither backend nor frontend)", "title": "chore(devops): add nginx cache management Makefile targets"}
+{"number": 3436, "reason": "non-task title prefix: chore: update codeowners", "title": "chore: update codeowners"}
+{"number": 3427, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): Team Selector dropdown fix"}
+{"number": 3402, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): preserve visibility selection when editing entities"}
+{"number": 3397, "reason": "no test file changes (neither backend nor frontend)", "title": "Embedded mode compose test"}
+{"number": 3389, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): preserve pagination page after edit modal save"}
+{"number": 3343, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(tests): exclude mcp-cli protocol tests from default pytest runs"}
+{"number": 3322, "reason": "no test file changes (neither backend nor frontend)", "title": "[CHORE][SECURITY]: Pin urllib3 and python-multipart to latest versions"}
+{"number": 3320, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(infra): disable IPv6 listener in nginx config"}
+{"number": 3317, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): hide selector container on zero search results in Virtual Server modals"}
+{"number": 3310, "reason": "no test file changes (neither backend nor frontend)", "title": "[CHORE]: Update dependencies across Python, Go, and Rust projects"}
+{"number": 3294, "reason": "only docs/ci/lock files", "title": "[CHORE][RUST]: ADR-0042 — Enforce Rust in build process"}
+{"number": 3289, "reason": "only docs/ci/lock files", "title": "[CHORE][RUST]: ADR-0041 — Top-Level Rust Workspace"}
+{"number": 3288, "reason": "no test file changes (neither backend nor frontend)", "title": "[FIX][UI]: Replace inline event handlers on Plugins page to survive innerHTML sanitizer"}
+{"number": 3287, "reason": "non-task title prefix: chore: remove altk optional dependency a", "title": "chore: remove ALTK optional dependency and add pipdeptree"}
+{"number": 3278, "reason": "no test file changes (neither backend nor frontend)", "title": "[FEATURE][BUG][UI]: Add a \"View Public\" checkbox in Virtual Servers page"}
+{"number": 3255, "reason": "only docs/ci/lock files", "title": "Cicd debounce cron - Reduce complexity of CI/CD build to simplify / shorten the build cycle and eliminate duplicate jobs."}
+{"number": 3243, "reason": "no test file changes (neither backend nor frontend)", "title": "Harden helm charts, better defaults, secrets management, etc"}
+{"number": 3218, "reason": "no test file changes (neither backend nor frontend)", "title": "Update all dependencies, remove dead code, legacy mcp servers, update…"}
+{"number": 3206, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): reinit Alpine.js on OOB-swapped pagination controls after fi…"}
+{"number": 3137, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(ui): modularize admin scope into independent modules"}
+{"number": 3124, "reason": "no test file changes (neither backend nor frontend)", "title": "Update docs"}
+{"number": 3097, "reason": "only docs/ci/lock files", "title": "fix(ci): reject placeholder secret values in validation step"}
+{"number": 3096, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ci): CE secret sync silently fails to overwrite existing values"}
+{"number": 3093, "reason": "non-task title prefix: docs: fix rebrand errors where contextfo", "title": "docs: fix rebrand errors where ContextForge replaced generic terms"}
+{"number": 3092, "reason": "only docs/ci/lock files", "title": "feat(ci): auto-sync secrets from GitHub to Code Engine on deploy"}
+{"number": 3091, "reason": "non-task title prefix: docs: rebrand to contextforge ai gateway", "title": "docs: rebrand to ContextForge AI Gateway"}
+{"number": 3058, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): uncomment .hidden CSS rule to prevent FOUC on tab panels"}
+{"number": 3035, "reason": "no test file changes (neither backend nor frontend)", "title": "update changelog"}
+{"number": 3034, "reason": "no test file changes (neither backend nor frontend)", "title": "Changelog"}
+{"number": 3020, "reason": "non-task title prefix: chore: update all dependencies and align", "title": "chore: update all dependencies and align Containerfiles to UBI10"}
+{"number": 2982, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: address all must-fix SonarQube findings across 25 files"}
+{"number": 2962, "reason": "non-task title prefix: chore: replace copier with cookiecutter ", "title": "chore: replace copier with cookiecutter for template scaffolding"}
+{"number": 2950, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): standardize loading indicators on MCP Registry, Teams, API T…"}
+{"number": 2948, "reason": "non-task title prefix: chore: add linting-full workflow and pre", "title": "chore: add linting-full workflow and pre-commit gate"}
+{"number": 2943, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: add alembic upgrade validation and migration compatibility fixes"}
+{"number": 2942, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(charts): add optional compose profile parity components to helm"}
+{"number": 2940, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add multi-language license compliance checker with CI/CD"}
+{"number": 2937, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: constrain Team Manage Members modal height to viewport (#2930)"}
+{"number": 2936, "reason": "non-task title prefix: chore: removed redundant conditional for", "title": "chore: removed redundant conditional for resource parameter (sonar S3923)"}
+{"number": 2934, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: preserve team_id filter during pagination"}
+{"number": 2927, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix macOS gunicorn worker crashes due to Objective-C fork safety"}
+{"number": 2924, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix HTML new line tags in server team column display"}
+{"number": 2922, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix Default Visibility to Reflect Selected Team Context"}
+{"number": 2918, "reason": "no test file changes (neither backend nor frontend)", "title": "Update files to clean"}
+{"number": 2914, "reason": "only docs/ci/lock files", "title": "feat: add GitHub workflow for tools_rust/wrapper CI/CD"}
+{"number": 2911, "reason": "no test file changes (neither backend nor frontend)", "title": "Playwright CI/CD"}
+{"number": 2904, "reason": "only docs/ci/lock files", "title": "ADR-0039 documenting the decision to adopt a fully independent plugin crates architecture."}
+{"number": 2897, "reason": "no test file changes (neither backend nor frontend)", "title": "bugfix/login-scroll-issue"}
+{"number": 2892, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: remove duplicate loading spinner on A2A agents page"}
+{"number": 2884, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: simplify OSError handling (#2380)"}
+{"number": 2876, "reason": "no test file changes (neither backend nor frontend)", "title": "Tag 1.0.0 rc1 release"}
+{"number": 2862, "reason": "non-task title prefix: docs: fix file header management section", "title": "docs: fix File Header Management section link in CONTRIBUTING.md"}
+{"number": 2860, "reason": "no test file changes (neither backend nor frontend)", "title": "test 100"}
+{"number": 2849, "reason": "only docs/ci/lock files", "title": "Update roadmap"}
+{"number": 2843, "reason": "no test file changes (neither backend nor frontend)", "title": "Update mcp catalog"}
+{"number": 2835, "reason": "non-task title prefix: chore: add test-verbose makefile target ", "title": "chore: add test-verbose Makefile target for real-time test output"}
+{"number": 2832, "reason": "only docs/ci/lock files", "title": "99% test coverage reached"}
+{"number": 2830, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: prevent browser autofill on admin config forms"}
+{"number": 2826, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Phase 3 JS test coverage — filters, UI, HTML, forms (512 tests)"}
+{"number": 2816, "reason": "no test file changes (neither backend nor frontend)", "title": "Add Lightweight Docker Compose Configuration for Local Load Testing and Monitoring"}
+{"number": 2791, "reason": "no test file changes (neither backend nor frontend)", "title": "2788 - Introduce Vitest"}
+{"number": 2786, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix iframe errors from replaceState and localStorage"}
+{"number": 2773, "reason": "non-task title prefix: chore: remove unused runtime dependencie", "title": "chore: remove unused runtime dependencies"}
+{"number": 2767, "reason": "no test file changes (neither backend nor frontend)", "title": "Hardening: safer CORS config + localhost bind defaults"}
+{"number": 2752, "reason": "no test file changes (neither backend nor frontend)", "title": "Improve doctest coverage"}
+{"number": 2751, "reason": "non-task title prefix: chore: update grpc proto generated files", "title": "chore: update grpc proto generated files and uv.lock"}
+{"number": 2749, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add MCP Inspector to docker-compose"}
+{"number": 2745, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(tests): improve JMeter load test coverage and configuration"}
+{"number": 2742, "reason": "non-task title prefix: chore: remove redundant conditional in f", "title": "chore: remove redundant conditional in form body handling"}
+{"number": 2737, "reason": "no test file changes (neither backend nor frontend)", "title": "2730 rust refactor pii_filter to own crate"}
+{"number": 2722, "reason": "no test file changes (neither backend nor frontend)", "title": "[RUST]: Rewrite wrapper module in Rust #1618"}
+{"number": 2720, "reason": "no test file changes (neither backend nor frontend)", "title": "2689 - Loading spinners upkeep"}
+{"number": 2713, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: ovelapping Authorize and Fetch Tool buttons on MCP servers page"}
+{"number": 2708, "reason": "non-task title prefix: chore: remove redundant ternary in log_a", "title": "chore: remove redundant ternary in log_aggregator.py"}
+{"number": 2705, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(admin): correct HTMX event name for team list refresh"}
+{"number": 2703, "reason": "no test file changes (neither backend nor frontend)", "title": "2702 - Fix Edit User password requirement"}
+{"number": 2701, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: update user fields full_name, administrator, password in UI"}
+{"number": 2688, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): Display prompt_id in admin panel prompts page"}
+{"number": 2684, "reason": "no test file changes (neither backend nor frontend)", "title": "chore(sonar): remove dead store max_duration"}
+{"number": 2683, "reason": "only docs/ci/lock files", "title": "chore(ci): remove unused workflow_dispatch platforms input"}
+{"number": 2667, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix compose-tls for certs with passphrase"}
+{"number": 2666, "reason": "no test file changes (neither backend nor frontend)", "title": "Resource tags are being displayed"}
+{"number": 2650, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Gateway Tags Serialization Bug & Transport Reset Issue"}
+{"number": 2642, "reason": "non-task title prefix: docs: comprehensive documentation review", "title": "docs: comprehensive documentation review and fixes"}
+{"number": 2638, "reason": "no test file changes (neither backend nor frontend)", "title": "Issue 1960 Fix high-impact performance issues in llm-guard plugin"}
+{"number": 2629, "reason": "no test file changes (neither backend nor frontend)", "title": "chore(mcp-servers): update dependencies across Python, Go, and Rust servers"}
+{"number": 2624, "reason": "non-task title prefix: docs: refresh docs formatting, links, an", "title": "docs: refresh docs formatting, links, and diagrams"}
+{"number": 2622, "reason": "no test file changes (neither backend nor frontend)", "title": "Circuit Breaker updates"}
+{"number": 2619, "reason": "non-task title prefix: chore: remove unused json_default functi", "title": "chore: remove unused json_default function from llmchat_router"}
+{"number": 2618, "reason": "non-task title prefix: chore: replace deprecated datetime.utcno", "title": "chore: replace deprecated datetime.utcnow() with timezone-aware datetime"}
+{"number": 2616, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: increase stdio buffer limit to prevent LimitOverrunError"}
+{"number": 2615, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: allow backticks in tool descriptions for Markdown formatting"}
+{"number": 2596, "reason": "non-task title prefix: docs: rationalize readme and move detail", "title": "docs: rationalize README and move detailed content to docs"}
+{"number": 2594, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: plugin runtime defaults and tag normalization"}
+{"number": 2589, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: add keyboard onkeydown handlers to interactive elements"}
+{"number": 2587, "reason": "no test file changes (neither backend nor frontend)", "title": "refactor: modularize setup scripts and streamline Docker login"}
+{"number": 2583, "reason": "non-task title prefix: chore: clean up .gitignore redundant pat", "title": "chore: clean up .gitignore redundant patterns and organization"}
+{"number": 2582, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: resolve LLM admin router db session and add favicon redirect"}
+{"number": 2579, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(infra): zero-config TLS for Nginx via Docker Compose profile"}
+{"number": 2565, "reason": "no test file changes (neither backend nor frontend)", "title": "Origin/2378 Add expires_at on dcr client"}
+{"number": 2540, "reason": "no test file changes (neither backend nor frontend)", "title": "update llms.txt"}
+{"number": 2537, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Prevent Stale Tool/Resource/Prompt Deletion During OAuth Authorization Code Flow"}
+{"number": 2532, "reason": "non-task title prefix: docs: sync env templates and performance", "title": "docs: sync env templates and performance tuning"}
+{"number": 2531, "reason": "non-task title prefix: chore: stabilize coverage and reduce tes", "title": "chore: stabilize coverage and reduce test warnings"}
+{"number": 2530, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(helm): harden chart templates and migrations"}
+{"number": 2515, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix TLS issues in Granian and implement TLS for NGINX"}
+{"number": 2513, "reason": "no test file changes (neither backend nor frontend)", "title": "Prevent ReDoS in plugin regex patterns"}
+{"number": 2510, "reason": "no test file changes (neither backend nor frontend)", "title": "Adding user info in plugin context and pass it to hooks"}
+{"number": 2507, "reason": "no test file changes (neither backend nor frontend)", "title": "Consistent duplicate constraints/working in tools, prompts and resources"}
+{"number": 2490, "reason": "no test file changes (neither backend nor frontend)", "title": "chore-2193: add Rocky Linux setup script"}
+{"number": 2394, "reason": "no test file changes (neither backend nor frontend)", "title": "212 sonarqube - security blockers and some reliability maintainability blockers"}
+{"number": 2384, "reason": "no test file changes (neither backend nor frontend)", "title": "Feat/rust filesystem server"}
+{"number": 2364, "reason": "no test file changes (neither backend nor frontend)", "title": "Default plugins setup in compose"}
+{"number": 2363, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): add missing Export Config button to Virtual Servers table"}
+{"number": 2343, "reason": "no test file changes (neither backend nor frontend)", "title": "perf: Precompile regex patterns across plugins"}
+{"number": 2338, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add ARM64 load testing support"}
+{"number": 2325, "reason": "no test file changes (neither backend nor frontend)", "title": "2324 - Observability dark mode"}
+{"number": 2317, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: plugin template test cases."}
+{"number": 2315, "reason": "no test file changes (neither backend nor frontend)", "title": "Bump2version 1.0.0 beta 2"}
+{"number": 2314, "reason": "no test file changes (neither backend nor frontend)", "title": "perf: reduce SQLite busy_timeout default to 5s and make configurable"}
+{"number": 2268, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix Admin UI to Display Tag Values Instead of Objects"}
+{"number": 2255, "reason": "no test file changes (neither backend nor frontend)", "title": "Modify http config export type from http to streamable-http"}
+{"number": 2252, "reason": "no test file changes (neither backend nor frontend)", "title": "Align SSO service teams claim format with /tokens and /auth/login"}
+{"number": 2220, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix serviceAccountName re-creating (wiping) existing DB"}
+{"number": 2214, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix pagination URL parameter mixing across tables"}
+{"number": 2210, "reason": "non-task title prefix: ci: skip non-amd64 container builds on p", "title": "ci: skip non-amd64 container builds on PRs for faster CI"}
+{"number": 2200, "reason": "no test file changes (neither backend nor frontend)", "title": "Issue 1959 [PERFORMANCE]: Fix critical performance issues in llm-guard plugin"}
+{"number": 2197, "reason": "non-task title prefix: chore: replace echo /etc/passwd with use", "title": "chore: Replace echo /etc/passwd with useradd in Containerfile.lite"}
+{"number": 2180, "reason": "no test file changes (neither backend nor frontend)", "title": "llmguard: replace raw eval() with a safe AST-based evaluator"}
+{"number": 2179, "reason": "no test file changes (neither backend nor frontend)", "title": "llmguard: switch from pickle to orjson for cache serialization"}
+{"number": 2177, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: add horizontal padding to input fields for cursor visibility"}
+{"number": 2176, "reason": "no test file changes (neither backend nor frontend)", "title": "Add ppc64le support to container build and CI"}
+{"number": 2146, "reason": "no test file changes (neither backend nor frontend)", "title": "Security: Update pyasn1 to 0.6.2"}
+{"number": 2144, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed a8f3b2c1d4e5 alembic script location"}
+{"number": 2131, "reason": "no test file changes (neither backend nor frontend)", "title": "2108 enable pagination"}
+{"number": 2124, "reason": "no test file changes (neither backend nor frontend)", "title": "2121 - prevent recurring initializeSearchInputs() calls in admin UI"}
+{"number": 2123, "reason": "no test file changes (neither backend nor frontend)", "title": "Prevent HTTP connection exhaustion and expose pool metrics"}
+{"number": 2122, "reason": "no test file changes (neither backend nor frontend)", "title": "Closes #1731"}
+{"number": 2105, "reason": "no test file changes (neither backend nor frontend)", "title": "tests: minor fixes to plugins performance profiler"}
+{"number": 2104, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: type mismatches and missing dependency checks in plugins"}
+{"number": 2099, "reason": "no test file changes (neither backend nor frontend)", "title": "2080 - Adjust Show inactive toggle"}
+{"number": 2093, "reason": "non-task title prefix: chore: allowlist dependency-review pylin", "title": "chore: Allowlist dependency-review pylint-pedantic and bump dependencies (Dependabot)"}
+{"number": 2090, "reason": "no test file changes (neither backend nor frontend)", "title": "2077 - Reorder action buttons"}
+{"number": 2088, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(helm): add service annotations and CACHE_TYPE none option"}
+{"number": 2087, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(chart): support external postgresql (cloudnativepg compatible)"}
+{"number": 2085, "reason": "no test file changes (neither backend nor frontend)", "title": "perf: fix unconditional logging overhead in plugin framework (2-5x speedup)"}
+{"number": 2083, "reason": "no test file changes (neither backend nor frontend)", "title": "Restore OAuth actions in gateways partial"}
+{"number": 2070, "reason": "no test file changes (neither backend nor frontend)", "title": "Improve MCP Servers table layout"}
+{"number": 2066, "reason": "no test file changes (neither backend nor frontend)", "title": "feature/password-enforcement-1843"}
+{"number": 2065, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: drop stack trace collection from loggers"}
+{"number": 2059, "reason": "no test file changes (neither backend nor frontend)", "title": "2058 advanced metrics table update"}
+{"number": 2051, "reason": "no test file changes (neither backend nor frontend)", "title": "Resolve Chart.js canvas reuse errors in Advanced Metrics"}
+{"number": 2048, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Add extraEnvFrom and extraEnv support to mcpContextForge"}
+{"number": 2046, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix default value for sso_issuers"}
+{"number": 2045, "reason": "no test file changes (neither backend nor frontend)", "title": "#2044 Add contrast to missing plugin card text"}
+{"number": 2026, "reason": "no test file changes (neither backend nor frontend)", "title": "Startup Resilience with Exponential Backoff (postgres and redis)"}
+{"number": 2015, "reason": "non-task title prefix: chore: update javascript linters to mode", "title": "chore: update JavaScript linters to modern versions"}
+{"number": 2011, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: replace Synchronous HTTP Calls with Asynchronous in OPA plugin"}
+{"number": 1991, "reason": "no test file changes (neither backend nor frontend)", "title": "Migrate OAuth/DCR services to shared singleton http client to leverage full potential of session connection pooling"}
+{"number": 1982, "reason": "no test file changes (neither backend nor frontend)", "title": "fix for redis missing module"}
+{"number": 1981, "reason": "no test file changes (neither backend nor frontend)", "title": "1978 add overview tab to UI, showing a live diagram of ContextForge"}
+{"number": 1980, "reason": "only docs/ci/lock files", "title": "perf(ci): remove redundant steps from full-build-pipeline"}
+{"number": 1979, "reason": "no test file changes (neither backend nor frontend)", "title": "Add an error message to form field validation"}
+{"number": 1976, "reason": "no test file changes (neither backend nor frontend)", "title": "ui cleanup tools"}
+{"number": 1973, "reason": "no test file changes (neither backend nor frontend)", "title": "Testing performance optimization"}
+{"number": 1955, "reason": "no test file changes (neither backend nor frontend)", "title": "Move to paginated UI for gateways, servers and agents"}
+{"number": 1953, "reason": "only docs/ci/lock files", "title": "Update arm64 support note in README"}
+{"number": 1947, "reason": "no test file changes (neither backend nor frontend)", "title": "perf: Add nginx caching for admin pages with multi-tenant isolation #1946"}
+{"number": 1945, "reason": "no test file changes (neither backend nor frontend)", "title": "perf: Add TEMPLATES_AUTO_RELOAD setting #1944"}
+{"number": 1939, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: MCP tools/list returns all registered items instead of ~50"}
+{"number": 1932, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix index creation in sqlite"}
+{"number": 1921, "reason": "only docs/ci/lock files", "title": "fix: consolidate Docker workflow for reliable multiplatform builds"}
+{"number": 1920, "reason": "no test file changes (neither backend nor frontend)", "title": " Disable live validation until custom validation is setup"}
+{"number": 1890, "reason": "no test file changes (neither backend nor frontend)", "title": "Team Membership Query Optimization"}
+{"number": 1889, "reason": "no test file changes (neither backend nor frontend)", "title": "Combine sessions"}
+{"number": 1878, "reason": "no test file changes (neither backend nor frontend)", "title": "1877 client idle timeout pgbouncer"}
+{"number": 1869, "reason": "no test file changes (neither backend nor frontend)", "title": "Granian backpressure protection - closes #1859"}
+{"number": 1867, "reason": "no test file changes (neither backend nor frontend)", "title": "Postgresql read replicas 1861"}
+{"number": 1866, "reason": "no test file changes (neither backend nor frontend)", "title": "Preserve HTTP status codes in email auth admin endpoints"}
+{"number": 1851, "reason": "no test file changes (neither backend nor frontend)", "title": "Closes #1850 inconsistent component names in request logging middlewa…"}
+{"number": 1845, "reason": "no test file changes (neither backend nor frontend)", "title": "1844 monitoring with grafana, loki, prometheus"}
+{"number": 1794, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix Postgres 18 startup issue by updating volume mount path"}
+{"number": 1791, "reason": "non-task title prefix: docs: add sparc syntactic tool calls val", "title": "docs: Add SPARC Syntactic Tool Calls Validator plugin docs"}
+{"number": 1790, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Fullscreen mode in Resource Test closes immediately on first attempt"}
+{"number": 1786, "reason": "no test file changes (neither backend nor frontend)", "title": "Optimized admin dashboard queries by consolidating multiple per-entity and per-metric COUNT queries into single aggregated database queries. This eliminates redundant DB round-trips caused by HTMX partial loading"}
+{"number": 1784, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix makefile venv"}
+{"number": 1783, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix flake8"}
+{"number": 1779, "reason": "no test file changes (neither backend nor frontend)", "title": "Add MCP tool annotations to chunker and PM servers"}
+{"number": 1776, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Add missing is_admin field to EmailRegistrationRequest schema"}
+{"number": 1775, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix JWT Token expiration mismatch"}
+{"number": 1772, "reason": "no test file changes (neither backend nor frontend)", "title": "1770 db rollback fix"}
+{"number": 1771, "reason": "no test file changes (neither backend nor frontend)", "title": "1768 nginx tuning"}
+{"number": 1754, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add PgBouncer connection pooling to Docker Compose"}
+{"number": 1752, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add PgBouncer connection pooling to Docker Compose"}
+{"number": 1747, "reason": "only docs/ci/lock files", "title": "ADR: propose experimental Rust transport backend"}
+{"number": 1746, "reason": "no test file changes (neither backend nor frontend)", "title": "Cache auth"}
+{"number": 1744, "reason": "no test file changes (neither backend nor frontend)", "title": "Postgresql 18 switch and AUDIT_TRAIL_ENABLED flag"}
+{"number": 1738, "reason": "no test file changes (neither backend nor frontend)", "title": "Get top metrics caching"}
+{"number": 1730, "reason": "no test file changes (neither backend nor frontend)", "title": "Optimize Gateway Health Check Timeout"}
+{"number": 1729, "reason": "non-task title prefix: docs: add monday.com mcp server integrat", "title": "docs: add monday.com MCP Server integration guide"}
+{"number": 1726, "reason": "no test file changes (neither backend nor frontend)", "title": "Add provider-specific configuration support for LLM Settings"}
+{"number": 1720, "reason": "no test file changes (neither backend nor frontend)", "title": "Error codes update - closes #1719"}
+{"number": 1718, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(helm): add ServiceAccount support to mcp-stack chart"}
+{"number": 1716, "reason": "no test file changes (neither backend nor frontend)", "title": "Db index"}
+{"number": 1708, "reason": "no test file changes (neither backend nor frontend)", "title": "LLM Chat bug fixes and improvements"}
+{"number": 1701, "reason": "no test file changes (neither backend nor frontend)", "title": "Add granian support"}
+{"number": 1667, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: improve cleanup script - enable pipefail/nounset, parameterize port and DB file, add graceful process termination helper, and some other improvements"}
+{"number": 1659, "reason": "no test file changes (neither backend nor frontend)", "title": "GUNICORN settings in .env"}
+{"number": 1658, "reason": "no test file changes (neither backend nor frontend)", "title": "Optimize logs"}
+{"number": 1656, "reason": "no test file changes (neither backend nor frontend)", "title": "OAuth Troubleshooting docs"}
+{"number": 1652, "reason": "no test file changes (neither backend nor frontend)", "title": "Feature/qr code server"}
+{"number": 1651, "reason": "no test file changes (neither backend nor frontend)", "title": "Change permission requirement for adding team members"}
+{"number": 1650, "reason": "no test file changes (neither backend nor frontend)", "title": "Database Indexing Optimization (Issue #1353)"}
+{"number": 1646, "reason": "no test file changes (neither backend nor frontend)", "title": "Catalog should use password field for keys"}
+{"number": 1634, "reason": "no test file changes (neither backend nor frontend)", "title": "1.0.0-BETA-1 tag"}
+{"number": 1630, "reason": "no test file changes (neither backend nor frontend)", "title": "Copier is now optional"}
+{"number": 1629, "reason": "no test file changes (neither backend nor frontend)", "title": "Update job-migration.yaml"}
+{"number": 1607, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: plugin template runtime update"}
+{"number": 1604, "reason": "no test file changes (neither backend nor frontend)", "title": "[Bug Fix] Fixes to findings from standalone app building."}
+{"number": 1603, "reason": "no test file changes (neither backend nor frontend)", "title": "Upgrade dependencies"}
+{"number": 1601, "reason": "no test file changes (neither backend nor frontend)", "title": "fix-1582/tool-visibility"}
+{"number": 1600, "reason": "no test file changes (neither backend nor frontend)", "title": "UI Improvement: Make “All Team” Dropdown Scrollable"}
+{"number": 1599, "reason": "no test file changes (neither backend nor frontend)", "title": "Rest tool text response fallback"}
+{"number": 1594, "reason": "no test file changes (neither backend nor frontend)", "title": "Makefile stop targets"}
+{"number": 1593, "reason": "no test file changes (neither backend nor frontend)", "title": "Move menu from top to side"}
+{"number": 1590, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: propagate app_user_email when global context already exists"}
+{"number": 1589, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Make sure \"enabled\" is set correctly in resource updates"}
+{"number": 1586, "reason": "no test file changes (neither backend nor frontend)", "title": "Use urljoin for building rpc URL"}
+{"number": 1585, "reason": "no test file changes (neither backend nor frontend)", "title": "Enable vault token"}
+{"number": 1584, "reason": "no test file changes (neither backend nor frontend)", "title": "fix uuid migration for postgresql"}
+{"number": 1573, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix in toolops tab UI code to call admin tools endpoint to get list of tools."}
+{"number": 1569, "reason": "no test file changes (neither backend nor frontend)", "title": "user mgmt password policy"}
+{"number": 1567, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix/1545 inactive resource 404"}
+{"number": 1565, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix/1542 oauth validation logs"}
+{"number": 1563, "reason": "only docs/ci/lock files", "title": "fix build and push stage in github workflow"}
+{"number": 1562, "reason": "only docs/ci/lock files", "title": "feat: add uv installation support #1503"}
+{"number": 1561, "reason": "no test file changes (neither backend nor frontend)", "title": "Admin: Enable gateway filtering for search & fix selection persistence"}
+{"number": 1558, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): missing Show Inactive toggle in Virtual Servers tab (#1544)"}
+{"number": 1557, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix tag handling  for vault plugin. Additional handling for PAT features using a tag."}
+{"number": 1554, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed tag structured in CommonAttributes"}
+{"number": 1548, "reason": "no test file changes (neither backend nor frontend)", "title": "For servers/{server_id}/tools - Optional execution count with lazy loading"}
+{"number": 1541, "reason": "no test file changes (neither backend nor frontend)", "title": "adding Unified Search & Filter"}
+{"number": 1538, "reason": "no test file changes (neither backend nor frontend)", "title": "Tools Telemetry Exporter plugin"}
+{"number": 1537, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixes CSP directive blocking the iframe issue"}
+{"number": 1534, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: escape % characters in DATABASE for Alembic config"}
+{"number": 1532, "reason": "only docs/ci/lock files", "title": "Bh/multi arch builds 2"}
+{"number": 1531, "reason": "no test file changes (neither backend nor frontend)", "title": "Update OPA Plugin: Error Handling and Synchronization with Plugin Framework Updates"}
+{"number": 1529, "reason": "no test file changes (neither backend nor frontend)", "title": "Include missing Container.scratch file in MANIFEST.in"}
+{"number": 1525, "reason": "no test file changes (neither backend nor frontend)", "title": "Refactor create_llm in agent_langchain.py to reduce cyclomatic complexity"}
+{"number": 1520, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Add multiplatform container image support (amd64, arm64, s390x)"}
+{"number": 1518, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Allow OPTIONS requests on /openapi.json for CORS preflight"}
+{"number": 1513, "reason": "only docs/ci/lock files", "title": "Adapt 'end-to-end demo' instructions in README to latest version"}
+{"number": 1510, "reason": "no test file changes (neither backend nor frontend)", "title": "Added password policy support under the Edit User section"}
+{"number": 1499, "reason": "no test file changes (neither backend nor frontend)", "title": "[Security Feature]: RBAC Plugin using Cedar"}
+{"number": 1498, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: If auth is disabled, use the default user for dependency injection"}
+{"number": 1496, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix PII Detection Logic to Correctly Update modified Flag"}
+{"number": 1494, "reason": "no test file changes (neither backend nor frontend)", "title": "1282 force to user to change password"}
+{"number": 1491, "reason": "no test file changes (neither backend nor frontend)", "title": "Opa updates"}
+{"number": 1490, "reason": "no test file changes (neither backend nor frontend)", "title": "Add Gateway-Based Filtering for Tools, Prompts, and Resources in Admin UI- Edit Server"}
+{"number": 1488, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Set the tool name when changed"}
+{"number": 1487, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Handle the case where the `teams` list is a list of dicts"}
+{"number": 1484, "reason": "no test file changes (neither backend nor frontend)", "title": "Toolops features in MCP context forge"}
+{"number": 1482, "reason": "no test file changes (neither backend nor frontend)", "title": "Bh/make uv use global venv instead of creating project one"}
+{"number": 1479, "reason": "no test file changes (neither backend nor frontend)", "title": "Address s390x build issue with podman"}
+{"number": 1469, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: add cursor to each input text fields in UI"}
+{"number": 1466, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: switched rust base image to manifest list to support multi-arch build"}
+{"number": 1460, "reason": "no test file changes (neither backend nor frontend)", "title": "Token team_id extraction and usage for APIs"}
+{"number": 1449, "reason": "no test file changes (neither backend nor frontend)", "title": "Skip creds gateway duplication check for one time auth"}
+{"number": 1445, "reason": "no test file changes (neither backend nor frontend)", "title": "Add Gateway-Based Filtering for Tools, Prompts, and Resources in Admin UI"}
+{"number": 1441, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: correct 3 blocker severity sonar findings for issue#212"}
+{"number": 1431, "reason": "no test file changes (neither backend nor frontend)", "title": "Add optional postgres 18 upgrade to chart"}
+{"number": 1416, "reason": "no test file changes (neither backend nor frontend)", "title": "add filtering by gateway id"}
+{"number": 1410, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: resolve Helm chart configuration validation errors"}
+{"number": 1408, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix pagination bugs in servers page"}
+{"number": 1407, "reason": "no test file changes (neither backend nor frontend)", "title": "One time auth for gateway"}
+{"number": 1402, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix plugin catalog and Test button"}
+{"number": 1400, "reason": "no test file changes (neither backend nor frontend)", "title": "Observability"}
+{"number": 1398, "reason": "no test file changes (neither backend nor frontend)", "title": "removed unncessary init file in root dir"}
+{"number": 1393, "reason": "no test file changes (neither backend nor frontend)", "title": "806_Enhanced with statistics display, failed tools list with copy functionality, and manual refresh controls. Uses dropdown-based bulk import interface rather than modal"}
+{"number": 1391, "reason": "no test file changes (neither backend nor frontend)", "title": "Add UI Pagination for prompts and resources"}
+{"number": 1390, "reason": "no test file changes (neither backend nor frontend)", "title": "Knative files and doc (scale gateway to 0)"}
+{"number": 1385, "reason": "no test file changes (neither backend nor frontend)", "title": "Enhance A2A Multi-Tenancy and Visibility: Table Redesign, Owner Column, and Logic Cleanup"}
+{"number": 1382, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(helm): add missing metrics configuration to values.schema.json"}
+{"number": 1380, "reason": "only docs/ci/lock files", "title": "Add QA Automation Gateway testimonial under Platforms"}
+{"number": 1379, "reason": "only docs/ci/lock files", "title": "Add QA Automation Gateway article to Social Highlights"}
+{"number": 1376, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix/iframe embedding"}
+{"number": 1375, "reason": "no test file changes (neither backend nor frontend)", "title": "fix alembic"}
+{"number": 1369, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: postgres 18 default data volume change and fasttime server on arm64"}
+{"number": 1367, "reason": "non-task title prefix: chore: add plugin pr template", "title": "chore: add plugin PR template"}
+{"number": 1363, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix Output Schema validation issue in tool result processing"}
+{"number": 1360, "reason": "no test file changes (neither backend nor frontend)", "title": "Add pagination for tools in servers page"}
+{"number": 1349, "reason": "no test file changes (neither backend nor frontend)", "title": "Temporary fix for server tools"}
+{"number": 1347, "reason": "no test file changes (neither backend nor frontend)", "title": "Update CLAUDE.md and link to existing documentation"}
+{"number": 1339, "reason": "no test file changes (neither backend nor frontend)", "title": "Configure Neovim and pre-commit to run flake8 and pylint"}
+{"number": 1335, "reason": "only docs/ci/lock files", "title": "Update API Usage Documentation"}
+{"number": 1332, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Export virtual server URLs now respect APP_ROOT_PATH configuration"}
+{"number": 1323, "reason": "no test file changes (neither backend nor frontend)", "title": "Correct \"Created\" Date Display in API Tokens UI"}
+{"number": 1322, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix tool listing on first load"}
+{"number": 1320, "reason": "non-task title prefix: chore: add type annotations to slugify f", "title": "chore: add type annotations to slugify function"}
+{"number": 1316, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(helm): implement dynamic provisioning for persistent storage"}
+{"number": 1314, "reason": "no test file changes (neither backend nor frontend)", "title": "Add nginx sample supporting #1295"}
+{"number": 1312, "reason": "no test file changes (neither backend nor frontend)", "title": "Add Neovim project configuration for ALE integration"}
+{"number": 1311, "reason": "non-task title prefix: chore: rationalize ruff i* rules with is", "title": "chore: rationalize ruff I* rules with isort configuration"}
+{"number": 1310, "reason": "no test file changes (neither backend nor frontend)", "title": "RSS MCP Server"}
+{"number": 1309, "reason": "only docs/ci/lock files", "title": "API usage docs"}
+{"number": 1307, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add optional persistence support for PostgreSQL and Redis"}
+{"number": 1303, "reason": "no files", "title": "[chore] Update uv.lock based on revised versions in pyproject.toml"}
+{"number": 1302, "reason": "no test file changes (neither backend nor frontend)", "title": "[chore] Update Makefile and best practices to match black selection vs ruff format (with doc fixes)"}
+{"number": 1288, "reason": "no test file changes (neither backend nor frontend)", "title": "Update CHANGELOG and README"}
+{"number": 1276, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix catalog not showing"}
+{"number": 1275, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix catalog not showing"}
+{"number": 1273, "reason": "no test file changes (neither backend nor frontend)", "title": "Rest pass api 746"}
+{"number": 1272, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix UI margins"}
+{"number": 1271, "reason": "no test file changes (neither backend nor frontend)", "title": "Consolidate and enhance linting tool configuration"}
+{"number": 1269, "reason": "no test file changes (neither backend nor frontend)", "title": "Add UI Support for MCP Tool outputSchema Field closes #1258"}
+{"number": 1262, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix JWT token follows default variable payload expiry instead of UI"}
+{"number": 1257, "reason": "no test file changes (neither backend nor frontend)", "title": "Add CI/CD verification for complete build pipeline"}
+{"number": 1252, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: align cookie scope and RBAC redirects with app root path"}
+{"number": 1244, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix bandit"}
+{"number": 1243, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix uv issue"}
+{"number": 1240, "reason": "non-task title prefix: chore: add linters for plugins and fix l", "title": "chore: add linters for plugins and fix linting issues"}
+{"number": 1238, "reason": "non-task title prefix: chore: fix makefile clean target", "title": "chore: fix makefile clean target"}
+{"number": 1237, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Remove deprecated 'env=...' parameters in config.py"}
+{"number": 1236, "reason": "no test file changes (neither backend nor frontend)", "title": "LLMChat add session consistency using redis"}
+{"number": 1233, "reason": "non-task title prefix: chore: clean up contributing.md and fix ", "title": "chore: Clean up CONTRIBUTING.md and fix Makefile lint-smart syntax error"}
+{"number": 1231, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Add non-root user to scratch go containers"}
+{"number": 1221, "reason": "no test file changes (neither backend nor frontend)", "title": "Benchmark mcp server"}
+{"number": 1220, "reason": "no test file changes (neither backend nor frontend)", "title": "Benchmark mcp server closes #1219"}
+{"number": 1218, "reason": "no test file changes (neither backend nor frontend)", "title": "Metrics can export all metrics"}
+{"number": 1215, "reason": "no test file changes (neither backend nor frontend)", "title": "Update env variables"}
+{"number": 1214, "reason": "only docs/ci/lock files", "title": "Fix docs newlines"}
+{"number": 1207, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: mcpgateway and plugin deployment as a configuration yaml."}
+{"number": 1206, "reason": "no test file changes (neither backend nor frontend)", "title": "Add support to build MCP Gateway for s390x platform"}
+{"number": 1205, "reason": "non-task title prefix: docs: langflow mcp server integration do", "title": "Docs: Langflow MCP Server integration documentation"}
+{"number": 1202, "reason": "no test file changes (neither backend nor frontend)", "title": "LLM Chat Interface with MCP Enabled Tool Orchestration"}
+{"number": 1201, "reason": "no test file changes (neither backend nor frontend)", "title": "Add OAUTH_DEFAULT_TIMEOUT in settings"}
+{"number": 1198, "reason": "no test file changes (neither backend nor frontend)", "title": "Complete OPA plugin hook implementation\""}
+{"number": 1194, "reason": "no test file changes (neither backend nor frontend)", "title": "Update APP_DOMAIN default url compatible with Pydantic v2"}
+{"number": 1189, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix return multiple StreamableHTTP content"}
+{"number": 1185, "reason": "no test file changes (neither backend nor frontend)", "title": "Chart plugin conf"}
+{"number": 1181, "reason": "no test file changes (neither backend nor frontend)", "title": "Add secure cookie warnings for HTTP development login issues"}
+{"number": 1179, "reason": "no test file changes (neither backend nor frontend)", "title": "header-modal overlap fix"}
+{"number": 1174, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: compose plugins and catalog config"}
+{"number": 1173, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix gateway addition from UI"}
+{"number": 1170, "reason": "no test file changes (neither backend nor frontend)", "title": "MCP Server Catalog Improvements"}
+{"number": 1169, "reason": "only docs/ci/lock files", "title": "updates to readme for issue #1159"}
+{"number": 1167, "reason": "no test file changes (neither backend nor frontend)", "title": "Verify"}
+{"number": 1165, "reason": "only docs/ci/lock files", "title": "Add scale.md"}
+{"number": 1163, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix A2A tool call"}
+{"number": 1157, "reason": "non-task title prefix: docs: normalize project name", "title": "docs: normalize project name"}
+{"number": 1155, "reason": "no test file changes (neither backend nor frontend)", "title": "Config tab"}
+{"number": 1154, "reason": "no test file changes (neither backend nor frontend)", "title": "Config tab"}
+{"number": 1153, "reason": "no test file changes (neither backend nor frontend)", "title": "Update ux catalogs"}
+{"number": 1152, "reason": "no test file changes (neither backend nor frontend)", "title": "Update UX"}
+{"number": 1151, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: lint issues across plugins"}
+{"number": 1150, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: remove unused variable in circuit breaker plugin"}
+{"number": 1149, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: remove piifilter dead code"}
+{"number": 1147, "reason": "non-task title prefix: docs: update plugins usage and document ", "title": "docs: update plugins usage and document built-in plugins"}
+{"number": 1146, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: preserve tools/resources/prompts when editing OAuth2 gateways without URL change"}
+{"number": 1142, "reason": "no test file changes (neither backend nor frontend)", "title": "Pass headers from plugin to server connection functions"}
+{"number": 1141, "reason": "no test file changes (neither backend nor frontend)", "title": "Temporarily removing limit for tools until pagination is properly implemented"}
+{"number": 1139, "reason": "non-task title prefix: docs: revise and consolidate plugin spec", "title": "docs: revise and consolidate plugin specification and design docs"}
+{"number": 1134, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix header propagation so we don's send X-Vault-Headers to mcp server"}
+{"number": 1132, "reason": "no test file changes (neither backend nor frontend)", "title": "Local Catalog of MCP servers for MCP Registry & Marketplace (295)"}
+{"number": 1131, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix resource filter"}
+{"number": 1130, "reason": "no test file changes (neither backend nor frontend)", "title": "PR for Plugin Management API and UI to Admin Dashboard - closes #1129"}
+{"number": 1128, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Get /a2a/ returns 500 due to datatype mistmatch"}
+{"number": 1127, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: add metrics recording for prompts, resources, and servers"}
+{"number": 1120, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix auth value db constraint"}
+{"number": 1118, "reason": "only docs/ci/lock files", "title": "WIP: Plugin Framework Specification Document"}
+{"number": 1106, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: multi-arch support for opa server"}
+{"number": 1103, "reason": "no test file changes (neither backend nor frontend)", "title": "fixing metrics"}
+{"number": 1102, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add opa policy input data mapping support"}
+{"number": 1089, "reason": "only docs/ci/lock files", "title": "Documentation updates"}
+{"number": 1088, "reason": "only docs/ci/lock files", "title": "Documentation updates"}
+{"number": 1087, "reason": "no test file changes (neither backend nor frontend)", "title": "Documentation update readmes"}
+{"number": 1083, "reason": "non-task title prefix: docs: add terraform mcp server and gatew", "title": "docs: add Terraform MCP Server and Gateway integration guide"}
+{"number": 1051, "reason": "no test file changes (neither backend nor frontend)", "title": "Massive mcp server and plugin update"}
+{"number": 1044, "reason": "no test file changes (neither backend nor frontend)", "title": "Pandoc MCP Server closes #1043"}
+{"number": 1038, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(helm): add image pull secrets support and enhance ingress TLS co…"}
+{"number": 1036, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Remove @require_permission(\"teams.join\") from admin_create_join_request (Issue #1022)"}
+{"number": 1029, "reason": "only docs/ci/lock files", "title": "Add Dynamic Client Registration Tutorial"}
+{"number": 1028, "reason": "no test file changes (neither backend nor frontend)", "title": "fixed duplication of app_root_path for static files"}
+{"number": 1027, "reason": "no test file changes (neither backend nor frontend)", "title": "ICA Vault Plugin: Replaces the Bearer token with a token received from backend"}
+{"number": 1021, "reason": "no test file changes (neither backend nor frontend)", "title": "Sticky Header Bar for easy access to team and other functionality"}
+{"number": 1018, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: add LLMGuard security guardrails plugin"}
+{"number": 1017, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: jwt audience verification should be independent from token expiration"}
+{"number": 1015, "reason": "no test file changes (neither backend nor frontend)", "title": "Updated wrapper configurations"}
+{"number": 1013, "reason": "no test file changes (neither backend nor frontend)", "title": "Add ps to containerfile"}
+{"number": 1010, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Support Kubernetes versions with vendor suffixes in Helm chart"}
+{"number": 1008, "reason": "non-task title prefix: bump 0.7.0 release", "title": "Bump 0.7.0 release"}
+{"number": 990, "reason": "no test file changes (neither backend nor frontend)", "title": "Powerpoint editor"}
+{"number": 982, "reason": "only docs/ci/lock files", "title": "add instana documentation for MCP context forge"}
+{"number": 980, "reason": "no test file changes (neither backend nor frontend)", "title": "Implement MCP data analysis server with comprehensive statistical   tools"}
+{"number": 977, "reason": "no test file changes (neither backend nor frontend)", "title": "system-monitor-server go mcp server"}
+{"number": 965, "reason": "no test file changes (neither backend nor frontend)", "title": "UI Bug Fixes (Post-RBAC)"}
+{"number": 957, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Export/Import End Points on Swagger UI"}
+{"number": 951, "reason": "no test file changes (neither backend nor frontend)", "title": "Add comprehensive calculator-server to mcp-servers/go"}
+{"number": 940, "reason": "no test file changes (neither backend nor frontend)", "title": "virtual server"}
+{"number": 938, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(login): fix login on macos due to datetime utc timestamp"}
+{"number": 937, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: ensure consistent DbTool creation across gateway registration, updation and rediscovery after health check failure "}
+{"number": 935, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix test tool checkbox inputs"}
+{"number": 933, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Tool calls failing due to timeout - increase timeout values"}
+{"number": 929, "reason": "no test file changes (neither backend nor frontend)", "title": "Upgrade Containerfile to use ubi10 and Python 3.12"}
+{"number": 927, "reason": "no test file changes (neither backend nor frontend)", "title": "Add support for mysql closes #925"}
+{"number": 924, "reason": "no test file changes (neither backend nor frontend)", "title": "Tox and dependencies"}
+{"number": 923, "reason": "no test file changes (neither backend nor frontend)", "title": "Update docs and troubleshoot sqlite3"}
+{"number": 868, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix/passthrough header save"}
+{"number": 862, "reason": "no test file changes (neither backend nor frontend)", "title": "Feat/860 enterprise multitenancy, role-based access control, JWT revocation and SSO"}
+{"number": 858, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Support APP_ROOT_PATH for static file serving"}
+{"number": 852, "reason": "no test file changes (neither backend nor frontend)", "title": "view tool"}
+{"number": 833, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixes #831 — Global Tools tab not refreshing on server reactivation"}
+{"number": 817, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix postgresql migration"}
+{"number": 814, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed servers"}
+{"number": 813, "reason": "no test file changes (neither backend nor frontend)", "title": "0 6 0 version bump"}
+{"number": 812, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix file headers"}
+{"number": 809, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix minor UI visibility issues"}
+{"number": 807, "reason": "only docs/ci/lock files", "title": "Update articles index.md with user contributed linkedin post"}
+{"number": 805, "reason": "no test file changes (neither backend nor frontend)", "title": "Remove manual name update logic from tool_service.py"}
+{"number": 802, "reason": "no test file changes (neither backend nor frontend)", "title": "Event handler for escape"}
+{"number": 801, "reason": "no test file changes (neither backend nor frontend)", "title": "Eval new"}
+{"number": 799, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Add OAuth 2.0 Authentication Support in Edit Gateway"}
+{"number": 798, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(ui+backend): complete Bulk Import implementation (200 cap)"}
+{"number": 797, "reason": "no test file changes (neither backend nor frontend)", "title": "Pylint fixes"}
+{"number": 796, "reason": "no test file changes (neither backend nor frontend)", "title": "Eval updates"}
+{"number": 794, "reason": "no test file changes (neither backend nor frontend)", "title": "Use database as cache_type"}
+{"number": 791, "reason": "non-task title prefix: docs: update plugins dev workflow", "title": "docs: update plugins dev workflow"}
+{"number": 790, "reason": "only docs/ci/lock files", "title": "Architecture for plugins closes #313 closes #673"}
+{"number": 788, "reason": "no test file changes (neither backend nor frontend)", "title": "752 mcp eval server"}
+{"number": 787, "reason": "no test file changes (neither backend nor frontend)", "title": "decode auth before connection"}
+{"number": 784, "reason": "no test file changes (neither backend nor frontend)", "title": "744 annotations"}
+{"number": 783, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: plugins template"}
+{"number": 781, "reason": "no test file changes (neither backend nor frontend)", "title": "feat #262: MCP Langchain Agent"}
+{"number": 778, "reason": "no test file changes (neither backend nor frontend)", "title": "Issue 587/rest tool error"}
+{"number": 777, "reason": "no test file changes (neither backend nor frontend)", "title": "Edit column header for servers catalog table"}
+{"number": 767, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: local network address translation in discovery module"}
+{"number": 764, "reason": "no test file changes (neither backend nor frontend)", "title": "Implemented virtual server configuration export as JSON (stdio, SSE, HTTP)"}
+{"number": 759, "reason": "no test file changes (neither backend nor frontend)", "title": "pylint fixes"}
+{"number": 757, "reason": "only docs/ci/lock files", "title": "Remove redundant title in readme."}
+{"number": 755, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: suppress bandit security warnings with appropriate nosec comments"}
+{"number": 748, "reason": "no test file changes (neither backend nor frontend)", "title": "(fix) Added missing prompts/get"}
+{"number": 742, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix edit tools"}
+{"number": 739, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Bulk Import Tools modal wiring #737"}
+{"number": 731, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix #715: align Add & Edit Tool fields & prefill MCP integration/request"}
+{"number": 730, "reason": "only docs/ci/lock files", "title": "Uv one liner"}
+{"number": 729, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed Translate streamablehttp "}
+{"number": 726, "reason": "no test file changes (neither backend nor frontend)", "title": "Add Null Checks and Enhanced Error Handling to admin.js Form Handler"}
+{"number": 725, "reason": "no test file changes (neither backend nor frontend)", "title": "Static typing"}
+{"number": 724, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: implement mutation testing with mutmut v3 (#280)"}
+{"number": 717, "reason": "no test file changes (neither backend nor frontend)", "title": "Truncating long tool description"}
+{"number": 713, "reason": "no test file changes (neither backend nor frontend)", "title": "Issue - 661 (Database migration runs during doctest execution) : replaced deprecated code"}
+{"number": 711, "reason": "only docs/ci/lock files", "title": "UI Customization docs for feature #707"}
+{"number": 709, "reason": "no test file changes (neither backend nor frontend)", "title": "Add resources and prompts to time server closes #404"}
+{"number": 703, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed the go time server annotation closes #405"}
+{"number": 702, "reason": "no test file changes (neither backend nor frontend)", "title": "Update deps"}
+{"number": 701, "reason": "no test file changes (neither backend nor frontend)", "title": "380 rest endpoints go fast time server closes #380"}
+{"number": 697, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix SSE Tool Invocation Fails After Integration Type Migration post #676 - closes #696"}
+{"number": 681, "reason": "non-task title prefix: docs: fix admin tools curl command field", "title": "docs: fix admin tools curl command field name"}
+{"number": 667, "reason": "no test file changes (neither backend nor frontend)", "title": "added streamablehttp as request type"}
+{"number": 664, "reason": "no test file changes (neither backend nor frontend)", "title": "fix for long input names in tool creation"}
+{"number": 662, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(gateway): Correct validation for STREAMABLEHTTP transport"}
+{"number": 660, "reason": "no test file changes (neither backend nor frontend)", "title": "CHORE(makefile): add comprehensive file-specific linting support"}
+{"number": 656, "reason": "no test file changes (neither backend nor frontend)", "title": "chore(file-headers): add script to verify and fix file headers"}
+{"number": 655, "reason": "no test file changes (neither backend nor frontend)", "title": "Dependency updates and docker build cleanup and optimization"}
+{"number": 652, "reason": "no test file changes (neither backend nor frontend)", "title": "Add search for associated tools"}
+{"number": 651, "reason": "no test file changes (neither backend nor frontend)", "title": "Consistency in acceptable length of Tool Names"}
+{"number": 650, "reason": "no test file changes (neither backend nor frontend)", "title": "support multiline text input in test tool panel"}
+{"number": 645, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: array input parsing"}
+{"number": 644, "reason": "no test file changes (neither backend nor frontend)", "title": "Fill default values in test tool"}
+{"number": 641, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix: Correctly parse array inputs in Test Tool UI"}
+{"number": 639, "reason": "no test file changes (neither backend nor frontend)", "title": "Add snyk Makefile .snyk and github actions sample"}
+{"number": 637, "reason": "no test file changes (neither backend nor frontend)", "title": "Add time server to compose closes #403"}
+{"number": 634, "reason": "no test file changes (neither backend nor frontend)", "title": "Migrate to use mcpgateway.translate and fix smoketest"}
+{"number": 633, "reason": "no test file changes (neither backend nor frontend)", "title": "Use values.data.get() in GatewayUpdate to Fix Pydantic Error Issue#630"}
+{"number": 628, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(bug): tool params type convert logic"}
+{"number": 624, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Add MCP Gateway Name to the Tools Overview"}
+{"number": 621, "reason": "no test file changes (neither backend nor frontend)", "title": "Version panel service status fix"}
+{"number": 619, "reason": "no test file changes (neither backend nor frontend)", "title": "checkbox implementation for selection in servers panel"}
+{"number": 618, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix smoketest"}
+{"number": 617, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix Database Migration Commands in Makefile"}
+{"number": 616, "reason": "no test file changes (neither backend nor frontend)", "title": "Add pypi package linters: check-manifest pyroma and verify target to GitHub Actions"}
+{"number": 614, "reason": "no test file changes (neither backend nor frontend)", "title": "Add web linters to Makefile and lint-web.yml GitHub Actions"}
+{"number": 612, "reason": "no test file changes (neither backend nor frontend)", "title": "507 makefile fixes"}
+{"number": 611, "reason": "no test file changes (neither backend nor frontend)", "title": "507 makefile fixes"}
+{"number": 608, "reason": "no test file changes (neither backend nor frontend)", "title": "Update run-gunicorn.sh script, closes #397 closes #430"}
+{"number": 607, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: issue 603 [Unexpected error when registering a gateway with the same name.]"}
+{"number": 599, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Update server ID regex to support hexadecimal UUIDs in virtual server paths"}
+{"number": 594, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: server_id parsing regexp to allow arbitrary identifier"}
+{"number": 592, "reason": "no test file changes (neither backend nor frontend)", "title": "590 devskim"}
+{"number": 588, "reason": "no test file changes (neither backend nor frontend)", "title": "update deps"}
+{"number": 585, "reason": "non-task title prefix: revert 580 fix mcp auth required", "title": "Revert 580 fix mcp auth required"}
+{"number": 581, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: missing ID in create gateway response"}
+{"number": 580, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: apply AUTH_REQUIRED flag to Streamable HTTP endpoints"}
+{"number": 577, "reason": "no test file changes (neither backend nor frontend)", "title": "admin_add_server_exception_update_fix"}
+{"number": 571, "reason": "no test file changes (neither backend nor frontend)", "title": "Validate prompt arguments for XSS"}
+{"number": 564, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix tls context bug"}
+{"number": 563, "reason": "no test file changes (neither backend nor frontend)", "title": "Update dependencies for release 0.4.0, added update_dependencies.py"}
+{"number": 559, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix nested JSON tests"}
+{"number": 556, "reason": "no test file changes (neither backend nor frontend)", "title": "Makefile Update"}
+{"number": 554, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: wrap tool description using <br/>"}
+{"number": 550, "reason": "only docs/ci/lock files", "title": "Update mkdocs with security policy, security guide and linking roadmap"}
+{"number": 530, "reason": "no test file changes (neither backend nor frontend)", "title": "Add nodejsscan closes #499"}
+{"number": 529, "reason": "no test file changes (neither backend nor frontend)", "title": "Doctest 60 closes #249"}
+{"number": 528, "reason": "no test file changes (neither backend nor frontend)", "title": "Smoketest2"}
+{"number": 525, "reason": "no test file changes (neither backend nor frontend)", "title": "249 raise doctest v2"}
+{"number": 523, "reason": "no test file changes (neither backend nor frontend)", "title": "Add session_registry doctest"}
+{"number": 517, "reason": "no test file changes (neither backend nor frontend)", "title": "249 doctest update"}
+{"number": 516, "reason": "no test file changes (neither backend nor frontend)", "title": "Use a separate pubsub for each session"}
+{"number": 514, "reason": "only docs/ci/lock files", "title": "Acceptance test docs closes #399"}
+{"number": 512, "reason": "only docs/ci/lock files", "title": "readme update for issue 371(Makefile)"}
+{"number": 502, "reason": "no test file changes (neither backend nor frontend)", "title": "suppressed pydantic warnings"}
+{"number": 498, "reason": "no test file changes (neither backend nor frontend)", "title": "Update default .env examples to enable UI"}
+{"number": 497, "reason": "no test file changes (neither backend nor frontend)", "title": "Made Fix - When Edit button clicked for - gateways/servers/tools/prom…"}
+{"number": 496, "reason": "no test file changes (neither backend nor frontend)", "title": "avoid  Console warning for missing #metrics-loading element "}
+{"number": 494, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix UI timeouts"}
+{"number": 490, "reason": "no test file changes (neither backend nor frontend)", "title": "UI/UX Improvements"}
+{"number": 489, "reason": "no test file changes (neither backend nor frontend)", "title": "Chore/doctest admin"}
+{"number": 488, "reason": "no test file changes (neither backend nor frontend)", "title": "Update doctest env.py"}
+{"number": 487, "reason": "no test file changes (neither backend nor frontend)", "title": "Update admin.js as per issue #352"}
+{"number": 486, "reason": "non-task title prefix: chore: complete 100% doctest coverage fo", "title": "chore: Complete 100% doctest coverage for admin.py"}
+{"number": 485, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix/pre commit config exclude object files"}
+{"number": 484, "reason": "no test file changes (neither backend nor frontend)", "title": "Update doctest env.py"}
+{"number": 483, "reason": "no test file changes (neither backend nor frontend)", "title": "249 achieve 100pct doctest part3"}
+{"number": 482, "reason": "no test file changes (neither backend nor frontend)", "title": "249 achieve 100pct doctest part 2"}
+{"number": 474, "reason": "no test file changes (neither backend nor frontend)", "title": "249 achieve 100pct doctest"}
+{"number": 473, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix _auth_populate in GatewayRead"}
+{"number": 470, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix makefile for issue#371"}
+{"number": 469, "reason": "no test file changes (neither backend nor frontend)", "title": "closes #467 achieve 100% docstring coverage"}
+{"number": 466, "reason": "no test file changes (neither backend nor frontend)", "title": "Lint fix"}
+{"number": 465, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix CodeMirror layout spacing and update content textarea"}
+{"number": 463, "reason": "only docs/ci/lock files", "title": "Update README.md"}
+{"number": 461, "reason": "no test file changes (neither backend nor frontend)", "title": "Add node_modules to yamllint ignore - closes #375"}
+{"number": 459, "reason": "no test file changes (neither backend nor frontend)", "title": "Update comments in Containerfile.lite"}
+{"number": 455, "reason": "no test file changes (neither backend nor frontend)", "title": "Update Makefile to load venv on every command closes #433"}
+{"number": 454, "reason": "no test file changes (neither backend nor frontend)", "title": "Vulture and unimport makefile targets + github actions"}
+{"number": 451, "reason": "no test file changes (neither backend nor frontend)", "title": "Phase 6 docs integration"}
+{"number": 450, "reason": "no test file changes (neither backend nor frontend)", "title": "Phase 5: Add comprehensive Google-style doctests to all transport modules"}
+{"number": 449, "reason": "no test file changes (neither backend nor frontend)", "title": "Chore/doctest services"}
+{"number": 446, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed darglint issues reported by flake8"}
+{"number": 445, "reason": "no test file changes (neither backend nor frontend)", "title": "Added doctest to files in mcpgateway folder"}
+{"number": 442, "reason": "no test file changes (neither backend nor frontend)", "title": "Fixed doctest-check target in Makefile"}
+{"number": 441, "reason": "no test file changes (neither backend nor frontend)", "title": "Add healthcheck in Containerfile.lite"}
+{"number": 438, "reason": "no test file changes (neither backend nor frontend)", "title": "Improve Error Messages #363"}
+{"number": 437, "reason": "no test file changes (neither backend nor frontend)", "title": "Implemented two ways to check content length"}
+{"number": 435, "reason": "no test file changes (neither backend nor frontend)", "title": "Updated error handling for bad requests in test gateway"}
+{"number": 427, "reason": "no test file changes (neither backend nor frontend)", "title": "Hover tooltips"}
+{"number": 422, "reason": "no test file changes (neither backend nor frontend)", "title": "Remove unused lock_file_path from config.py"}
+{"number": 413, "reason": "no test file changes (neither backend nor frontend)", "title": "412 fix assert in translate"}
+{"number": 401, "reason": "no test file changes (neither backend nor frontend)", "title": "Added doctests to config and schema modules"}
+{"number": 400, "reason": "no test file changes (neither backend nor frontend)", "title": "Added doctests to utility modules"}
+{"number": 394, "reason": "only docs/ci/lock files", "title": "Added documentation for using mcp-cli as a client with MCP Gateway."}
+{"number": 372, "reason": "no test file changes (neither backend nor frontend)", "title": "Updated dependencies"}
+{"number": 370, "reason": "no test file changes (neither backend nor frontend)", "title": "Added semantic versioning to UI"}
+{"number": 360, "reason": "no test file changes (neither backend nor frontend)", "title": "Tagging 0.3.1 - Security and Data Validation"}
+{"number": 350, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: support both /message and /messages endpoints in fast-time-server"}
+{"number": 348, "reason": "no test file changes (neither backend nor frontend)", "title": "Grype and Trivy security vulnerability scanning"}
+{"number": 335, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: include virtual environment in clean target"}
+{"number": 334, "reason": "only docs/ci/lock files", "title": "Switch to using the official ibmcloud-cli action"}
+{"number": 333, "reason": "only docs/ci/lock files", "title": "Use non TTY docker with translate"}
+{"number": 332, "reason": "no test file changes (neither backend nor frontend)", "title": "Pylint improvements"}
+{"number": 330, "reason": "no test file changes (neither backend nor frontend)", "title": "Feat/test mcp server"}
+{"number": 329, "reason": "no test file changes (neither backend nor frontend)", "title": "Persisting checkbox state"}
+{"number": 327, "reason": "no test file changes (neither backend nor frontend)", "title": "update dependencies before 0.3.0 tag"}
+{"number": 326, "reason": "no test file changes (neither backend nor frontend)", "title": "0.3.0 version bump"}
+{"number": 325, "reason": "no test file changes (neither backend nor frontend)", "title": "prepare documentation 0 3 0"}
+{"number": 310, "reason": "no test file changes (neither backend nor frontend)", "title": "Moved alembic to inside mcpgateway and fixed wheel"}
+{"number": 248, "reason": "no test file changes (neither backend nor frontend)", "title": "Cleanup special characters (added cleanup script)"}
+{"number": 246, "reason": "no test file changes (neither backend nor frontend)", "title": "Update dependencies"}
+{"number": 240, "reason": "no test file changes (neither backend nor frontend)", "title": "Start alembic revision history"}
+{"number": 239, "reason": "no test file changes (neither backend nor frontend)", "title": "Pylint improvements"}
+{"number": 238, "reason": "only docs/ci/lock files", "title": "Added macOS setup guide to articles list"}
+{"number": 236, "reason": "only docs/ci/lock files", "title": "Adding documentation Watsonx.ai Agent to MCP Gateway"}
+{"number": 228, "reason": "no test file changes (neither backend nor frontend)", "title": "CLI and Translate"}
+{"number": 227, "reason": "only docs/ci/lock files", "title": "Generated README from helm chart"}
