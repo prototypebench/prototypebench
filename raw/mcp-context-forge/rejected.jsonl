@@ -1,0 +1,48 @@
+{"number": 4256, "reason": "only docs/ci/lock files", "title": "ci(lint): parallelize pylint with --jobs 0"}
+{"number": 4251, "reason": "non-task title prefix: chore: remove obsolete claude skills and", "title": "chore: remove obsolete Claude skills and completed 0.7.0 migration artifacts"}
+{"number": 4249, "reason": "non-task title prefix: docs: restructure observability document", "title": "docs: restructure observability documentation for clarity and neutrality"}
+{"number": 4243, "reason": "no test file changes (neither backend nor frontend)", "title": "[CHORE] Pin brotli transivite dependency version"}
+{"number": 4242, "reason": "only docs/ci/lock files", "title": "fix(ci): use check-runs API and peel annotated tags in docker-release…"}
+{"number": 4231, "reason": "non-task title prefix: chore: add lint, formatter and test chec", "title": "chore: add lint, formatter and test checks to react client for CI workflow"}
+{"number": 4224, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: adjust navigation sidebar to the figma design"}
+{"number": 4201, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Install shadcn/ui"}
+{"number": 4199, "reason": "no test file changes (neither backend nor frontend)", "title": "Docs/plugin bindings api"}
+{"number": 4195, "reason": "non-task title prefix: chore: bump version to 1.0.0-rc-3", "title": "chore: bump version to 1.0.0-RC-3"}
+{"number": 4191, "reason": "no test file changes (neither backend nor frontend)", "title": "feat: Add Vite watch mode to make dev for React app hot reload"}
+{"number": 4170, "reason": "non-task title prefix: chore: remove alpine container reference", "title": "chore: remove alpine container references"}
+{"number": 4157, "reason": "only docs/ci/lock files", "title": "Update CODEOWNERS to include me for everything"}
+{"number": 4142, "reason": "only docs/ci/lock files", "title": "fix(ci): install node directly in playwright workflow"}
+{"number": 4127, "reason": "no test file changes (neither backend nor frontend)", "title": "Bh/detect secrets ignore"}
+{"number": 4124, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: restore runtime metric writeback and cover mcp_runtime in CI"}
+{"number": 4123, "reason": "non-task title prefix: chore: replace remaining bare uv command", "title": "chore: Replace remaining bare uv commands with $(UV_BIN) in Makefile"}
+{"number": 4118, "reason": "non-task title prefix: chore: standardize makefile virtual envi", "title": "chore: standardize Makefile virtual environment execution strategy"}
+{"number": 4114, "reason": "non-task title prefix: docs: add test gateway connectivity expl", "title": "docs: add Test Gateway Connectivity explanation and SSE testing guide"}
+{"number": 4113, "reason": "only docs/ci/lock files", "title": "fix(docs): broken curl line continuations in README"}
+{"number": 4105, "reason": "no test file changes (neither backend nor frontend)", "title": "Scaffold i18n"}
+{"number": 4102, "reason": "no test file changes (neither backend nor frontend)", "title": "Update cryptography package and pin transitive dependency"}
+{"number": 4092, "reason": "no test file changes (neither backend nor frontend)", "title": "chore(ui): Resolve dependabot suggestions"}
+{"number": 4090, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): remove duplicate onclick handler causing double-click for CA cert upload"}
+{"number": 4087, "reason": "no test file changes (neither backend nor frontend)", "title": "refactor: consolidate rust workspace under crates"}
+{"number": 4083, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(ui): Fix MCP Tool Refresh button"}
+{"number": 4081, "reason": "no test file changes (neither backend nor frontend)", "title": "fix(permissions): add missing TOOLS_MANAGE_PLUGINS permission constant"}
+{"number": 4079, "reason": "only docs/ci/lock files", "title": "fix: remove setup-node from GitHub workflows"}
+{"number": 4076, "reason": "non-task title prefix: docs: add documentation for plugin bindi", "title": "docs: add documentation for plugin bindings APIs"}
+{"number": 4075, "reason": "no test file changes (neither backend nor frontend)", "title": "build: Support s390x and ppc64le architectures in lite container"}
+{"number": 4073, "reason": "non-task title prefix: chore: adjust diff-cover threshold and i", "title": "chore: adjust diff-cover threshold and ignore Bob files"}
+{"number": 4064, "reason": "non-task title prefix: docs: interactive browsable architecture", "title": "docs: interactive browsable architecture explorer"}
+{"number": 4053, "reason": "no test file changes (neither backend nor frontend)", "title": "feat(helm): preliminary experimental OCP deployment with managed PGO and MCP benchmark"}
+{"number": 4043, "reason": "no test file changes (neither backend nor frontend)", "title": "Fix/4041 Nav bug & dependency documentation"}
+{"number": 4039, "reason": "no test file changes (neither backend nor frontend)", "title": "Updates to pre-commit for cyclical secret detection issue"}
+{"number": 4035, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: Add build js command to makefile serve commands"}
+{"number": 4007, "reason": "no test file changes (neither backend nor frontend)", "title": "Set TCP_NODELAY on socket in order to speed up statefull mcp server and make it comparable with rest api call rps."}
+{"number": 4004, "reason": "no test file changes (neither backend nor frontend)", "title": "Bh/update whitesource config"}
+{"number": 4001, "reason": "non-task title prefix: chore: update pr-review skill and remove", "title": "chore: update pr-review skill and remove duplicate config schemas"}
+{"number": 3972, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: add /app to container PYTHONPATH for alternate entrypoints"}
+{"number": 3967, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: resolve Alpine.js MutationObserver race condition in observability sub-views"}
+{"number": 3965, "reason": "no test file changes (neither backend nor frontend)", "title": "refactor(plugins): migrate in-tree plugins to PyPI packages (cpex-*)"}
+{"number": 3948, "reason": "non-task title prefix: chore: remove istambul setup from non-co", "title": "chore: Remove Istambul setup from non-coverage tests"}
+{"number": 3942, "reason": "non-task title prefix: chore: add a minimum release age of 10 d", "title": "chore: Add a minimum release age of 10 days for npm packages"}
+{"number": 3933, "reason": "non-task title prefix: chore: remove flake8, darglint, dlint; r", "title": "chore: remove flake8, darglint, dlint; replace with ruff D417"}
+{"number": 3918, "reason": "no test file changes (neither backend nor frontend)", "title": "refactor: rewrite pr-review skill as review-only with design guidance"}
+{"number": 3903, "reason": "non-task title prefix: chore: add uv exclude-newer policy", "title": "chore: add uv exclude-newer policy"}
+{"number": 3887, "reason": "no test file changes (neither backend nor frontend)", "title": "fix: remove unmaintained rustls-pemfile from MCP runtime"}
