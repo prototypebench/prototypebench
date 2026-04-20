@@ -239,7 +239,7 @@ register(SourceConfig(
 | 1 | repo 생성, 스키마 v0.1, validator | ✅ |
 | 1 | PR 크롤러 (multi-source) | ✅ |
 | 1 | filter (kind 라우팅 + uv-era cutoff) | ✅ |
-| 1 | seed 큐레이션 → instance 자동 빌드 | ✅ **41 / 40-60** (목표 달성) — fastapi-template 3 + mcp-context-forge 38 |
+| 1 | seed 큐레이션 → instance 자동 빌드 | ✅ **71 / 40-60** (목표 초과) — fastapi-template 3 + mcp-context-forge 68 |
 | 2 | 하네스 architecture doc | ✅ |
 | 2 | Backend FAIL_TO_PASS extractor (Docker) | ✅ |
 | 2 | Agent runner v1 (patch submission, 3-scenario validated) | ✅ |
@@ -252,15 +252,20 @@ register(SourceConfig(
 | 3 | 모델 평가 자동화 | ⏳ |
 | 4 | 공개 리더보드 | ⏳ |
 
-현재 instance pool: **41 task** (fastapi-template 3 + mcp-context-forge 38), 모두 backend_only · schema valid.
+현재 instance pool: **71 task** (fastapi-template 3 + mcp-context-forge 68), 모두 backend_only · schema valid.
 
-mcp-context-forge top-50 batch 결과:
-- exact 38 (76% usable rate)
-- no_signal 10 (관련 backend test 미수정 — 정상)
-- test_only 2
+테스트 자산:
+- F2P 689 (정답 통과 기준)
+- P2P 31,644 (regression guard)
+- 합 32,333 individual test cases / full evaluation
+
+mcp-context-forge top-100 batch 결과 (incremental 캐시 + 50 신규):
+- exact 68 (68% usable rate, 누적)
+- no_signal 28 (frontend-only / docs-only / non-test-touching backend fix)
+- test_only 4
 - error 0 (effective_uv_extras fix 효과)
 
-→ Phase 1 의 task pool 양적 목표 (40-60) 달성. Phase 3 (모델 평가) 로 이행 가능.
+→ Phase 1 의 task pool 양적 목표 (40-60) **초과 달성**. SWE-Bench Lite (300) 의 ~24% 수준.
 
 ---
 

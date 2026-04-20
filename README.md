@@ -7,7 +7,7 @@
 > **Can your agent ship a full-stack AI-native prototype?**
 
 ![phase](https://img.shields.io/badge/phase-1%20%26%202%20active-green)
-![corpus](https://img.shields.io/badge/corpus-41%20tasks-blue)
+![corpus](https://img.shields.io/badge/corpus-71%20tasks-blue)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![stack](https://img.shields.io/badge/stack-React%20%2B%20Vite%20%2B%20Tailwind%20%7C%20FastAPI%20%2B%20SQLModel-black)
 
@@ -63,7 +63,7 @@ Full schema: [`schemas/task_instance.schema.json`](schemas/task_instance.schema.
 
 | Phase | Status |
 |---|---|
-| 1 · Task curation pipeline | ✅ **41 task instances** — initial pool target met |
+| 1 · Task curation pipeline | ✅ **71 task instances** — initial pool target exceeded |
 | 2 · Evaluation harness (pytest + Playwright + Docker, multi-source) | ✅ extract + score + batch + Frontend Playwright |
 | 3 · Internal beta (model shootout) | ⏳ Next |
 | 4 · Public leaderboard | ⏳ |
@@ -73,12 +73,12 @@ Full schema: [`schemas/task_instance.schema.json`](schemas/task_instance.schema.
 
 | Stat | Value |
 |---|---:|
-| Task instances | **41** |
+| Task instances | **71** |
 | Sources | 2 (`fastapi/full-stack-fastapi-template`, `IBM/mcp-context-forge`) |
-| `FAIL_TO_PASS` tests (combined) | **451** |
-| `PASS_TO_PASS` regression-guard tests | **17,186** |
-| Total individual test cases per full evaluation | **17,637** |
-| Schema valid | 41 / 41 |
+| `FAIL_TO_PASS` tests (combined) | **689** |
+| `PASS_TO_PASS` regression-guard tests | **31,644** |
+| Total individual test cases per full evaluation | **32,333** |
+| Schema valid | 71 / 71 |
 
 For comparison: SWE-Bench Verified ships 500, SWE-Bench Lite 300, HumanEval 164. v1 public-beta target: 200-300 instances split across `public` / `held_out` / `internal_only` tiers.
 
