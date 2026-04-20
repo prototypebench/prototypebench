@@ -6,7 +6,8 @@
 
 > **Can your agent ship a full-stack AI-native prototype?**
 
-![status](https://img.shields.io/badge/status-phase%201%20(curation)-yellow)
+![phase](https://img.shields.io/badge/phase-1%20%26%202%20active-green)
+![corpus](https://img.shields.io/badge/corpus-41%20tasks-blue)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![stack](https://img.shields.io/badge/stack-React%20%2B%20Vite%20%2B%20Tailwind%20%7C%20FastAPI%20%2B%20SQLModel-black)
 
@@ -62,13 +63,26 @@ Full schema: [`schemas/task_instance.schema.json`](schemas/task_instance.schema.
 
 | Phase | Status |
 |---|---|
-| 1 · Task curation pipeline | 🚧 In progress |
-| 2 · Evaluation harness (pytest + Playwright) | ⏳ |
-| 3 · Internal beta (model shootout) | ⏳ |
+| 1 · Task curation pipeline | ✅ **41 task instances** — initial pool target met |
+| 2 · Evaluation harness (pytest + Playwright + Docker, multi-source) | ✅ extract + score + batch + Frontend Playwright |
+| 3 · Internal beta (model shootout) | ⏳ Next |
 | 4 · Public leaderboard | ⏳ |
 | 5 · Continuous task refresh | ⏳ |
 
-Leaderboard submissions open in Phase 4. Design principles and the full roadmap live in [`PLAN.md`](PLAN.md).
+**Current corpus** (2026-04-20):
+
+| Stat | Value |
+|---|---:|
+| Task instances | **41** |
+| Sources | 2 (`fastapi/full-stack-fastapi-template`, `IBM/mcp-context-forge`) |
+| `FAIL_TO_PASS` tests (combined) | **451** |
+| `PASS_TO_PASS` regression-guard tests | **17,186** |
+| Total individual test cases per full evaluation | **17,637** |
+| Schema valid | 41 / 41 |
+
+For comparison: SWE-Bench Verified ships 500, SWE-Bench Lite 300, HumanEval 164. v1 public-beta target: 200-300 instances split across `public` / `held_out` / `internal_only` tiers.
+
+Leaderboard submissions open in Phase 4. Design principles, observed-failure-modes, and the full roadmap live in [`PLAN.md`](PLAN.md).
 
 ## Fairness & contamination
 

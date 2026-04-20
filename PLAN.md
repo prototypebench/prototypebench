@@ -309,11 +309,21 @@ mcp-context-forge top-50 batch 결과:
 
 ### Phase 4 — 공개 베타
 
+론칭 채널 · 메시지 · KPI 등 종합 전략은 [`docs/launch-strategy.md`](docs/launch-strategy.md).
+
 - [ ] `.ai` / `.com` 도메인 방어 확보
 - [ ] 리더보드 사이트 (`prototypebench.org`) — 기술 선택 필요 (단순 static 이면 Astro + GitHub Pages 무난)
 - [ ] Methodology 문서 공개
 - [ ] 제출 양식 / 재현성 요구사항 정의
-- [ ] Hacker News 론칭 포스트
+- [ ] Social preview image (1280×640 PNG)
+- [ ] CONTRIBUTING.md / CODE_OF_CONDUCT.md / issue templates (GitHub Community Standards)
+- [ ] GitHub Releases v1.0.0 — 첫 공식 corpus + harness snapshot
+- [ ] Hugging Face dataset publish (`prototypebench/prototypebench-v1`)
+- [ ] HF Spaces leaderboard mirror
+- [ ] Hacker News 론칭 포스트 (Show HN, 화요일 PT 오전)
+- [ ] Newsletter pitch (Latent Space, AlphaSignal, TLDR AI, Import AI)
+- [ ] Twitter launch thread (8-12 tweets)
+- [ ] awesome-list PR 침투 (`awesome-llm-eval`, `awesome-coding-llm`, `awesome-fastapi` 등)
 
 ### Phase 5 — 지속 운영
 

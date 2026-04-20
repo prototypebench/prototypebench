@@ -90,6 +90,17 @@ def _signal_for_kind(r: dict, kind: str) -> int:
     return s.get("frontend_tests", 0)
 
 
+def _load_existing_summary(work_dir: Path) -> dict | None:
+    """Return parsed summary.json if a prior extract finished cleanly."""
+    p = work_dir / "out" / "summary.json"
+    if not p.exists():
+        return None
+    try:
+        return json.loads(p.read_text())
+    except Exception:
+        return None
+
+
 def batch_extract(
     *,
     candidates_path: Path,
@@ -99,6 +110,7 @@ def batch_extract(
     top_n: int | None,
     mode: str,
     kind: str = "backend",
+    skip_existing: bool = True,
     console: Console | None = None,
 ) -> list[BatchRow]:
     console = console or Console()
@@ -191,6 +203,34 @@ def batch_extract(
             work_dir.mkdir(exist_ok=True)
             patch_filename = "test_patch.diff" if kind == "backend" else "frontend_test_patch.diff"
             (work_dir / patch_filename).write_text(test_patch)
+
+            # Incremental skip: if a prior summary.json exists for this PR,
+            # reuse it instead of re-running the (expensive) extract.
+            if skip_existing:
+                cached = _load_existing_summary(work_dir)
+                if cached:
+                    f2p = list(cached.get("fail_to_pass") or [])
+                    p2p = list(cached.get("pass_to_pass") or [])
+                    fb = cached.get("fallback_used")
+                    err = cached.get("error")
+                    if err:
+                        status = "error"
+                    elif fb:
+                        status = "fallback"
+                    elif f2p:
+                        status = "exact"
+                    elif p2p:
+                        status = "test_only"
+                    else:
+                        status = "no_signal"
+                    results.append(BatchRow(
+                        pr=number, instance_id=instance_id,
+                        title=pr.get("title", ""),
+                        f2p=len(f2p), p2p=len(p2p),
+                        fallback=fb, status=status, error=err,
+                        duration_s=time.monotonic() - t0,
+                    ))
+                    continue
 
             try:
                 if kind == "backend":
