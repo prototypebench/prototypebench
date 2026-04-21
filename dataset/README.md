@@ -4,7 +4,6 @@ language:
   - en
 task_categories:
   - text-generation
-  - text2text-generation
 pretty_name: PrototypeBench v0.1
 tags:
   - benchmark

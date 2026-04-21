@@ -13,6 +13,7 @@
 
 PrototypeBench는 AI 코딩 에이전트의 **풀스택 제품 개발 능력**을 평가하는 공개 벤치마크입니다. SWE-Bench가 "성숙한 Python 라이브러리에서의 버그픽스"를 측정한다면, PrototypeBench는 **"현대적 AI-native 스택에서 풀스택 기능을 ship 할 수 있는가"** 를 측정합니다.
 
+- **📦 Hugging Face 데이터셋**: [`banyaaiofficial/prototypebench-v1`](https://huggingface.co/datasets/banyaaiofficial/prototypebench-v1) — 71 instances, MIT, `datasets.load_dataset(...)` 바로 사용 가능.
 - **태스크 소스** (multi-source via `harness/sources/`):
   - [`fastapi/full-stack-fastapi-template`](https://github.com/fastapi/full-stack-fastapi-template) — MIT, 42.7k★ — 풀스택 템플릿 (React+Vite+Tailwind+shadcn / FastAPI+SQLModel+Postgres).
   - [`IBM/mcp-context-forge`](https://github.com/IBM/mcp-context-forge) — Apache-2, 3.6k★ — FastAPI MCP gateway, **연 1,645 PR**, hermetic SQLite 테스트.
