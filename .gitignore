@@ -17,3 +17,7 @@ venv/
 
 raw/*.jsonl
 raw/cache/
+
+# Combined dataset is built fresh from tasks/*.jsonl at publish time;
+# tracked only under tasks/ (the source of truth).
+dataset/instances.jsonl

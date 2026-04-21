@@ -34,10 +34,19 @@ def _sha256_of_file_at_commit(repo_dir: Path, commit: str, rel_path: str) -> str
     return "sha256:" + hashlib.sha256(content.encode("utf-8", errors="replace")).hexdigest()
 
 
-def _derive_stack_domain(diff_text: str) -> str:
-    """Backend / frontend / fullstack from the non-test patch's `+++ b/` paths."""
+def _derive_stack_domain(diff_text: str, source: SourceConfig) -> str:
+    """Backend / frontend / fullstack from the non-test patch's `+++ b/` paths.
+
+    Uses the source's `backend_dir` to correctly identify backend paths for
+    repos that don't use the `backend/` prefix (e.g. mcp-context-forge has
+    backend at repo root, so every non-`frontend/` path is backend).
+    """
     paths = re.findall(r"^\+\+\+ b/(.+?)\s*$", diff_text, re.MULTILINE)
-    has_be = any(p.startswith("backend/") for p in paths)
+    if source.backend_dir:
+        has_be = any(p.startswith(f"{source.backend_dir}/") for p in paths)
+    else:
+        # Source at repo root: anything not explicitly frontend is backend.
+        has_be = any(not p.startswith("frontend/") for p in paths)
     has_fe = any(p.startswith("frontend/") for p in paths)
     if has_be and has_fe:
         return "fullstack"
@@ -45,7 +54,7 @@ def _derive_stack_domain(diff_text: str) -> str:
         return "backend_only"
     if has_fe:
         return "frontend_only"
-    return "fullstack"
+    return "backend_only"
 
 
 def _contamination_tier(created_at: str, cutoff: str = "2026-01-01") -> str:
@@ -139,7 +148,7 @@ def build_instance_from_extract(
         "test_patch_frontend": test_patch_frontend,
         "fail_to_pass": {"backend": fail_to_pass_be, "frontend": []},
         "pass_to_pass": {"backend": pass_to_pass_be, "frontend": []},
-        "stack_domain": _derive_stack_domain(patch),
+        "stack_domain": _derive_stack_domain(patch, source),
         "environment": {
             "python_version": source.python_version,
             "node_version": "20",
