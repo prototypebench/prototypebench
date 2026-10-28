@@ -2,7 +2,7 @@
 
 Usage:
     uv run python -m scripts.publish_hf \
-        --repo newtype-2038/newtypebench-v1 \
+        --repo banyaaiofficial/prototypebench-v1 \
         --local dataset
 
 Requires env var HUGGINGFACE_TOKEN with write scope on the target org.
@@ -22,7 +22,7 @@ app = typer.Typer(no_args_is_help=True)
 @app.command()
 def main(
     repo: str = typer.Option(
-        "newtype-2038/newtypebench-v1", "--repo",
+        "banyaaiofficial/prototypebench-v1", "--repo",
         help="HF dataset repo id (<org>/<name>).",
     ),
     local: Path = typer.Option(

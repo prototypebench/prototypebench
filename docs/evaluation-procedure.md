@@ -379,7 +379,7 @@ v1에서 명시적으로 **포함하지 않은 것** (yagni):
 ```
 [1] 코퍼스 로드
     from datasets import load_dataset
-    ds = load_dataset("newtype-2038/newtypebench-v1", split="test")
+    ds = load_dataset("banyaaiofficial/prototypebench-v1", split="test")
 
 [2] 인스턴스 i ∈ ds 마다:
 

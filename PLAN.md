@@ -255,7 +255,7 @@ PrototypeBench v1 은 정체성 ("AI-native Python+JS stack") 유지. Spring sis
 | `github.com/prototypebench` | ✅ 확보 |
 | `github.com/prototypebench/prototypebench` repo | ✅ public |
 | `prototypebench.org` | ✅ 확보 |
-| HF dataset `newtype-2038/newtypebench-v1` (구 `banyaaiofficial/prototypebench-v1`, 리다이렉트) | ✅ **v0.2 publish (2026-05-23, 123 instances, 12.6 MB)** |
+| HF dataset `banyaaiofficial/prototypebench-v1` | ✅ **v0.2 publish (2026-05-23, 123 instances, 12.6 MB)** |
 | `prototypebench.ai` | ⏳ 방어 확보 권장 (~$80/년) |
 | `prototypebench.com` | ⏳ 방어 확보 권장 (~$12/년) |
 | `prototypebench.dev` | 옵션 |
@@ -373,7 +373,7 @@ PrototypeBench 는 **task spec + score** 만 정의한다. **응시자가 자신
 | 2 | **Dockerfile.playwright-electron** (Xvfb + GTK/NSS/ATK for Electron e2e) | ✅ (2026-05-23) |
 | 2 | **build_from_extract kind-aware** (frontend bucket + source-driven globs) | ✅ (2026-05-23) |
 | 3 | 모델 평가 자동화 | ⏳ |
-| 4 | 공개 리더보드 (HF dataset 만 선행 완료) | ⏳ (`newtype-2038/newtypebench-v1` published) |
+| 4 | 공개 리더보드 (HF dataset 만 선행 완료) | ⏳ (`banyaaiofficial/prototypebench-v1` published) |
 | 5 | 지속 운영 (held-out rotation, contribution guide) | ⏳ |
 
 **현재 instance pool**: **123 task** (Phase 1 목표 40-60 의 ~2-3 배 초과)
