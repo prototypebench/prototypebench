@@ -1,5 +1,7 @@
 ---
-license: mit
+license: other
+license_name: bsl-1.1
+license_link: https://mariadb.com/bsl11/
 language:
   - en
 task_categories:
@@ -66,7 +68,7 @@ PrototypeBench is an open benchmark for evaluating AI coding agents on **full-st
 
 - **Project home**: https://github.com/prototypebench/prototypebench
 - **Website**: https://prototypebench.org
-- **License**: MIT
+- **License**: BSL-1.1 (dataset); harness code is MIT
 - **Version**: v0.1 (initial corpus)
 - **Language**: English (problem statements), Python (backend code), TypeScript/JavaScript (frontend code, future)
 
@@ -104,7 +106,7 @@ score(instance) = 1  iff  FAIL_TO_PASS ⊆ passing_tests
 ```python
 from datasets import load_dataset
 
-ds = load_dataset("banyaaiofficial/prototypebench-v1", split="test")
+ds = load_dataset("newtype-2038/newtypebench-v1", split="test")
 
 for item in ds:
     print(item["instance_id"])           # e.g. "IBM__mcp-context-forge-4270"
@@ -150,7 +152,7 @@ See the task-schema doc for full field-by-field semantics. Highlights:
 
 - **Held-out by construction**: all v0.2 instances are merged after 2026-01-01 (Claude Opus 4.7 cutoff). Submitters must disclose their model cutoff for point-count adjustment.
 - **Rotation**: held-out tier is rotated per leaderboard season (Phase 5).
-- **No vendor branding**: benchmark carries no vendor name. Hosted on `banyaaiofficial` for convenience only; the benchmark is project-neutral.
+- **Hosting**: published on Hugging Face as `newtype-2038/newtypebench-v1` (the former `banyaaiofficial/prototypebench-v1` URL redirects there).
 
 ## Limitations
 

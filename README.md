@@ -9,12 +9,13 @@
 ![phase](https://img.shields.io/badge/phase-3%20active-green)
 ![corpus](https://img.shields.io/badge/corpus-123%20tasks-blue)
 ![dataset](https://img.shields.io/badge/HF-v0.2.2-yellow)
-![license](https://img.shields.io/badge/license-MIT-blue)
+![license](https://img.shields.io/badge/code-MIT-blue)
+![data-license](https://img.shields.io/badge/dataset-BSL--1.1-orange)
 ![stack](https://img.shields.io/badge/stack-React%20%2B%20Vite%20%2B%20Tailwind%20%7C%20FastAPI%20%2B%20SQLModel-black)
 
 PrototypeBench is an open benchmark for evaluating the **full-stack product-shipping ability** of AI coding agents. Where SWE-Bench measures bug-fixing in mature Python libraries, PrototypeBench measures **"can the agent ship a full-stack feature on a modern AI-native stack?"**
 
-- **📦 Dataset on Hugging Face**: [`banyaaiofficial/prototypebench-v1`](https://huggingface.co/datasets/banyaaiofficial/prototypebench-v1) — **123 instances** (v0.2.2, 71 backend + 52 frontend), MIT, `datasets.load_dataset(...)` ready.
+- **📦 Dataset on Hugging Face**: [`newtype-2038/newtypebench-v1`](https://huggingface.co/datasets/newtype-2038/newtypebench-v1) — **123 instances** (v0.2.2, 71 backend + 52 frontend), BSL-1.1, `datasets.load_dataset(...)` ready.
 - **Task sources** (multi-source via `harness/sources/`):
   - [`fastapi/full-stack-fastapi-template`](https://github.com/fastapi/full-stack-fastapi-template) — MIT, 42.7k★ — full-stack template (React+Vite+Tailwind+shadcn / FastAPI+SQLModel+Postgres). 3 backend instances.
   - [`IBM/mcp-context-forge`](https://github.com/IBM/mcp-context-forge) — Apache-2, 3.6k★ — FastAPI MCP gateway, 1,645 PRs/yr, hermetic SQLite tests. 68 backend instances.
@@ -214,7 +215,9 @@ Please open an Issue before a PR while the process is still hardening.
 
 ## License
 
-MIT. The base repo `fastapi/full-stack-fastapi-template` is also MIT.
+- **Code** (harness, scripts, docs): MIT.
+- **Dataset** ([`newtype-2038/newtypebench-v1`](https://huggingface.co/datasets/newtype-2038/newtypebench-v1)): [BSL-1.1](https://mariadb.com/bsl11/).
+- Task source repos keep their own licenses (`fastapi/full-stack-fastapi-template` and `usebruno/bruno`: MIT, `IBM/mcp-context-forge`: Apache-2.0).
 
 ## Cite
 
