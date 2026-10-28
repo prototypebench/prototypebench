@@ -322,7 +322,7 @@ PrototypeBench 의 방어선:
 
 ```
 [1] Hugging Face 에서 코퍼스 로드
-    → "banyaaiofficial/prototypebench-v1"
+    → "newtype-2038/newtypebench-v1"
 
 [2] 각 인스턴스마다:
 
@@ -389,7 +389,7 @@ PrototypeBench 의 우선순위는 명확합니다.
 - [evaluation-procedure.md](https://github.com/prototypebench/prototypebench/blob/main/docs/evaluation-procedure.md) — 본 글의 상세 운영 레퍼런스 (코드/명령 포함)
 - [harness-architecture.md](https://github.com/prototypebench/prototypebench/blob/main/docs/harness-architecture.md) — 하네스 설계 결정의 근거
 - [task-schema.md](https://github.com/prototypebench/prototypebench/blob/main/docs/task-schema.md) — 태스크 인스턴스 스키마
-- [Hugging Face dataset](https://huggingface.co/datasets/banyaaiofficial/prototypebench-v1) — 123 개 인스턴스 직접 다운로드
+- [Hugging Face dataset](https://huggingface.co/datasets/newtype-2038/newtypebench-v1) — 123 개 인스턴스 직접 다운로드
 
 ---
 
